@@ -3,18 +3,32 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TopbarComponent } from './topbar/topbar.component';
-import { App } from './app.main.component';
+import { AppMainComponent } from './app.main.component';
+import { AppTopBarComponent } from './app.topbar.component';
+import { AppFooterComponent} from './app.footer.component';
+import { AppMenuComponent } from './app.menu.component';
+import { AppMenuitemComponent} from './app.menuitem.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
+import { AccessComponent } from './components/access/access.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import {InputTextModule} from "primeng/inputtext";
 
 @NgModule({
   declarations: [
     AppComponent,
-    TopbarComponent,
-    App.MainComponent
+    AppTopBarComponent,
+    AppMainComponent,
+    AppFooterComponent,
+    AppMenuComponent,
+    AppMenuitemComponent,
+    NotfoundComponent,
+    AccessComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    InputTextModule
   ],
   providers: [],
   bootstrap: [AppComponent]
