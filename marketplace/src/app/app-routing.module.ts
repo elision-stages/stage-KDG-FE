@@ -4,6 +4,7 @@ import {AppMainComponent} from "./app.main.component";
 import {NotfoundComponent} from "./components/notfound/notfound.component";
 import {AccessComponent} from "./components/access/access.component";
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
+import {LoginComponent} from "./components/login/login.component";
 
 const routes: Routes = [];
 
@@ -14,6 +15,7 @@ const routes: Routes = [];
         path: '', component: AppMainComponent,
         children: [
           {path: '', component: DashboardComponent},
+          {path: 'login', component: LoginComponent},
         ]
       },
       {path:'pages/notfound', component: NotfoundComponent},

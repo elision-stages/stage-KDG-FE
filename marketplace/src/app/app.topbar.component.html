@@ -1,16 +1,24 @@
 <div class="layout-topbar">
   <a class="layout-topbar-logo" routerLink="">
-    <img src="assets/layout/images/{{appMain.config.dark ? 'logo-white' : 'logo-dark'}}.svg" alt="logo">
-    <span>SAKAI</span>
+    <img src="assets/layout/images/{{appMain.config.dark ? 'square_white' : 'square_dark'}}.svg" alt="logo">
+    <span>Marketplace</span>
   </a>
 
-  <a class="p-link layout-menu-button layout-topbar-button" href="#" (click)="appMain.toggleMenu($event)">
+  <a class="p-link layout-menu-button layout-topbar-button" href="#" (click)="appMain.toggleMenu($event)" *ngIf="false">
     <i class="pi pi-bars"></i>
   </a>
 
-  <a class="p-link layout-topbar-menu-button layout-topbar-button" href="#" (click)="appMain.toggleTopMenu($event)">
+  <a class="p-link layout-topbar-menu-button layout-topbar-button" href="#" (click)="appMain.onMenuClick();appMain.toggleTopMenu($event)">
     <i class="pi pi-ellipsis-v"></i>
   </a>
+
+  <!-- https://www.primefaces.org/primeng/button -->
+  <div class="categoriesbtn"
+       (mouseover)="showCategories = true"
+       (mouseleave)="showCategories = false">
+    <p-button icon="pi pi-bars" label="Categories"></p-button>
+    <p-megaMenu [model]="megaMenuItems" orientation="vertical" [hidden]="!showCategories"></p-megaMenu>
+  </div>
 
   <div class="layout-topbar-menu">
       <span class="p-input-icon-right">
@@ -21,16 +29,15 @@
 
   <div class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active':appMain.topMenuActive}">
     <a href="#" class="p-link layout-topbar-button">
-      <i class="pi pi-calendar"></i>
-      <span>Calendar</span>
-    </a>
-    <a href="#" class="p-link layout-topbar-button">
-      <i class="pi pi-shopping-cart"></i>
+      <i class="pi pi-shopping-cart mr-3 p-text-secondary"
+         pBadge
+         [value]="'5'"></i>
       <span>Shopping cart</span>
     </a>
-    <a href="#" class="p-link layout-topbar-button">
+    <a href="#" class="p-link layout-topbar-button" (click)="menu.toggle($event)">
       <i class="pi pi-user"></i>
       <span>Profile</span>
     </a>
+    <p-menu #menu [popup]="true" [model]="items"></p-menu>
   </div>
 </div>

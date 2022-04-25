@@ -23,13 +23,13 @@ import { Subscription } from 'rxjs';
 })
 export class AppMainComponent implements AfterViewInit, OnDestroy, OnInit {
 
-  public menuInactiveDesktop: boolean;
+  public menuInactiveDesktop: boolean = true;
 
-  public menuActiveMobile: boolean;
+  public menuActiveMobile: boolean = false;
 
-  public overlayMenuActive: boolean;
+  public overlayMenuActive: boolean = false;
 
-  public staticMenuInactive: boolean = false;
+  public staticMenuInactive: boolean = true;
 
   public profileActive: boolean;
 
@@ -38,6 +38,8 @@ export class AppMainComponent implements AfterViewInit, OnDestroy, OnInit {
   public topMenuLeaving: boolean;
 
   public theme: string;
+
+  public vendorMenu: boolean = false;
 
   documentClickListener: () => void;
 

@@ -12,6 +12,12 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
 import { AccessComponent } from './components/access/access.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import {InputTextModule} from "primeng/inputtext";
+import {MegaMenuModule} from "primeng/megamenu";
+import {ButtonModule} from "primeng/button";
+import {BadgeModule} from "primeng/badge";
+import {MenuModule} from "primeng/menu";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -23,12 +29,18 @@ import {InputTextModule} from "primeng/inputtext";
     AppMenuitemComponent,
     NotfoundComponent,
     AccessComponent,
-    DashboardComponent
+    DashboardComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    InputTextModule
+    InputTextModule,
+    MegaMenuModule,
+    ButtonModule,
+    BadgeModule,
+    MenuModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
