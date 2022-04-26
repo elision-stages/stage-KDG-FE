@@ -18,6 +18,11 @@ import {BadgeModule} from "primeng/badge";
 import {MenuModule} from "primeng/menu";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { LoginComponent } from './components/login/login.component';
+import {RippleModule} from "primeng/ripple";
+import {PasswordModule} from "primeng/password";
+import {ReactiveFormsModule} from "@angular/forms";
+import { RegisterComponent } from './components/register/register.component';
+import {DividerModule} from "primeng/divider";
 
 @NgModule({
   declarations: [
@@ -30,7 +35,8 @@ import { LoginComponent } from './components/login/login.component';
     NotfoundComponent,
     AccessComponent,
     DashboardComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +46,11 @@ import { LoginComponent } from './components/login/login.component';
     ButtonModule,
     BadgeModule,
     MenuModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    RippleModule,
+    PasswordModule,
+    ReactiveFormsModule,
+    DividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
