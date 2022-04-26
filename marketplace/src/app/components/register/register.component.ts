@@ -14,23 +14,18 @@ export class RegisterComponent implements OnInit {
 
   registerForm = new FormGroup({
     firstname: new FormControl(''),
+    familyname: new FormControl(''),
     mail: new FormControl('', Validators.email),
     password: new FormControl('')
   });
 
   constructor() { /* TODO document why this constructor is empty */  }
 
-  ngOnInit(): void {
-    this.pw.onMaskToggle = () => {
-      this.pw.unmasked = !this.pw.unmasked;
-      console.log('ok?')
-    }
+  ngOnInit() {
     if(sessionStorage.getItem('registerMail') !== null) {
       this.registerForm.get('mail').setValue(sessionStorage.getItem('registerMail'))
     }
   }
-
-  ngA
 
   onRegister(): void {
     // TODO
