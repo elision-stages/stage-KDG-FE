@@ -1,0 +1,20 @@
+.categoriesbtn {
+  position: relative;
+
+  &:hover:after {
+    /* Hidden node to overcome distance between dialog and button with hover events */
+    display: block;
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 5rem;
+    width: 100%;
+  }
+
+  p-megamenu {
+    position: absolute;
+    left: 0;
+    top: 4rem;
+  }
+}
