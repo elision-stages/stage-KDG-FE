@@ -23,6 +23,11 @@ import {PasswordModule} from "primeng/password";
 import {ReactiveFormsModule} from "@angular/forms";
 import { RegisterComponent } from './components/register/register.component';
 import {DividerModule} from "primeng/divider";
+import {HttpClientModule} from "@angular/common/http";
+import {MessageModule} from "primeng/message";
+import {DialogModule} from "primeng/dialog";
+import {MessageService} from "primeng/api";
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -39,6 +44,7 @@ import {DividerModule} from "primeng/divider";
     RegisterComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     InputTextModule,
@@ -50,9 +56,11 @@ import {DividerModule} from "primeng/divider";
     RippleModule,
     PasswordModule,
     ReactiveFormsModule,
-    DividerModule
+    DividerModule,
+    MessageModule,
+    DialogModule,
+    ToastModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

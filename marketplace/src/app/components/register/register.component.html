@@ -3,30 +3,36 @@
     <div class="col-12 lg:col-6">
       <div class="card">
         <h4>Personal details</h4>
-        <label for="firstName" class="block text-900 text-xl font-medium mb-2">First name</label>
-        <input id="firstName" type="text" placeholder="First name" pInputText class="w-full mb-3" formControlName="firstname" required minlength="2" autofocus>
-        <label for="familyName" class="block text-900 text-xl font-medium mb-2">Family name</label>
-        <input id="familyName" type="text" placeholder="Family name" pInputText class="w-full mb-3" formControlName="familyname" required minlength="2">
-        <label for="email2" class="block text-900 text-xl font-medium mb-2">Email</label>
-        <input id="email2" type="email" placeholder="Email address" pInputText class="w-full" formControlName="mail" required
-               (keydown.Tab)="getMailHint(registerForm.get('mail').value) && registerForm.get('mail').setValue(getMailHint(registerForm.get('mail').value))">
-        <p [hidden]="!getMailHint(registerForm.get('mail').value)">
+        <label for="firstName" class="block text-900 text-xl font-medium">First name</label>
+        <input id="firstName" type="text" placeholder="First name" pInputText class="w-full mt-2" formControlName="firstname" autofocus>
+        <small class="mt-1 block p-error" *ngIf="registerForm.controls['firstname'].invalid && registerForm.controls['firstname'].touched">{{readableErrors(registerForm.controls['firstname'].errors).join('\n')}}</small>
+        <label for="familyName" class="block text-900 text-xl font-medium mt-3">Family name</label>
+        <input id="familyName" type="text" placeholder="Family name" pInputText class="w-full mt-2" formControlName="familyname">
+        <small class="mt-1 block p-error" *ngIf="registerForm.controls['familyname'].invalid && registerForm.controls['familyname'].touched">{{readableErrors(registerForm.controls['familyname'].errors).join('\n')}}</small>
+        <label for="email2" class="block text-900 text-xl font-medium mt-3">Email</label>
+        <input id="email2" type="email" placeholder="Email address" pInputText class="w-full mt-2" formControlName="mail"
+               (keydown.Tab)="getMailHint(registerForm.get('mail').value) ? registerForm.get('mail').setValue(getMailHint(registerForm.get('mail').value)) : true">
+        <small [hidden]="!getMailHint(registerForm.get('mail').value)">
           Do you mean <a (click)="registerForm.get('mail').setValue(getMailHint(registerForm.get('mail').value))">{{getMailHint(registerForm.get('mail').value)}}</a>?
-        </p>
+        </small>
+        <small class="mt-1 block p-error" *ngIf="registerForm.controls['mail'].invalid && registerForm.controls['mail'].touched">{{readableErrors(registerForm.controls['mail'].errors).join('\n')}}</small>
       </div>
     </div>
     <div class="col-12 lg:col-6">
       <div class="card">
         <h4>Account credentials</h4>
-        <label for="password1" class="block text-900 font-medium text-xl mb-2">Password</label>
-        <p-password #password id="password1" formControlName="password" placeholder="Password"
-                    [toggleMask]="true" [feedback]="true" styleClass="mb-3 w-full p-inputwrapper p-input-icon-right"
-                    inputStyleClass="w-full" required minlength="8">
+        <label for="password1" class="block text-900 font-medium text-xl">Password</label>
+        <p-password #passwordd id="password1" formControlName="password" placeholder="Password"
+                    [toggleMask]="true" [feedback]="true" styleClass="mt-2 w-full p-inputwrapper p-input-icon-right"
+                    inputStyleClass="w-full" (keyup)="pwnCheck()">
           <ng-template pTemplate="header">
             <h6>Pick a password</h6>
           </ng-template>
           <ng-template pTemplate="footer">
             <p-divider></p-divider>
+            <p-message severity="error" [hidden]="!unsafePassword" class="mt-2"
+            text="This password has previously appeared in a data breach and should never be used.">
+            </p-message>
             <p class="mt-2">Suggestions</p>
             <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
               <li>At least one lowercase</li>
@@ -36,14 +42,24 @@
             </ul>
           </ng-template>
         </p-password>
+        <small class="mt-1 block p-error" *ngIf="registerForm.controls['password'].invalid && registerForm.controls['password'].dirty">{{readableErrors(registerForm.controls['password'].errors).join('\n')}}</small>
 
-        <label for="password2" class="block text-900 font-medium text-xl mb-2">Password confirmation</label>
-        <p-password id="password2" formControlName="password" placeholder="Password confirmation" [toggleMask]="true"
-                    styleClass="mb-3 w-full p-inputwrapper p-input-icon-right" inputStyleClass="w-full"
-                    required minlength="8" [feedback]="false"></p-password>
+        <label for="password2" class="block text-900 font-medium text-xl mt-3">Password confirmation</label>
+        <p-password id="password2" formControlName="passwordRepeat" placeholder="Password confirmation" [toggleMask]="true"
+                    styleClass="mt-2 w-full p-inputwrapper p-input-icon-right" inputStyleClass="w-full"
+                    [feedback]="false"></p-password>
+        <small class="mt-1 block p-error" *ngIf="registerForm.errors && registerForm.errors.hasOwnProperty('passwordRepeat') && registerForm.controls['passwordRepeat'].dirty">{{readableErrors(registerForm.errors).join('\n')}}</small>
 
-        <button pButton pRipple label="Create your account" class="w-full p-3 text-xl mt-3" type="submit"></button>
+        <button [disabled]="!registerForm.valid" [loading]="isLoading" pButton pRipple label="Create your account" class="w-full p-3 text-xl mt-3" type="submit"></button>
       </div>
     </div>
   </div>
 </form>
+<p-dialog header="Registration successfull" [(visible)]="success" [modal]="true" [style]="{width: '50vw'}"
+          [draggable]="false" [resizable]="false" [closable]="false">
+  <p class="m-0">You have received a confirmation e-mail. You can log in when your e-mail address is confirmed.</p>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="this.router.navigate(['/login'])" label="Ok" styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>
+<p-toast position="bottom-center"></p-toast>
