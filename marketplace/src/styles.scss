@@ -5,3 +5,10 @@
 @import "assets/sass/layout/_variables";
 @import "assets/sass/layout/_layout";
 @import "assets/sass/overrides/_overrides";
+
+a:not([href]){
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none
+}
