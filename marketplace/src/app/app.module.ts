@@ -8,29 +8,28 @@ import { AppTopBarComponent } from './app.topbar.component';
 import { AppFooterComponent} from './app.footer.component';
 import { AppMenuComponent } from './app.menu.component';
 import { AppMenuitemComponent} from './app.menuitem.component';
-import { NotfoundComponent } from './components/notfound/notfound.component';
-import { AccessComponent } from './components/access/access.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { NotfoundComponent } from './components/open/notfound/notfound.component';
+import { AccessComponent } from './components/open/access/access.component';
+import { DashboardComponent } from './components/open/dashboard/dashboard.component';
 import {InputTextModule} from "primeng/inputtext";
 import {MegaMenuModule} from "primeng/megamenu";
 import {ButtonModule} from "primeng/button";
 import {BadgeModule} from "primeng/badge";
 import {MenuModule} from "primeng/menu";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './components/open/login/login.component';
 import {RippleModule} from "primeng/ripple";
 import {PasswordModule} from "primeng/password";
 import {ReactiveFormsModule} from "@angular/forms";
-import { RegisterComponent } from './components/register/register.component';
+import { RegisterComponent } from './components/open/register/register.component';
 import {DividerModule} from "primeng/divider";
 import {HttpClientModule} from "@angular/common/http";
 import {MessageModule} from "primeng/message";
 import {DialogModule} from "primeng/dialog";
-import {MessageService} from "primeng/api";
 import { ToastModule } from 'primeng/toast';
-import { VendorComponent } from './components/vendor/vendor.component';
+import { VendorComponent } from './components/open/vendor/vendor.component';
 import {ColorPickerModule} from "primeng/colorpicker";
-import { GroupErrorsPipe } from './helpers/group-errors.pipe';
+import {EditorModule} from "primeng/editor";
 
 @NgModule({
   declarations: [
@@ -45,8 +44,7 @@ import { GroupErrorsPipe } from './helpers/group-errors.pipe';
     DashboardComponent,
     LoginComponent,
     RegisterComponent,
-    VendorComponent,
-    GroupErrorsPipe
+    VendorComponent
   ],
   imports: [
     HttpClientModule,
@@ -65,7 +63,8 @@ import { GroupErrorsPipe } from './helpers/group-errors.pipe';
     MessageModule,
     DialogModule,
     ToastModule,
-    ColorPickerModule
+    ColorPickerModule,
+    EditorModule
   ],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,5 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { AppMainComponent } from './app.main.component';
-import { Subscription } from 'rxjs';
 import { MenuItem, MegaMenuItem } from 'primeng/api';
 
 @Component({

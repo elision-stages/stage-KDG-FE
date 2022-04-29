@@ -17,13 +17,19 @@ export class ValidationHelper {
 
   static VATValidator(vendorService: VendorService): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      return of(null)
+      // Backend nog niet gemerged
       return vendorService
-        .checkVat(control.value, 1)
+        .checkVat(control.value)
         .pipe(
-          map(res => null), // checkVat only returns result when a business is found => OK
-          catchError(err => of({vat: true})) // 404 => Doesn't exist
+          map(_res => null), // checkVat only returns result when a business is found => OK
+          catchError(_err => of({vat: true})) // 404 => Doesn't exist
         )
     }
+  }
+
+  static phoneValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+    return /^\d+$/.test(control.value) ? null : { phone: true }
   }
 
   static readableErrors(errors: ValidationErrors): string[] {
@@ -48,6 +54,9 @@ export class ValidationHelper {
             break;
           case 'vat':
             clean.push('This isn\'t a valid VAT number.')
+            break;
+          case 'phone':
+            clean.push('A phone number may only contain digits.')
             break;
           default:
             clean.push('Unknown error: ' + key)

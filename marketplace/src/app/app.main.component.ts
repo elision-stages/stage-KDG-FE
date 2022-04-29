@@ -64,7 +64,7 @@ export class AppMainComponent implements AfterViewInit, OnDestroy, OnInit {
 
   ngAfterViewInit() {
     // hides the overlay menu and top menu if outside is clicked
-    this.documentClickListener = this.renderer.listen('body', 'click', (event) => {
+    this.documentClickListener = this.renderer.listen('body', 'click', _event => {
       if (!this.isDesktop()) {
         if (!this.menuClick) {
           this.menuActiveMobile = false;
@@ -147,7 +147,7 @@ export class AppMainComponent implements AfterViewInit, OnDestroy, OnInit {
     this.menuClick = true;
   }
 
-  onConfigClick(event) {
+  onConfigClick() {
     this.configClick = true;
   }
 

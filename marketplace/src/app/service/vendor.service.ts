@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
-import {map, Observable} from "rxjs";
+import {Observable} from "rxjs";
 import {VATBusiness} from "../model/VATBusiness";
+import {User} from "../model/User";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,11 @@ export class VendorService {
 
   constructor(private http: HttpClient) { }
 
-  checkVat(vat: string, test?: number): Observable<VATBusiness> {
+  checkVat(vat: string): Observable<VATBusiness> {
     return this.http.get<VATBusiness>(this.vendorUrl + 'vat/' + vat);
+  }
+
+  register(user: User): Observable<User> {
+    return this.http.post<User>(environment.api + 'registercustomer', user)
   }
 }

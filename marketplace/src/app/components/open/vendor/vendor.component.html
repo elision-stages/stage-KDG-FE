@@ -15,7 +15,7 @@
             <label id="logoPreview" for="logo" class="mt-1 image-upload-label p-inputtext pb-0"></label>
             <input id="logo" type="file" placeholder="Logo" pInputText class="w-full mt-2" formControlName="logo"
                    accept="image/png,image/jpeg,image/gif" (change)="updatePreview($event)">
-            <small class="p-error" *ngIf="vendorForm.controls['logo'].invalid && vendorForm.controls['logo'].touched">{{readableErrors(vendorForm.controls['logo'].errors).join('\n')}}</small>
+            <small class="p-error" *ngIf="vendorForm.controls['logo'].invalid && vendorForm.controls['business'].touched">{{readableErrors(vendorForm.controls['logo'].errors).join('\n')}}</small>
           </div>
           <div class="col-9">
             <label for="vat" class="block text-900 text-xl font-medium">Business VAT</label>
@@ -33,7 +33,19 @@
 
         <label for="color" class="block text-900 text-xl font-medium mt-3">Theme color</label>
         <p-colorPicker id="color" class="mt-2 block w-full" (onChange)="setTheme($event)"></p-colorPicker>
-        <small class="mt-1 block p-error" *ngIf="vendorForm.controls['theme'].invalid && vendorForm.controls['theme'].touched">{{readableErrors(vendorForm.controls['theme'].errors).join('\n')}}</small>
+        <small class="mt-1 block p-error" *ngIf="vendorForm.controls['theme'].invalid && vendorForm.controls['firstname'].dirty">{{readableErrors(vendorForm.controls['theme'].errors).join('\n')}}</small>
+
+        <label for="description" class="block text-900 text-xl font-medium mt-3 mb-2">Business description</label>
+        <p-editor id="description" [style]="{'height':'150px'}" (onTextChange)="setDescription($event)">
+          <ng-template pTemplate="header">
+            <span class="ql-formats">
+                <button type="button" class="ql-bold" aria-label="Bold"></button>
+                <button type="button" class="ql-italic" aria-label="Italic"></button>
+                <button type="button" class="ql-underline" aria-label="Underline"></button>
+            </span>
+          </ng-template>
+        </p-editor>
+        <small class="mt-1 block p-error" *ngIf="vendorForm.controls['description'].invalid && vendorForm.controls['firstname'].dirty">{{readableErrors(vendorForm.controls['description'].errors).join('\n')}}</small>
       </div>
     </div>
     <div class="col-12 md:col-6 md:flex-order-1 lg:col-5">

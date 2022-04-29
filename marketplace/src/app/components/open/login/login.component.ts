@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {FormControl, FormGroup, Validators } from "@angular/forms";
 import {Router} from "@angular/router";
-import getMailHint from "../../helpers/getMailHint";
+import getMailHint from "../../../helpers/getMailHint";
 import { MessageService } from 'primeng/api';
-import {AuthService} from "../../service/auth.service";
+import {AuthService} from "../../../service/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -11,7 +11,7 @@ import {AuthService} from "../../service/auth.service";
   styleUrls: ['./login.component.scss'],
   providers: [MessageService]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   public getMailHint = getMailHint;
 
   loading: boolean = false
@@ -25,10 +25,6 @@ export class LoginComponent implements OnInit {
   })
 
   constructor(private router: Router, private messageService: MessageService, private authService: AuthService) { }
-
-  ngOnInit(): void {
-    // ngOnInit is required
-  }
 
   onLogin(): void {
     this.loading = true
@@ -48,4 +44,5 @@ export class LoginComponent implements OnInit {
     sessionStorage.setItem('registerMail', this.registerForm.get('mail').value)
     this.router.navigate(['/register'])
   }
+
 }

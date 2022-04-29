@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {catchError, map, Observable, tap} from "rxjs";
+import {map, Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 

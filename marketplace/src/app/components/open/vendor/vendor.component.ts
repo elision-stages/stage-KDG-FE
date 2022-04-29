@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import getMailHint from 'src/app/helpers/getMailHint';
-import {PasswordService} from "../../service/password.service";
+import {PasswordService} from "../../../service/password.service";
 import {Router} from "@angular/router";
 import {MessageService} from "primeng/api";
-import {VendorService} from "../../service/vendor.service";
-import {ValidationHelper} from "../../helpers/ValidationHelper";
+import {VendorService} from "../../../service/vendor.service";
+import {ValidationHelper} from "../../../helpers/ValidationHelper";
 
 @Component({
   selector: 'app-vendor',
@@ -23,9 +23,11 @@ export class VendorComponent {
   vendorForm = new FormGroup({
     vat: new FormControl('', [Validators.required, Validators.minLength(10)], [ValidationHelper.VATValidator(this.vendorService)]),
     business: new FormControl('', [Validators.required, Validators.minLength(2)]),
-    phone: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    phone: new FormControl('', [Validators.required, Validators.minLength(9), ValidationHelper.phoneValidator]),
     logo: new FormControl('', [Validators.required]),
+    logoImage: new FormControl('', [Validators.required]),
     theme: new FormControl('', [Validators.required]),
+    description: new FormControl('', [Validators.required, Validators.minLength(50)]),
     firstname: new FormControl('', [Validators.required, Validators.minLength(2)]),
     familyname: new FormControl('', [Validators.required, Validators.minLength(2)]),
     mail: new FormControl('', [Validators.required, Validators.email]),
@@ -54,6 +56,9 @@ export class VendorComponent {
     if (fileList && fileList.length) {
       document.getElementById('logoPreview').classList.add('selected')
       document.getElementById('logoPreview').style.backgroundImage = "url('" + URL.createObjectURL(fileList[0]) + "')"
+      this.vendorForm.patchValue({
+        logoImage: fileList[0]
+      });
     }
   }
 
@@ -74,7 +79,27 @@ export class VendorComponent {
     this.vendorForm.get('theme').setValue(event.value)
   }
 
+  setDescription(event: any) {
+    this.vendorForm.get('description').setValue(event.htmlValue)
+  }
+
   onVendorRegister(): void {
-    // TODO
+    this.vendorForm.disable()
+    this.isLoading = true
+    this.vendorService.register(this.vendorForm.value).subscribe({
+      next: (_result) => {
+        this.success = true
+      },
+      error: (error) => {
+        if(error.status === 409) {
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'A vendor with this e-mail address exists already'});
+        }else{
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'Unknown error'});
+        }
+      }
+    }).add(() => {
+      this.vendorForm.enable()
+      this.isLoading = false
+    })
   }
 }
