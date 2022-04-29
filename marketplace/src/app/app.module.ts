@@ -28,6 +28,9 @@ import {MessageModule} from "primeng/message";
 import {DialogModule} from "primeng/dialog";
 import {MessageService} from "primeng/api";
 import { ToastModule } from 'primeng/toast';
+import { VendorComponent } from './components/vendor/vendor.component';
+import {ColorPickerModule} from "primeng/colorpicker";
+import { GroupErrorsPipe } from './helpers/group-errors.pipe';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,9 @@ import { ToastModule } from 'primeng/toast';
     AccessComponent,
     DashboardComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    VendorComponent,
+    GroupErrorsPipe
   ],
   imports: [
     HttpClientModule,
@@ -59,7 +64,8 @@ import { ToastModule } from 'primeng/toast';
     DividerModule,
     MessageModule,
     DialogModule,
-    ToastModule
+    ToastModule,
+    ColorPickerModule
   ],
   bootstrap: [AppComponent]
 })

@@ -6,8 +6,7 @@ import {AccessComponent} from "./components/access/access.component";
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {LoginComponent} from "./components/login/login.component";
 import {RegisterComponent} from "./components/register/register.component";
-
-const routes: Routes = [];
+import {VendorComponent} from "./components/vendor/vendor.component";
 
 @NgModule({
   imports: [
@@ -18,6 +17,7 @@ const routes: Routes = [];
           {path: '', component: DashboardComponent},
           {path: 'login', component: LoginComponent},
           {path: 'register', component: RegisterComponent},
+          {path: 'vendor', component: VendorComponent},
         ]
       },
       {path:'pages/notfound', component: NotfoundComponent},

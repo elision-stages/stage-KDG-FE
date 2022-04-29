@@ -1,12 +1,11 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import getMailHint from "../../helpers/getMailHint";
-import {FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {PasswordService} from "../../service/password.service";
-import {passwordValidator} from "../../helpers/passwordValidator";
-import {passwordRepeatValidator} from "../../helpers/passwordRepeatValidator";
 import {Router} from "@angular/router";
 import {UserService} from "../../service/user.service";
 import {MessageService} from "primeng/api";
+import {ValidationHelper} from "../../helpers/ValidationHelper";
 
 @Component({
   selector: 'app-register',
@@ -16,6 +15,7 @@ import {MessageService} from "primeng/api";
 })
 export class RegisterComponent implements OnInit {
   getMailHint: Function = getMailHint;
+  readableErrors = ValidationHelper.readableErrors;
   unsafePassword: boolean = false
   isLoading: boolean = false
   success: boolean = false
@@ -24,9 +24,9 @@ export class RegisterComponent implements OnInit {
     firstname: new FormControl('', [Validators.required, Validators.minLength(2)]),
     familyname: new FormControl('', [Validators.required, Validators.minLength(2)]),
     mail: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(8), passwordValidator()]),
+    password: new FormControl('', [Validators.required, Validators.minLength(8), ValidationHelper.passwordValidator]),
     passwordRepeat: new FormControl('')
-  }, { validators: passwordRepeatValidator });
+  }, { validators: ValidationHelper.passwordRepeatValidator });
 
   constructor(private pwService: PasswordService, public router: Router, private userService: UserService, private messageService: MessageService) {
 
@@ -75,33 +75,5 @@ export class RegisterComponent implements OnInit {
       this.registerForm.enable()
       this.isLoading = false
     })
-  }
-
-  readableErrors(errors: ValidationErrors): string[] {
-    let clean: string[] = []
-    for (var key in errors) {
-      if (errors.hasOwnProperty(key)) {
-        switch (key) {
-          case 'required':
-            clean.push('This field is required.')
-            break;
-          case 'minlength':
-            clean.push('This field has to contain at least ' + errors[key].requiredLength + ' characters.')
-            break;
-          case 'email':
-            clean.push('This isn\'t a valid e-mail address.')
-            break;
-          case 'password':
-            clean.push('A password must contain lowercase characters, uppercase characters and numbers.')
-            break;
-          case 'passwordRepeat':
-            clean.push('The passwords do not match.')
-            break;
-          default:
-            clean.push('Unknown error: ' + key)
-        }
-      }
-    }
-    return clean
   }
 }
