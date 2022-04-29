@@ -7,7 +7,7 @@ import getMailHint from "../../helpers/getMailHint";
   selector: 'app-login',
   templateUrl: './login.component.html'
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   public getMailHint = getMailHint;
 
   loginForm = new FormGroup({
@@ -20,16 +20,11 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router) { }
 
-  ngOnInit(): void {
-    // ngOnInit is required
-  }
-
   onLogin(): void {
-    console.log(this.loginForm)
+    // TODO
   }
 
   onRegister(): void {
-    console.log(this.registerForm)
     sessionStorage.setItem('registerMail', this.registerForm.get('mail').value)
     this.router.navigate(['/register'])
   }

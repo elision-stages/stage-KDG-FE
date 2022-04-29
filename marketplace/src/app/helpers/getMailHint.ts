@@ -3,10 +3,7 @@ export default function getMailHint(input: string) {
   if(!input.includes('@')) return false
   const parts = input.split('@', 2)
   if(parts[1].length === 0 || parts[1].includes('.')) return false
-  for(let domain of domains) {
-    if(domain.startsWith(parts[1])) {
-      return parts[0] + '@' + domain
-    }
-  }
+  const result = domains.find(domain => domain.startsWith(parts[1]))
+  if(result) return parts[0] + '@' + result
   return false
 }
