@@ -139,7 +139,7 @@ export class AppTopBarComponent {
         items: [{
           label: 'Angular Website',
           icon: 'pi pi-external-link',
-          url: 'http://angular.io'
+          url: 'https://angular.io'
         },
           {
             label: 'Router',
