@@ -10,7 +10,7 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./login.component.scss'],
   providers: [MessageService]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   public getMailHint = getMailHint;
 
   loginForm = new FormGroup({
@@ -23,17 +23,11 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router, private messageService: MessageService) { }
 
-  ngOnInit(): void {
-    // ngOnInit is required
-  }
-
   onLogin(): void {
-    this.messageService.add({severity:'error', summary: 'Error', detail: 'Unknown error'});
-    console.log(this.loginForm)
+    // TODO (Already done in other merge request...)
   }
 
   onRegister(): void {
-    console.log(this.registerForm)
     sessionStorage.setItem('registerMail', this.registerForm.get('mail').value)
     this.router.navigate(['/register'])
   }
