@@ -17,6 +17,6 @@ export class UserService {
   }
 
   register(user: User): Observable<User> {
-    return this.http.post<User>(this.userUrl, user)
+    return this.http.post<User>(environment.api + 'registercustomer', user)
   }
 }

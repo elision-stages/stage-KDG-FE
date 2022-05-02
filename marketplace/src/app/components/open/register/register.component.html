@@ -4,18 +4,18 @@
       <div class="card">
         <h4>Personal details</h4>
         <label for="firstName" class="block text-900 text-xl font-medium">First name</label>
-        <input id="firstName" type="text" placeholder="First name" pInputText class="w-full mt-2" formControlName="firstname" autofocus>
-        <small class="mt-1 block p-error" *ngIf="registerForm.controls['firstname'].invalid && registerForm.controls['firstname'].touched">{{readableErrors(registerForm.controls['firstname'].errors).join('\n')}}</small>
-        <label for="familyName" class="block text-900 text-xl font-medium mt-3">Family name</label>
-        <input id="familyName" type="text" placeholder="Family name" pInputText class="w-full mt-2" formControlName="familyname">
-        <small class="mt-1 block p-error" *ngIf="registerForm.controls['familyname'].invalid && registerForm.controls['familyname'].touched">{{readableErrors(registerForm.controls['familyname'].errors).join('\n')}}</small>
+        <input id="firstName" type="text" placeholder="First name" pInputText class="w-full mt-2" formControlName="firstName" autofocus>
+        <small class="mt-1 block p-error" *ngIf="registerForm.controls['firstName'].invalid && registerForm.controls['firstName'].touched">{{readableErrors(registerForm.controls['firstName'].errors).join('\n')}}</small>
+        <label for="lastName" class="block text-900 text-xl font-medium mt-3">Family name</label>
+        <input id="lastName" type="text" placeholder="Family name" pInputText class="w-full mt-2" formControlName="lastName">
+        <small class="mt-1 block p-error" *ngIf="registerForm.controls['lastName'].invalid && registerForm.controls['lastName'].touched">{{readableErrors(registerForm.controls['lastName'].errors).join('\n')}}</small>
         <label for="email2" class="block text-900 text-xl font-medium mt-3">Email</label>
-        <input id="email2" type="email" placeholder="Email address" pInputText class="w-full mt-2" formControlName="mail"
-               (keydown.Tab)="getMailHint(registerForm.get('mail').value) ? registerForm.get('mail').setValue(getMailHint(registerForm.get('mail').value)) : true">
-        <small [hidden]="!getMailHint(registerForm.get('mail').value)">
-          Do you mean <a (click)="registerForm.get('mail').setValue(getMailHint(registerForm.get('mail').value))">{{getMailHint(registerForm.get('mail').value)}}</a>?
+        <input id="email2" type="email" placeholder="Email address" pInputText class="w-full mt-2" formControlName="email"
+               (keydown.Tab)="getMailHint(registerForm.get('email').value) ? registerForm.get('email').setValue(getMailHint(registerForm.get('email').value)) : true">
+        <small [hidden]="!getMailHint(registerForm.get('email').value)">
+          Do you mean <button class="inline" (click)="registerForm.get('email').setValue(getMailHint(registerForm.get('email').value))">{{getMailHint(registerForm.get('email').value)}}</button>?
         </small>
-        <small class="mt-1 block p-error" *ngIf="registerForm.controls['mail'].invalid && registerForm.controls['mail'].touched">{{readableErrors(registerForm.controls['mail'].errors).join('\n')}}</small>
+        <small class="mt-1 block p-error" *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched">{{readableErrors(registerForm.controls['email'].errors).join('\n')}}</small>
       </div>
     </div>
     <div class="col-12 lg:col-6">

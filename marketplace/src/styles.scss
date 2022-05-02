@@ -2,6 +2,7 @@
 @import "../node_modules/primeflex/primeflex.scss";
 @import "../node_modules/primeicons/primeicons.css";
 @import "../node_modules/prismjs/themes/prism-coy.css";
+@import "../node_modules/quill/dist/quill.snow.css";
 @import "assets/sass/layout/_variables";
 @import "assets/sass/layout/_layout";
 @import "assets/sass/overrides/_overrides";
@@ -11,4 +12,20 @@ a:not([href]){
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none
+}
+
+.p-colorpicker, .p-colorpicker-preview {
+  width: 100%;
+  box-sizing: content-box;
+  padding: .75rem 0;
+  height: 1rem;
+}
+
+button.inline {
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  font-family: var(--font-family);
+  color: var(--primary-color);
+  cursor: pointer;
 }

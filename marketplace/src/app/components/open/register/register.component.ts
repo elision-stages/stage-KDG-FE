@@ -21,9 +21,9 @@ export class RegisterComponent implements OnInit {
   success: boolean = false
 
   registerForm = new FormGroup({
-    firstname: new FormControl('', [Validators.required, Validators.minLength(2)]),
-    familyname: new FormControl('', [Validators.required, Validators.minLength(2)]),
-    mail: new FormControl('', [Validators.required, Validators.email]),
+    firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(8), ValidationHelper.passwordValidator]),
     passwordRepeat: new FormControl('')
   }, { validators: ValidationHelper.passwordRepeatValidator });
@@ -55,21 +55,15 @@ export class RegisterComponent implements OnInit {
     this.registerForm.disable()
     this.isLoading = true
     this.userService.register(this.registerForm.value).subscribe({
-      next: (result) => {
-        console.log('User registered', result)
+      next: (_result) => {
         this.success = true
       },
       error: (error) => {
-        console.log('error')
-        console.log(error)
-        console.log(this.messageService)
         if(error.status === 409) {
           this.messageService.add({severity:'error', summary: 'Error', detail: 'A user with this e-mail address exists already'});
         }else{
           this.messageService.add({severity:'error', summary: 'Error', detail: 'Unknown error'});
         }
-        console.log('error')
-        console.log(error)
       }
     }).add(() => {
       this.registerForm.enable()

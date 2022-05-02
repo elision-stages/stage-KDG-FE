@@ -27,13 +27,13 @@
             <small class="mt-1 block p-error" *ngIf="vendorForm.controls['business'].invalid && vendorForm.controls['business'].touched">{{readableErrors(vendorForm.controls['business'].errors).join('\n')}}</small>
           </div>
         </div>
-        <label for="phone" class="mt-3 block text-900 text-xl font-medium">Phone number</label>
-        <input id="phone" type="tel" placeholder="Phone number" pInputText class="w-full mt-2" formControlName="phone" autofocus>
-        <small class="mt-1 block p-error" *ngIf="vendorForm.controls['phone'].invalid && vendorForm.controls['phone'].touched">{{readableErrors(vendorForm.controls['phone'].errors).join('\n')}}</small>
+        <label for="phoneNumber" class="mt-3 block text-900 text-xl font-medium">Phone number</label>
+        <input id="phoneNumber" type="tel" placeholder="Phone number" pInputText class="w-full mt-2" formControlName="phoneNumber" autofocus>
+        <small class="mt-1 block p-error" *ngIf="vendorForm.controls['phoneNumber'].invalid && vendorForm.controls['phoneNumber'].touched">{{readableErrors(vendorForm.controls['phoneNumber'].errors).join('\n')}}</small>
 
         <label for="color" class="block text-900 text-xl font-medium mt-3">Theme color</label>
         <p-colorPicker id="color" class="mt-2 block w-full" (onChange)="setTheme($event)"></p-colorPicker>
-        <small class="mt-1 block p-error" *ngIf="vendorForm.controls['theme'].invalid && vendorForm.controls['firstname'].dirty">{{readableErrors(vendorForm.controls['theme'].errors).join('\n')}}</small>
+        <small class="mt-1 block p-error" *ngIf="vendorForm.controls['theme'].invalid && vendorForm.controls['firstName'].dirty">{{readableErrors(vendorForm.controls['theme'].errors).join('\n')}}</small>
 
         <label for="description" class="block text-900 text-xl font-medium mt-3 mb-2">Business description</label>
         <p-editor id="description" [style]="{'height':'150px'}" (onTextChange)="setDescription($event)">
@@ -45,25 +45,25 @@
             </span>
           </ng-template>
         </p-editor>
-        <small class="mt-1 block p-error" *ngIf="vendorForm.controls['description'].invalid && vendorForm.controls['firstname'].dirty">{{readableErrors(vendorForm.controls['description'].errors).join('\n')}}</small>
+        <small class="mt-1 block p-error" *ngIf="vendorForm.controls['description'].invalid && vendorForm.controls['firstName'].dirty">{{readableErrors(vendorForm.controls['description'].errors).join('\n')}}</small>
       </div>
     </div>
     <div class="col-12 md:col-6 md:flex-order-1 lg:col-5">
       <div class="card">
         <h4>Personal details</h4>
         <label for="firstName" class="block text-900 text-xl font-medium">First name</label>
-        <input id="firstName" type="text" placeholder="First name" pInputText class="w-full mt-2" formControlName="firstname" autofocus>
-        <small class="mt-1 block p-error" *ngIf="vendorForm.controls['firstname'].invalid && vendorForm.controls['firstname'].touched">{{readableErrors(vendorForm.controls['firstname'].errors).join('\n')}}</small>
-        <label for="familyName" class="block text-900 text-xl font-medium mt-3">Family name</label>
-        <input id="familyName" type="text" placeholder="Family name" pInputText class="w-full mt-2" formControlName="familyname">
-        <small class="mt-1 block p-error" *ngIf="vendorForm.controls['familyname'].invalid && vendorForm.controls['familyname'].touched">{{readableErrors(vendorForm.controls['familyname'].errors).join('\n')}}</small>
+        <input id="firstName" type="text" placeholder="First name" pInputText class="w-full mt-2" formControlName="firstName" autofocus>
+        <small class="mt-1 block p-error" *ngIf="vendorForm.controls['firstName'].invalid && vendorForm.controls['firstName'].touched">{{readableErrors(vendorForm.controls['firstName'].errors).join('\n')}}</small>
+        <label for="lastname" class="block text-900 text-xl font-medium mt-3">Family name</label>
+        <input id="lastName" type="text" placeholder="Family name" pInputText class="w-full mt-2" formControlName="lastName">
+        <small class="mt-1 block p-error" *ngIf="vendorForm.controls['lastName'].invalid && vendorForm.controls['lastName'].touched">{{readableErrors(vendorForm.controls['lastName'].errors).join('\n')}}</small>
         <label for="email2" class="block text-900 text-xl font-medium mt-3">Email</label>
-        <input id="email2" type="email" placeholder="Email address" pInputText class="w-full mt-2" formControlName="mail"
-               (keydown.Tab)="getMailHint(vendorForm.get('mail').value) ? vendorForm.get('mail').setValue(getMailHint(vendorForm.get('mail').value)) : true">
-        <small [hidden]="!getMailHint(vendorForm.get('mail').value)">
-          Do you mean <a (click)="vendorForm.get('mail').setValue(getMailHint(vendorForm.get('mail').value))">{{getMailHint(vendorForm.get('mail').value)}}</a>?
+        <input id="email2" type="email" placeholder="Email address" pInputText class="w-full mt-2" formControlName="email"
+               (keydown.Tab)="getMailHint(vendorForm.get('email').value) ? vendorForm.get('email').setValue(getMailHint(vendorForm.get('email').value)) : true">
+        <small [hidden]="!getMailHint(vendorForm.get('email').value)">
+          Do you mean <a (click)="vendorForm.get('email').setValue(getMailHint(vendorForm.get('email').value))">{{getMailHint(vendorForm.get('email').value)}}</a>?
         </small>
-        <small class="mt-1 block p-error" *ngIf="vendorForm.controls['mail'].invalid && vendorForm.controls['mail'].touched">{{readableErrors(vendorForm.controls['mail'].errors).join('\n')}}</small>
+        <small class="mt-1 block p-error" *ngIf="vendorForm.controls['email'].invalid && vendorForm.controls['email'].touched">{{readableErrors(vendorForm.controls['email'].errors).join('\n')}}</small>
       </div>
       <div class="card">
         <h4>Account credentials</h4>

@@ -23,14 +23,14 @@ export class VendorComponent {
   vendorForm = new FormGroup({
     vat: new FormControl('', [Validators.required, Validators.minLength(10)], [ValidationHelper.VATValidator(this.vendorService)]),
     business: new FormControl('', [Validators.required, Validators.minLength(2)]),
-    phone: new FormControl('', [Validators.required, Validators.minLength(9), ValidationHelper.phoneValidator]),
+    phoneNumber: new FormControl('', [Validators.required, Validators.minLength(9), ValidationHelper.phoneValidator]),
     logo: new FormControl('', [Validators.required]),
     logoImage: new FormControl('', [Validators.required]),
     theme: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required, Validators.minLength(50)]),
-    firstname: new FormControl('', [Validators.required, Validators.minLength(2)]),
-    familyname: new FormControl('', [Validators.required, Validators.minLength(2)]),
-    mail: new FormControl('', [Validators.required, Validators.email]),
+    firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(8), ValidationHelper.passwordValidator]),
     passwordRepeat: new FormControl('')
   }, { validators: ValidationHelper.passwordRepeatValidator });
@@ -47,7 +47,6 @@ export class VendorComponent {
         this.vendorForm.get('business').setValue(result.name)
       }
     })
-    // http://localhost:8080/vendor/vat/BE0776947729
   }
 
   updatePreview(event: Event) {
