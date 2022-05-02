@@ -21,11 +21,7 @@ export class LoginComponent {
     mail: new FormControl('', Validators.email),
   });
 
-  constructor(private router: Router, private messageService: MessageService) { }
-
-  onLogin(): void {
-    // TODO (Already done in other merge request...)
-  }
+  constructor(private router: Router) { }
 
   onRegister(): void {
     sessionStorage.setItem('registerMail', this.registerForm.get('mail').value)
