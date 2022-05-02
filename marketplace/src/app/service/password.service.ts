@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core'
 import sha1 from 'js-sha1'
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'

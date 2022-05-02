@@ -7,12 +7,12 @@
         <input id="email1" type="text" placeholder="Email address" pInputText class="w-full" formControlName="mail"
                (keydown.Tab)="getMailHint(loginForm.get('mail').value) && loginForm.get('mail').setValue(getMailHint(loginForm.get('mail').value))">
         <p [hidden]="!getMailHint(loginForm.get('mail').value)">
-          Do you mean <a (click)="loginForm.get('mail').setValue(getMailHint(loginForm.get('mail').value))">{{getMailHint(loginForm.get('mail').value)}}</a>?
+          Do you mean <button class="inline" (click)="loginForm.get('mail').setValue(getMailHint(loginForm.get('mail').value))">{{getMailHint(loginForm.get('mail').value)}}</button>?
         </p>
         <label for="password1" class="block text-900 font-medium text-xl mb-2 mt-3">Password</label>
         <p-password id="password1" formControlName="password" placeholder="Password" [toggleMask]="true" [feedback]="false" styleClass="mb-3 w-full p-inputwrapper p-input-icon-right" inputStyleClass="w-full"></p-password>
 
-        <button pButton pRipple label="Sign In" class="w-full p-3 text-xl" type="submit"></button>
+        <button pButton pRipple label="Sign In" class="w-full p-3 text-xl" type="submit" [loading]="loading"></button>
       </form>
     </div>
   </div>
@@ -24,7 +24,7 @@
         <input id="email2" type="text" placeholder="Email address" pInputText class="w-full" formControlName="mail"
                (keydown.Tab)="getMailHint(registerForm.get('mail').value) && registerForm.get('mail').setValue(getMailHint(registerForm.get('mail').value))">
         <p [hidden]="!getMailHint(registerForm.get('mail').value)">
-          Do you mean <a (click)="registerForm.get('mail').setValue(getMailHint(registerForm.get('mail').value))">{{getMailHint(registerForm.get('mail').value)}}</a>?
+          Do you mean <button class="inline" (click)="registerForm.get('mail').setValue(getMailHint(registerForm.get('mail').value))">{{getMailHint(registerForm.get('mail').value)}}</button>?
         </p>
         <button pButton pRipple label="Create your account" class="w-full p-3 text-xl mt-3" type="submit"></button>
       </form>

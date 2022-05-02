@@ -28,16 +28,17 @@
   </div>
 
   <div class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active':appMain.topMenuActive}">
-    <a href="#" class="p-link layout-topbar-button">
+    <a href="#" class="p-link layout-topbar-button p-button-outlined">
       <i class="pi pi-shopping-cart mr-3 p-text-secondary"
          pBadge
          [value]="'5'"></i>
       <span>Shopping cart</span>
     </a>
-    <a href="#" class="p-link layout-topbar-button" (click)="menu.toggle($event)">
+    <a class="p-link layout-topbar-button" (click)="menu.show($event)" *ngIf="false">
       <i class="pi pi-user"></i>
       <span>Profile</span>
     </a>
+    <button pButton pRipple type="button" label="Log in" icon="pi pi-user" routerLink="/login" class="p-button-outlined p-button-rounded ml-2"></button>
     <p-menu #menu [popup]="true" [model]="items"></p-menu>
   </div>
 
