@@ -7,6 +7,7 @@ import {DashboardComponent} from "./components/open/dashboard/dashboard.componen
 import {LoginComponent} from "./components/open/login/login.component";
 import {RegisterComponent} from "./components/open/register/register.component";
 import {VendorComponent} from "./components/open/vendor/vendor.component";
+import {CategoriesComponent} from "./components/vendor/categories/categories.component";
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import {VendorComponent} from "./components/open/vendor/vendor.component";
           {path: 'login', component: LoginComponent},
           {path: 'register', component: RegisterComponent},
           {path: 'vendor', component: VendorComponent},
+          {path: 'categories', component: CategoriesComponent},
         ]
       },
       {path:'pages/notfound', component: NotfoundComponent},

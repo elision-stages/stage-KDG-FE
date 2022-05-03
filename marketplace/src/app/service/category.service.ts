@@ -1,53 +1,37 @@
 import { Injectable } from '@angular/core';
 import {TreeNode} from "primeng/api";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../environments/environment";
+import {Observable} from "rxjs";
+import {User} from "../model/User";
+import {Category} from "../model/Category";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  getCategories(): Promise<TreeNode[]> {
-    return new Promise<TreeNode[]>((resolve) => {
-      resolve([
-        {
-          "label": "Computergebeuren",
-          "expandedIcon": "pi pi-folder-open",
-          "collapsedIcon": "pi pi-folder",
-          "children": [
-            {
-              "label": "Opslag",
-              "expandedIcon": "pi pi-folder-open",
-              "collapsedIcon": "pi pi-folder",
-              "children": [
-                {"label": "HDD", "icon": "pi pi-file"},
-                {"label": "SSD", "icon": "pi pi-file"},
-                {"label": "NAS", "icon": "pi pi-file"}
-              ]
-            },
-            {
-              "label": "Extra",
-              "expandedIcon": "pi pi-folder-open",
-              "collapsedIcon": "pi pi-folder",
-              "children": [
-                {"label": "Toetsenborden", "icon": "pi pi-file"},
-                {"label": "Muizen", "icon": "pi pi-file"},
-                {"label": "Xyz", "icon": "pi pi-file"}
-              ]
-            }]
-        },
-        {
-          "label": "Kleding",
-          "expandedIcon": "pi pi-folder-open",
-          "collapsedIcon": "pi pi-folder",
-          "children": [
-            {"label": "Broeken", "icon": "pi pi-image"},
-            {"label": "Shirts", "icon": "pi pi-image"},
-            {"label": "Hoodies", "icon": "pi pi-image"},
-            {"label": "Petten", "icon": "pi pi-image"}]
-        }
-      ])
+  getCategories(): Observable<any[]> {
+    return this.http.get<any[]>(environment.api + 'getCategories')
+  }
+
+  formatCategories(cats: any): TreeNode[] {
+    let result: TreeNode[] = []
+    cats.forEach((cat) => {
+      result.push({
+        "label": cat.name,
+        "data": cat.id,
+        "expandedIcon": "pi pi-folder-open",
+        "collapsedIcon": "pi pi-folder",
+        "children": this.formatCategories(cat.subcategories)
+      })
     })
+    return result
+  }
+
+  add(category: Category): Observable<Category> {
+    return this.http.post<Category>(environment.api + 'createCategory', category)
   }
 }

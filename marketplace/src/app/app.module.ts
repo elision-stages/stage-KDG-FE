@@ -30,6 +30,8 @@ import { ToastModule } from 'primeng/toast';
 import { VendorComponent } from './components/open/vendor/vendor.component';
 import {ColorPickerModule} from "primeng/colorpicker";
 import {EditorModule} from "primeng/editor";
+import {CategoriesComponent} from "./components/vendor/categories/categories.component";
+import {TreeSelectModule} from "primeng/treeselect";
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import {EditorModule} from "primeng/editor";
     DashboardComponent,
     LoginComponent,
     RegisterComponent,
-    VendorComponent
+    VendorComponent,
+    CategoriesComponent
   ],
   imports: [
     HttpClientModule,
@@ -64,7 +67,8 @@ import {EditorModule} from "primeng/editor";
     DialogModule,
     ToastModule,
     ColorPickerModule,
-    EditorModule
+    EditorModule,
+    TreeSelectModule
   ],
   bootstrap: [AppComponent]
 })
