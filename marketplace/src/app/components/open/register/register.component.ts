@@ -9,13 +9,11 @@ import {ValidationHelper} from "../../../helpers/ValidationHelper";
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
   providers: [MessageService]
 })
 export class RegisterComponent implements OnInit {
-  getMailHint: Function = getMailHint;
-  readableErrors = ValidationHelper.readableErrors;
-  unsafePassword: boolean = false
+  getMailHint: Function = getMailHint
+  readableErrors = ValidationHelper.readableErrors
   isLoading: boolean = false
   success: boolean = false
 
