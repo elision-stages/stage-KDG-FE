@@ -17,9 +17,7 @@ export class ValidationHelper {
 
   static VATValidator(vendorService: VendorService): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      return of(null)
-      // Backend nog niet gemerged
-      return vendorService
+     return vendorService
         .checkVat(control.value)
         .pipe(
           map(_res => null), // checkVat only returns result when a business is found => OK

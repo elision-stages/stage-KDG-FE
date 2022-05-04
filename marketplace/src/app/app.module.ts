@@ -30,6 +30,7 @@ import { ToastModule } from 'primeng/toast';
 import { VendorComponent } from './components/open/vendor/vendor.component';
 import {ColorPickerModule} from "primeng/colorpicker";
 import {EditorModule} from "primeng/editor";
+import { CustomPasswordInputComponent } from './components/custom-password-input/custom-password-input.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import {EditorModule} from "primeng/editor";
     DashboardComponent,
     LoginComponent,
     RegisterComponent,
-    VendorComponent
+    VendorComponent,
+    CustomPasswordInputComponent
   ],
   imports: [
     HttpClientModule,

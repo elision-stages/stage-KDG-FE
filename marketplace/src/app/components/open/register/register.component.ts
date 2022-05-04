@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import getMailHint from "../../../helpers/getMailHint";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {PasswordService} from "../../../service/password.service";
 import {Router} from "@angular/router";
 import {UserService} from "../../../service/user.service";
 import {MessageService} from "primeng/api";
@@ -28,7 +27,7 @@ export class RegisterComponent implements OnInit {
     passwordRepeat: new FormControl('')
   }, { validators: ValidationHelper.passwordRepeatValidator });
 
-  constructor(private pwService: PasswordService, public router: Router, private userService: UserService, private messageService: MessageService) {
+  constructor(public router: Router, private userService: UserService, private messageService: MessageService) {
 
   }
 
@@ -36,19 +35,6 @@ export class RegisterComponent implements OnInit {
     if(sessionStorage.getItem('registerMail') !== null) {
       this.registerForm.get('mail').setValue(sessionStorage.getItem('registerMail'))
     }
-  }
-
-  pwnCheck(): void {
-    const password = this.registerForm.get('password').value
-    if(password.length < 8) {
-      this.unsafePassword = false
-      return
-    }
-    this.pwService
-      .cancel()
-      .checkPassword(password).then((result) => {
-        this.unsafePassword = result > 0
-      })
   }
 
   onRegister(): void {
