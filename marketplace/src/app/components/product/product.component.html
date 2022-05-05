@@ -1,0 +1,36 @@
+<p>product works!</p>
+
+<div class="card">
+  <form [formGroup]="addProduct" (ngSubmit)="onAdd()">
+    <h4>Product toevoegen</h4>
+
+    <label for="title" class="block text-900 text-xl font-medium">Product titel</label>
+    <input id="title"
+           type="text"
+           placeholder="Product titel"
+           pInputText
+           class="w-full mt-2"
+           formControlName="title"
+           autofocus>
+
+    <label for="description" class="block text-900 text-xl font-medium">Product description</label>
+    <p-dropdown [options]="getAllCategories()"></p-dropdown>
+
+    <label for="description" class="block text-900 text-xl font-medium">Product description</label>
+    <input id="description"
+           type="text"
+           placeholder="Product titel"
+           pInputText
+           class="w-full mt-2"
+           formControlName="title"
+    >
+
+    <button
+      class="w-full p-3 text-xl mt-3"
+      pButton
+      pRipple
+      label="Voeg product toe"
+      type="submit"
+    ></button>
+  </form>
+</div>
