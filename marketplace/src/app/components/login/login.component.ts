@@ -2,10 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators } from "@angular/forms";
 import {Router} from "@angular/router";
 import getMailHint from "../../helpers/getMailHint";
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
+  providers: [MessageService]
 })
 export class LoginComponent {
   public getMailHint = getMailHint;
@@ -19,10 +22,6 @@ export class LoginComponent {
   });
 
   constructor(private router: Router) { }
-
-  onLogin(): void {
-    // TODO
-  }
 
   onRegister(): void {
     sessionStorage.setItem('registerMail', this.registerForm.get('mail').value)
