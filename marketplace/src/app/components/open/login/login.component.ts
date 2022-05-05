@@ -40,7 +40,6 @@ export class LoginComponent {
   }
 
   onRegister(): void {
-    console.log(this.registerForm)
     sessionStorage.setItem('registerMail', this.registerForm.get('mail').value)
     this.router.navigate(['/register'])
   }

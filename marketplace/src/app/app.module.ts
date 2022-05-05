@@ -30,6 +30,8 @@ import { ToastModule } from 'primeng/toast';
 import { VendorComponent } from './components/open/vendor/vendor.component';
 import {ColorPickerModule} from "primeng/colorpicker";
 import {EditorModule} from "primeng/editor";
+import {CategoriesComponent} from "./components/vendor/categories/categories.component";
+import {TreeSelectModule} from "primeng/treeselect";
 import { CustomPasswordInputComponent } from './components/custom-password-input/custom-password-input.component';
 
 @NgModule({
@@ -46,6 +48,7 @@ import { CustomPasswordInputComponent } from './components/custom-password-input
     LoginComponent,
     RegisterComponent,
     VendorComponent,
+    CategoriesComponent,
     CustomPasswordInputComponent
   ],
   imports: [
@@ -66,7 +69,8 @@ import { CustomPasswordInputComponent } from './components/custom-password-input
     DialogModule,
     ToastModule,
     ColorPickerModule,
-    EditorModule
+    EditorModule,
+    TreeSelectModule
   ],
   bootstrap: [AppComponent]
 })

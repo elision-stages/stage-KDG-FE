@@ -1,0 +1,22 @@
+<div class="grid">
+  <div class="col-12 md:col-8">
+    <div class="card">
+      <h4>Webshop categories</h4>
+      <p-tree [value]="categoryView"></p-tree>
+    </div>
+  </div>
+  <div class="col-12 md:col-4">
+    <div class="card">
+      <h4>Categorie toevoegen</h4>
+      <form [formGroup]="addForm" (ngSubmit)="onAdd()">
+        <label for="name" class="block text-900 text-xl font-medium">Category name</label>
+        <input id="name" type="text" placeholder="Category name" pInputText class="w-full mt-2" formControlName="name" autofocus>
+        <small class="mt-1 block p-error" *ngIf="addForm.controls['name'].invalid && addForm.controls['name'].touched">{{readableErrors(addForm.controls['name'].errors).join('\n')}}</small>
+
+        <label for="parent" class="block text-900 text-xl font-medium mt-3">Parent category</label>
+        <p-treeSelect id="parent" [options]="categoryList" (onNodeSelect)="setParentId($event)" placeholder="Root map" class="w-full mt-2 block"></p-treeSelect>
+        <button [loading]="isLoading" [pTooltip]="!addForm.valid && 'Some fields aren\'t valid'" tooltipPosition="top" [disabled]="!addForm.valid" [loading]="isLoading" pButton pRipple label="Add category" class="w-full p-3 text-xl mt-3" type="submit"></button>
+      </form>
+    </div>
+  </div>
+</div>
