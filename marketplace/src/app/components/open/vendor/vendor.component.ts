@@ -16,7 +16,6 @@ import {ValidationHelper} from "../../../helpers/ValidationHelper";
 export class VendorComponent {
   getMailHint: Function = getMailHint;
   readableErrors = ValidationHelper.readableErrors;
-  unsafePassword: boolean = false
   isLoading: boolean = false
   success: boolean = false
 
@@ -35,7 +34,7 @@ export class VendorComponent {
     passwordRepeat: new FormControl('')
   }, { validators: ValidationHelper.passwordRepeatValidator });
 
-  constructor(private pwService: PasswordService, public router: Router, private vendorService: VendorService, private messageService: MessageService) {
+  constructor(public router: Router, private vendorService: VendorService, private messageService: MessageService) {
 
   }
 
@@ -59,19 +58,6 @@ export class VendorComponent {
         logoImage: fileList[0]
       });
     }
-  }
-
-  pwnCheck(): void {
-    const password = this.vendorForm.get('password').value
-    if(password.length < 8) {
-      this.unsafePassword = false
-      return
-    }
-    this.pwService
-      .cancel()
-      .checkPassword(password).then((result) => {
-      this.unsafePassword = result > 0
-    })
   }
 
   setTheme(event: any) {

@@ -32,6 +32,7 @@ import {ColorPickerModule} from "primeng/colorpicker";
 import {EditorModule} from "primeng/editor";
 import {CategoriesComponent} from "./components/vendor/categories/categories.component";
 import {TreeSelectModule} from "primeng/treeselect";
+import { CustomPasswordInputComponent } from './components/custom-password-input/custom-password-input.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import {TreeSelectModule} from "primeng/treeselect";
     LoginComponent,
     RegisterComponent,
     VendorComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    CustomPasswordInputComponent
   ],
   imports: [
     HttpClientModule,

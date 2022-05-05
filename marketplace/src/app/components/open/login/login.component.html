@@ -2,7 +2,7 @@
   <div class="col-12 lg:col-6">
     <div class="card">
       <h4>Login</h4>
-      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <form [formGroup]="loginForm">
         <label for="email1" class="block text-900 text-xl font-medium mb-2">Email</label>
         <input id="email1" type="text" placeholder="Email address" pInputText class="w-full" formControlName="mail"
                (keydown.Tab)="getMailHint(loginForm.get('mail').value) && loginForm.get('mail').setValue(getMailHint(loginForm.get('mail').value))">
