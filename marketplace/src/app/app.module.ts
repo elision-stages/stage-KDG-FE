@@ -21,6 +21,7 @@ import {LoginComponent} from './components/open/login/login.component';
 import {RippleModule} from "primeng/ripple";
 import {PasswordModule} from "primeng/password";
 import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule} from "@angular/forms";
 import {RegisterComponent} from './components/open/register/register.component';
 import {DividerModule} from "primeng/divider";
 import {HttpClientModule} from "@angular/common/http";
@@ -35,6 +36,11 @@ import {TreeSelectModule} from "primeng/treeselect";
 import {CustomPasswordInputComponent} from './components/custom-password-input/custom-password-input.component';
 import {ProductComponent} from './components/product/product.component';
 import {DropdownModule} from "primeng/dropdown";
+import {MultiSelectModule} from "primeng/multiselect";
+import {KnobModule} from "primeng/knob";
+import {SelectButtonModule} from "primeng/selectbutton";
+import {SliderModule} from "primeng/slider";
+import {InputNumberModule} from "primeng/inputnumber";
 
 @NgModule({
   declarations: [
@@ -67,6 +73,7 @@ import {DropdownModule} from "primeng/dropdown";
     RippleModule,
     PasswordModule,
     ReactiveFormsModule,
+    FormsModule,
     DividerModule,
     MessageModule,
     DialogModule,
@@ -74,8 +81,14 @@ import {DropdownModule} from "primeng/dropdown";
     ColorPickerModule,
     EditorModule,
     TreeSelectModule,
-    DropdownModule
+    DropdownModule,
+    MultiSelectModule,
+    KnobModule,
+    SelectButtonModule,
+    SliderModule,
+    InputNumberModule
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
