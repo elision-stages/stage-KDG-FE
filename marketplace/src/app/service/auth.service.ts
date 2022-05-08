@@ -11,12 +11,9 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  login(mail: string, password: string): Observable<boolean> {
-    return this.http.post<boolean>(this.authUrl, { mail: mail, password: password }).pipe(
-      map(data => {
-        console.log(data)
-        return data
-      })
-    );
+  login(mail: string, password: string): Observable<any> {
+    return this.http.post<any>(this.authUrl + 'login', { email: mail, password: password }, {
+      withCredentials: true
+    });
   }
 }
