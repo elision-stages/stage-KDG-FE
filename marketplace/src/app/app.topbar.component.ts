@@ -16,7 +16,6 @@ export class AppTopBarComponent {
   constructor(public appMain: AppMainComponent) { }
 
   ngOnInit() {
-
     this.megaMenuItems = [
       {
         label: 'Fashion', icon: 'pi pi-fw pi-tag',

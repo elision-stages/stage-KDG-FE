@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import getMailHint from "../../../helpers/getMailHint";
 import { MessageService } from 'primeng/api';
 import {AuthService} from "../../../service/auth.service";
+import {finalize} from "rxjs";
 
 @Component({
   selector: 'app-login',
@@ -28,13 +29,20 @@ export class LoginComponent {
 
   onLogin(): void {
     this.loading = true
-    this.authService.login(this.loginForm.get('username').value, this.loginForm.get('password').value).subscribe({
-      next: (result) => {
-        console.log('Login result', result)
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'This service isn\'t implemented yet'});
-      },
-      complete: () => {
+    this.authService.login(this.loginForm.get('mail').value, this.loginForm.get('password').value).pipe(
+      finalize(() => {
         this.loading = false
+      })
+    ).subscribe({
+      next: (_result) => {
+        this.messageService.add({severity:'success', summary: 'Login successfull', detail: 'Hooray'});
+      },
+      error: (error) => {
+        if(error.status === 401) {
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'Unknown credentials'});
+        }else{
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'Unknown error: '});
+        }
       }
     })
   }

@@ -13,7 +13,7 @@
         <input id="email2" type="email" placeholder="Email address" pInputText class="w-full mt-2" formControlName="email"
                (keydown.Tab)="getMailHint(registerForm.get('email').value) ? registerForm.get('email').setValue(getMailHint(registerForm.get('email').value)) : true">
         <small [hidden]="!getMailHint(registerForm.get('email').value)">
-          Do you mean <button class="inline" (click)="registerForm.get('email').setValue(getMailHint(registerForm.get('email').value))">{{getMailHint(registerForm.get('email').value)}}</button>?
+          Do you mean <button type="button" class="inline" (click)="registerForm.get('email').setValue(getMailHint(registerForm.get('email').value))">{{getMailHint(registerForm.get('email').value)}}</button>?
         </small>
         <small class="mt-1 block p-error" *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched">{{readableErrors(registerForm.controls['email'].errors).join('\n')}}</small>
       </div>
