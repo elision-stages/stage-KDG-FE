@@ -11,7 +11,8 @@ export class ChunkPipe implements PipeTransform {
       n = arr.length;
 
     while (i < n) {
-      chunks.push(arr.slice(i, i += len));
+      chunks.push(arr.slice(i, i + len));
+      i += len;
     }
 
     return chunks;

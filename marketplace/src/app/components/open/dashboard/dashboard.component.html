@@ -43,32 +43,6 @@
               </div>
             </div>
           </div>
-          <div [class]="productTemplate == 'list' ? 'col-12' : ['col-12', 'lg:col-3', 'md:col-4', 'sm:col-6']" *ngFor="let hit of hits">
-            <div class="p-card-shadow p-card">
-              <div class="p-card-header">
-                <img alt="Card" [src]="hit.image" class="smallaspect" (error)="imageFail($event)">
-              </div>
-              <div class="p-card-body">
-                <h2><ais-highlight attribute="name" [hit]="hit"></ais-highlight></h2>
-                <a href="#">{{ hit['categories.lvl0'] }}</a>
-                <p class="desc"><ais-highlight attribute="description" [hit]="hit"></ais-highlight></p>
-                <button pButton type="button" [label]="'&euro;' + hit.price.toFixed(2).replace('.', ',')" ></button>
-              </div>
-            </div>
-          </div>
-          <div [class]="productTemplate == 'list' ? 'col-12' : ['col-12', 'lg:col-3', 'md:col-4', 'sm:col-6']" *ngFor="let hit of hits">
-            <div class="p-card-shadow p-card">
-              <div class="p-card-header">
-                <img alt="Card" [src]="hit.image" class="smallaspect" (error)="imageFail($event)">
-              </div>
-              <div class="p-card-body">
-                <h2><ais-highlight attribute="name" [hit]="hit"></ais-highlight></h2>
-                <a href="#">{{ hit['categories.lvl0'] }}</a>
-                <p class="desc"><ais-highlight attribute="description" [hit]="hit"></ais-highlight></p>
-                <button pButton type="button" [label]="'&euro;' + hit.price.toFixed(2).replace('.', ',')" ></button>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
