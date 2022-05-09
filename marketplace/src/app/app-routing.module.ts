@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 import {AppMainComponent} from "./app.main.component";
 import {NotfoundComponent} from "./components/open/notfound/notfound.component";
 import {AccessComponent} from "./components/open/access/access.component";
@@ -8,6 +8,7 @@ import {LoginComponent} from "./components/open/login/login.component";
 import {RegisterComponent} from "./components/open/register/register.component";
 import {VendorComponent} from "./components/open/vendor/vendor.component";
 import {CategoriesComponent} from "./components/vendor/categories/categories.component";
+import {ProductComponent} from "./components/product/product.component";
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import {CategoriesComponent} from "./components/vendor/categories/categories.com
           {path: 'register', component: RegisterComponent},
           {path: 'vendor', component: VendorComponent},
           {path: 'categories', component: CategoriesComponent},
+          {path: 'addProduct', component: ProductComponent},
         ]
       },
       {path:'pages/notfound', component: NotfoundComponent},
