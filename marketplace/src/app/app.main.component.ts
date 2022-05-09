@@ -4,6 +4,12 @@ import { AppComponent } from './app.component';
 import { ConfigService } from './service/app.config.service';
 import { AppConfig } from './api/appconfig';
 import { Subscription } from 'rxjs';
+import algoliasearch from 'algoliasearch/lite';
+
+const searchClient = algoliasearch(
+  'EL070LM1BO',
+  'a3a4d79bb7692be48ae627e98245c082'
+);
 
 @Component({
   selector: 'app-main',
@@ -54,6 +60,11 @@ export class AppMainComponent implements AfterViewInit, OnDestroy, OnInit {
   config: AppConfig;
 
   subscription: Subscription;
+
+  algoliaConfig = {
+    indexName: 'l1_kdg_stage_marketplace',
+    searchClient
+  };
 
   constructor(public renderer: Renderer2, public app: AppComponent, public configService: ConfigService) { }
 
