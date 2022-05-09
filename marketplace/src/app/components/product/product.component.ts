@@ -1,16 +1,16 @@
-import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ProductService} from "../../service/product.service";
 import {Pair, Product} from "../../model/Product";
 import {CategoryService} from "../../service/category.service";
 import {Category, Characteristic} from "../../model/Category";
+import {Component} from "@angular/core";
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent {
   addProduct = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(2)]),
     description: new FormControl('', [Validators.required]),
@@ -27,12 +27,6 @@ export class ProductComponent implements OnInit {
     this.outProduct = new Product();
   }
 
-  ngOnInit(): void {
-  }
-
-  /**
-   *
-   */
   onAdd(): void {
     console.log(this.addProduct.value)
     console.log(this.outProduct);
@@ -55,8 +49,8 @@ export class ProductComponent implements OnInit {
   getAllCategories(): any {
     this.categoryService.getCategories().subscribe({
       next: (_result) => {
-        for (let i = 0; i < _result.length; i++) {
-          this.categories.push(_result[i])
+        for (let result of _result) {
+          this.categories.push(result)
         }
 
         return _result;
@@ -71,16 +65,16 @@ export class ProductComponent implements OnInit {
     console.log(this.outProduct);
     this.outProduct.attributes.splice(0, this.outProduct.attributes.length)
 
-    for (let i = 0; i < this.selectedCategory.characteristics.length; i++) {
+    for (let attribute of this.selectedCategory.characteristics) {
       let pair = new Pair();
-      pair.attributeName = this.selectedCategory.characteristics[i].name;
+      pair.attributeName = attribute.name;
       pair.attributeValue = ''
       this.outProduct.attributes.push(pair)
     }
     console.log(this.outProduct);
   }
 
-  characteristicChanged(characteristic: Characteristic, value:any) {
+  characteristicChanged(characteristic: Characteristic, value: any) {
     console.log('characteristic');
     console.log(characteristic);
     console.log('value');
