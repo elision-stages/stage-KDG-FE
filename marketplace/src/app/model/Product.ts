@@ -1,17 +1,15 @@
+import {AttributeValue} from "./AttributeValue";
+
 export class Product {
   title: string
   price: number
   description: string
   vendorId: number
-  attributes: Array<Pair>
+  attributes: Array<AttributeValue>
 
   constructor() {
-    this.attributes = new Array<Pair>()
+    this.attributes = new Array<AttributeValue>()
   }
 
 }
 
-export class Pair {
-  attributeName: string
-  attributeValue: string
-}

@@ -1,42 +1,49 @@
-<div class="card">
-  <form [formGroup]="addProduct" (ngSubmit)="onAdd()">
-    <div class="grid">
-      <div class="col-12 md:col-6">
-        <h4>Product toevoegen</h4>
+<form [formGroup]="addProduct" (ngSubmit)="onAdd()">
+  <div class="grid">
+    <div class="col-12 lg:col-6">
+      <div class="card">
+        <h4>Add product</h4>
 
-        <div class="field col-12 md:col-4">
+        <div class="field">
         <span class="p-float-label">
-            <input type="text" id="title" pInputText name="first" formControlName="title">
-            <label for="title">Product titel</label>
+            <input type="text" id="title" pInputText class="w-full" name="first" formControlName="title">
+            <label for="title">Product title</label>
         </span>
         </div>
-        <div class="field col-12 md:col-4">
+        <div class="field">
         <span class="p-float-label">
-            <input type="text" id="desc" pInputText name="desc" formControlName="description">
-            <label for="title">Product omschrijving</label>
+            <input type="text" id="desc" class="w-full" pInputText name="desc" formControlName="description">
+            <label for="title">Product description</label>
         </span>
         </div>
 
-        <label for="price">Prijs</label> <br>
-        <p-inputNumber id="price" [showButtons]="true"
-                       formControlName="price"
-                       prefix="€"
-                       inputId="stacked" mode="decimal" [step]="0.01" incrementButtonIcon="pi pi-plus"
-                       decrementButtonIcon="pi pi-minus">
-        </p-inputNumber>
+        <div class="field">
+          <label for="price">Prijs</label> <br>
+          <p-inputNumber id="price" [showButtons]="true"
+                         class="w-full"
+                         formControlName="price"
+                         prefix="€"
+                         inputId="stacked" mode="decimal" [step]="0.01" incrementButtonIcon="pi pi-plus"
+                         decrementButtonIcon="pi pi-minus">
+          </p-inputNumber>
+        </div>
       </div>
-      <div class="col-12 md:col-4">
+    </div>
+    <div class="col-12 lg:col-6 ">
+      <div class="card">
+        <div class="field w-full">
+          <label for="category" class="block text-900 text-xl font-medium mt-1 w-full">Category</label>
+          <p-dropdown [options]="categories" [(ngModel)]="selectedCategory" [ngModelOptions]="{standalone:true}"
+                      class="w-full"
+                      id="category"
+                      optionLabel="name" (onChange)="selectCategory()"></p-dropdown>
+        </div>
 
-        <label for="category" class="block text-900 text-xl font-medium mt">Categorie</label>
-        <p-dropdown [options]="categories" [(ngModel)]="selectedCategory" [ngModelOptions]="{standalone:true}"
-                    id="category"
-                    optionLabel="name" (onChange)="selectCategory()"></p-dropdown>
-
-        <div *ngIf="selectedCategory != undefined">
-          <div *ngFor="let characteristic of selectedCategory.characteristics" class="mt card">
+        <ng-container *ngIf="selectedCategory != undefined">
+          <div *ngFor="let characteristic of selectedCategory.characteristics" class="mt-1 card">
             <h5>{{characteristic.name}}</h5>
 
-            <p-knob *ngIf="characteristic.type === 'INTEGER'" #value [ngModel]="characteristic.value"
+            <p-knob *ngIf="characteristic.type === 'INTEGER'" [ngModel]="characteristic.value"
                     [ngModelOptions]="{standalone:true}"
                     [min]="0" [max]="10" (onChange)="characteristicChanged(characteristic,$event)"></p-knob>
 
@@ -57,15 +64,16 @@
             </p-inputNumber>
 
           </div>
-        </div>
+        </ng-container>
       </div>
-      <button
-        class="w-full p-3 text-xl mt-3"
-        pButton
-        pRipple
-        label="Voeg product toe"
-        type="submit"
-      ></button>
     </div>
-  </form>
-</div>
+    <button
+      class="w-full p-3 text-xl mt-1"
+      pButton
+      pRipple
+      label="Voeg product toe"
+      type="submit"
+    ></button>
+  </div>
+</form>
+

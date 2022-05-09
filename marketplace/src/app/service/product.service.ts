@@ -3,6 +3,7 @@ import {Product} from "../model/Product";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
+import {Response} from "../model/Response";
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +13,8 @@ export class ProductService {
   constructor(private http: HttpClient) {
   }
 
-  addProduct(product: Product): Observable<Product> {
+  addProduct(product: Product): Observable<Response> {
     let url = environment.api + 'addProduct';
-    console.log(url.toString());
-    console.log(product);
-    return this.http.post<Product>(url, product);
+    return this.http.post<Response>(url, product);
   }
 }
