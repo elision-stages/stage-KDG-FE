@@ -36,10 +36,8 @@ import { CustomPasswordInputComponent } from './components/custom-password-input
 import { NgAisModule } from 'angular-instantsearch';
 import {CardModule} from "primeng/card";
 import { ChunkPipe } from './helpers/chunk.pipe';
-import {SelectButtonModule} from "primeng/selectbutton";
 import { StoreModule } from '@ngrx/store';
 import {MessagesModule} from "primeng/messages";
-import {CustomPasswordInputComponent} from './components/custom-password-input/custom-password-input.component';
 import {ProductComponent} from './components/product/product.component';
 import {DropdownModule} from "primeng/dropdown";
 import {MultiSelectModule} from "primeng/multiselect";
@@ -94,7 +92,7 @@ import {InputNumberModule} from "primeng/inputnumber";
     KnobModule,
     SelectButtonModule,
     SliderModule,
-    InputNumberModule
+    InputNumberModule,
     TreeSelectModule,
     NgAisModule.forRoot(),
     CardModule,
