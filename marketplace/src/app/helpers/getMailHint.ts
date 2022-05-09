@@ -1,4 +1,5 @@
 export default function getMailHint(input: string) {
+  if(!input) return false
   const domains = ['gmail.com', 'yahoo.com', 'hotmail.com', 'aol.com', 'elision.eu', 'cronos.be', 'hotmail.be', 'msn.com', 'live.com', 'icloud.com', 'outlook.com']
   if(!input.includes('@')) return false
   const parts = input.split('@', 2)

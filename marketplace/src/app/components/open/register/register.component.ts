@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     if(sessionStorage.getItem('registerMail') !== null) {
-      this.registerForm.get('mail').setValue(sessionStorage.getItem('registerMail'))
+      this.registerForm.get('email').setValue(sessionStorage.getItem('registerMail'))
     }
   }
 
