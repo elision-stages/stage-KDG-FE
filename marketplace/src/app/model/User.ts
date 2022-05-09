@@ -1,5 +1,7 @@
 export class User {
-  private firstName: string
-  private familyName: string
-  private mail: string
+  id: number
+  firstName: string
+  familyName: string
+  email: string
+  role: string
 }

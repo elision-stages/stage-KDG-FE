@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AppMainComponent } from './app.main.component';
 import { MenuItem, MegaMenuItem } from 'primeng/api';
+import {User} from "./model/User";
+import {AuthService} from "./service/auth.service";
 
 @Component({
   selector: 'app-topbar',
@@ -8,12 +10,17 @@ import { MenuItem, MegaMenuItem } from 'primeng/api';
   styleUrls: ['./app.topbar.component.scss']
 })
 export class AppTopBarComponent {
-
   items: MenuItem[];
   showCategories: boolean = false;
   megaMenuItems: MegaMenuItem[];
 
-  constructor(public appMain: AppMainComponent) { }
+  user: User = null;
+  j = JSON;
+
+  constructor(public appMain: AppMainComponent, private authService: AuthService) {
+    this.authService.user.subscribe(x => this.user = x);
+    this.authService.user.subscribe(this.setItems.bind(this));
+  }
 
   ngOnInit() {
     this.megaMenuItems = [
@@ -120,29 +127,26 @@ export class AppTopBarComponent {
         ]
       },
     ];
-
-    this.items = [{
-      label: 'Options',
-      items: [{
-        label: 'Update',
-        icon: 'pi pi-refresh'
+    this.setItems(123);
+  }
+  setItems(x) {
+    console.log('setItems', x)
+    this.items = [
+      {
+        label: 'Dag ' + this.user?.firstName,
+        items: [
+          {
+            label: 'Settings',
+            icon: 'pi pi-cog'
+          }]
       },
-        {
-          label: 'Delete',
-          icon: 'pi pi-times'
-        }
-      ]},
       {
         label: 'Navigate',
         items: [{
-          label: 'Angular Website',
-          icon: 'pi pi-external-link',
-          url: 'https://angular.io'
-        },
-          {
-            label: 'Router',
-            icon: 'pi pi-upload'
-          }
+          label: 'Log out',
+          icon: 'pi pi-sign-out',
+          command: this.authService.logout.bind(this)
+        }
         ]}
     ]
   }
