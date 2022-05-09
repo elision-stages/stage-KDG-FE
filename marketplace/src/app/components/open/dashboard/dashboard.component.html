@@ -23,7 +23,7 @@
           </div>
         </div>
       </div>
-      <div [class]="!!results && results.query ? 'col-9' : 'col-12'">
+      <div [class]="results && results.query ? 'col-9' : 'col-12'">
         <div [class]="['grid', productTemplate]">
           <div class="col-12" *ngIf="hits.length === 0">
             <div class="p-card p-card-shadow py-3" style="text-align: center">
