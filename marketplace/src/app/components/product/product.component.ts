@@ -11,7 +11,6 @@ import {AttributeValue} from "../../model/AttributeValue";
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss'],
   providers: [MessageService]
 })
 export class ProductComponent {
