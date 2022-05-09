@@ -20,7 +20,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { LoginComponent } from './components/open/login/login.component';
 import {RippleModule} from "primeng/ripple";
 import {PasswordModule} from "primeng/password";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { RegisterComponent } from './components/open/register/register.component';
 import {DividerModule} from "primeng/divider";
 import {HttpClientModule} from "@angular/common/http";
@@ -33,6 +33,12 @@ import {EditorModule} from "primeng/editor";
 import {CategoriesComponent} from "./components/vendor/categories/categories.component";
 import {TreeSelectModule} from "primeng/treeselect";
 import { CustomPasswordInputComponent } from './components/custom-password-input/custom-password-input.component';
+import { NgAisModule } from 'angular-instantsearch';
+import {CardModule} from "primeng/card";
+import { ChunkPipe } from './helpers/chunk.pipe';
+import {SelectButtonModule} from "primeng/selectbutton";
+import { StoreModule } from '@ngrx/store';
+import {MessagesModule} from "primeng/messages";
 
 @NgModule({
   declarations: [
@@ -49,7 +55,8 @@ import { CustomPasswordInputComponent } from './components/custom-password-input
     RegisterComponent,
     VendorComponent,
     CategoriesComponent,
-    CustomPasswordInputComponent
+    CustomPasswordInputComponent,
+    ChunkPipe
   ],
   imports: [
     HttpClientModule,
@@ -70,7 +77,13 @@ import { CustomPasswordInputComponent } from './components/custom-password-input
     ToastModule,
     ColorPickerModule,
     EditorModule,
-    TreeSelectModule
+    TreeSelectModule,
+    NgAisModule.forRoot(),
+    CardModule,
+    SelectButtonModule,
+    FormsModule,
+    StoreModule.forRoot({}, {}),
+    MessagesModule
   ],
   bootstrap: [AppComponent]
 })

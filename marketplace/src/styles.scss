@@ -33,3 +33,32 @@ button.inline {
 .p-treeselect {
   width: 100%;
 }
+
+.ais-Highlight mark {
+  background: #FFF8E1;
+  padding: 0;
+  border-radius: 5px;
+  font-family: inherit;
+  border: 1px solid #dfcf98;
+}
+
+.clearboth {
+  clear: both;
+  display: block;
+  content: '';
+}
+
+.p-selectbutton {
+  > .p-button {
+    width: 50%;
+    display: block;
+    float: left;
+    text-align: center;
+  }
+
+  &:after {
+    display: block;
+    content: '';
+    clear: both;
+  }
+}
