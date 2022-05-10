@@ -45,6 +45,8 @@ import {KnobModule} from "primeng/knob";
 import {SelectButtonModule} from "primeng/selectbutton";
 import {SliderModule} from "primeng/slider";
 import {InputNumberModule} from "primeng/inputnumber";
+import { EditProductComponent } from './components/vendor/edit-product/edit-product.component';
+import {FileUploadModule} from "primeng/fileupload";
 
 @NgModule({
   declarations: [
@@ -64,7 +66,8 @@ import {InputNumberModule} from "primeng/inputnumber";
     CustomPasswordInputComponent,
     ProductComponent,
     CustomPasswordInputComponent,
-    ChunkPipe
+    ChunkPipe,
+    EditProductComponent
   ],
   imports: [
     HttpClientModule,
@@ -99,7 +102,8 @@ import {InputNumberModule} from "primeng/inputnumber";
     SelectButtonModule,
     FormsModule,
     StoreModule.forRoot({}, {}),
-    MessagesModule
+    MessagesModule,
+    FileUploadModule
   ],
   bootstrap: [AppComponent]
 })
