@@ -8,6 +8,7 @@ import {LoginComponent} from "./components/open/login/login.component";
 import {RegisterComponent} from "./components/open/register/register.component";
 import {VendorComponent} from "./components/open/vendor/vendor.component";
 import {CategoriesComponent} from "./components/vendor/categories/categories.component";
+import {RouteGuardService} from "./service/route-guard.service";
 import {ProductComponent} from "./components/product/product.component";
 
 @NgModule({
@@ -20,7 +21,7 @@ import {ProductComponent} from "./components/product/product.component";
           {path: 'login', component: LoginComponent},
           {path: 'register', component: RegisterComponent},
           {path: 'vendor', component: VendorComponent},
-          {path: 'categories', component: CategoriesComponent},
+          {path: 'categories', component: CategoriesComponent, canActivate: [ RouteGuardService ]},
           {path: 'addProduct', component: ProductComponent},
         ]
       },

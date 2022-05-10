@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import {map, Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
+import {User} from "../model/User";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +11,37 @@ import {environment} from "../../environments/environment";
 export class AuthService {
   private authUrl: string = environment.api + 'auth/'
 
-  constructor(private http: HttpClient) { }
+  private userSubject: BehaviorSubject<User>;
+  public user: Observable<User>;
 
-  login(mail: string, password: string): Observable<any> {
-    return this.http.post<any>(this.authUrl + 'login', { email: mail, password: password }, {
+  constructor(
+    private router: Router,
+    private http: HttpClient
+  ) {
+    this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
+    this.user = this.userSubject.asObservable();
+  }
+
+  public get userValue(): User {
+    return this.userSubject.value;
+  }
+
+  login(mail: string, password: string): Observable<User> {
+    let request: Observable<User> = this.http.post<any>(this.authUrl + 'login', { email: mail, password: password }, {
       withCredentials: true
-    });
+    })
+    request.subscribe({
+      next: (user) => {
+        localStorage.setItem('user', JSON.stringify(user));
+        this.userSubject.next(user);
+      }
+    })
+    return request
+  }
+
+  logout() {
+    localStorage.removeItem('user');
+    this.userSubject.next(null);
+    this.router.navigate(['/']);
   }
 }
