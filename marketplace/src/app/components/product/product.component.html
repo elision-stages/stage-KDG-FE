@@ -1,0 +1,79 @@
+<form [formGroup]="addProduct" (ngSubmit)="onAdd()">
+  <div class="grid">
+    <div class="col-12 lg:col-6">
+      <div class="card">
+        <h4>Add product</h4>
+
+        <div class="field">
+        <span class="p-float-label">
+            <input type="text" id="title" pInputText class="w-full" name="first" formControlName="title">
+            <label for="title">Product title</label>
+        </span>
+        </div>
+        <div class="field">
+        <span class="p-float-label">
+            <input type="text" id="desc" class="w-full" pInputText name="desc" formControlName="description">
+            <label for="title">Product description</label>
+        </span>
+        </div>
+
+        <div class="field">
+          <label for="price">Prijs</label> <br>
+          <p-inputNumber id="price" [showButtons]="true"
+                         class="w-full"
+                         formControlName="price"
+                         prefix="€"
+                         inputId="stacked" mode="decimal" [step]="0.01" incrementButtonIcon="pi pi-plus"
+                         decrementButtonIcon="pi pi-minus">
+          </p-inputNumber>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 lg:col-6 ">
+      <div class="card">
+        <div class="field w-full">
+          <label for="category" class="block text-900 text-xl font-medium mt-1 w-full">Category</label>
+          <p-dropdown [options]="categories" [(ngModel)]="selectedCategory" [ngModelOptions]="{standalone:true}"
+                      class="w-full"
+                      id="category"
+                      optionLabel="name" (onChange)="selectCategory()"></p-dropdown>
+        </div>
+
+        <ng-container *ngIf="selectedCategory != undefined">
+          <div *ngFor="let characteristic of selectedCategory.characteristics" class="mt-1 card">
+            <h5>{{characteristic.name}}</h5>
+
+            <p-knob *ngIf="characteristic.type === 'INTEGER'" [ngModel]="characteristic.value"
+                    [ngModelOptions]="{standalone:true}"
+                    [min]="0" [max]="10" (onChange)="characteristicChanged(characteristic,$event)"></p-knob>
+
+            <p-dropdown *ngIf="characteristic.type === 'ENUMERATION'" [options]="characteristic.enumValues"
+                        [ngModel]="characteristic.value" [ngModelOptions]="{standalone:true}"
+                        (onChange)="characteristicChanged(characteristic,$event)"></p-dropdown>
+
+            <p-selectButton *ngIf="characteristic.type === 'BOOL'"
+                            [options]="[{label: 'Ja', value: 'true'}, {label: 'Nee', value: 'false'}]"
+                            [ngModel]="characteristic.value" [ngModelOptions]="{standalone:true}"
+                            (onChange)="characteristicChanged(characteristic,$event)"></p-selectButton>
+
+            <p-inputNumber *ngIf="characteristic.type === 'DECIMAL'" [ngModel]="characteristic.value"
+                           [ngModelOptions]="{standalone:true}" [showButtons]="true"
+                           (onInput)="characteristicChanged(characteristic, $event.value)"
+                           inputId="stacked" mode="decimal" [step]="0.1" incrementButtonIcon="pi pi-plus"
+                           decrementButtonIcon="pi pi-minus">
+            </p-inputNumber>
+
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <button
+      class="w-full p-3 text-xl mt-1"
+      pButton
+      pRipple
+      label="Voeg product toe"
+      type="submit"
+    ></button>
+  </div>
+</form>
+

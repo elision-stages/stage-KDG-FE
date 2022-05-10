@@ -36,9 +36,15 @@ import { CustomPasswordInputComponent } from './components/custom-password-input
 import { NgAisModule } from 'angular-instantsearch';
 import {CardModule} from "primeng/card";
 import { ChunkPipe } from './helpers/chunk.pipe';
-import {SelectButtonModule} from "primeng/selectbutton";
 import { StoreModule } from '@ngrx/store';
 import {MessagesModule} from "primeng/messages";
+import {ProductComponent} from './components/product/product.component';
+import {DropdownModule} from "primeng/dropdown";
+import {MultiSelectModule} from "primeng/multiselect";
+import {KnobModule} from "primeng/knob";
+import {SelectButtonModule} from "primeng/selectbutton";
+import {SliderModule} from "primeng/slider";
+import {InputNumberModule} from "primeng/inputnumber";
 
 @NgModule({
   declarations: [
@@ -56,6 +62,8 @@ import {MessagesModule} from "primeng/messages";
     VendorComponent,
     CategoriesComponent,
     CustomPasswordInputComponent,
+    ProductComponent,
+    CustomPasswordInputComponent,
     ChunkPipe
   ],
   imports: [
@@ -71,12 +79,20 @@ import {MessagesModule} from "primeng/messages";
     RippleModule,
     PasswordModule,
     ReactiveFormsModule,
+    FormsModule,
     DividerModule,
     MessageModule,
     DialogModule,
     ToastModule,
     ColorPickerModule,
     EditorModule,
+    TreeSelectModule,
+    DropdownModule,
+    MultiSelectModule,
+    KnobModule,
+    SelectButtonModule,
+    SliderModule,
+    InputNumberModule,
     TreeSelectModule,
     NgAisModule.forRoot(),
     CardModule,
