@@ -10,7 +10,7 @@ export class RouteGuardService implements CanActivate {
     private router: Router,
     private authService: AuthService) { }
 
-  public canActivate(route: ActivatedRouteSnapshot){
+  public canActivate(_route: ActivatedRouteSnapshot){
     const loggedIn = this.authService.userValue !== null;
     if(!loggedIn) {
       this.router.navigate(['pages/access']);
