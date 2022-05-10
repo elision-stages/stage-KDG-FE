@@ -1,4 +1,8 @@
+import {Characteristic} from "./Characteristic";
+
 export class Category {
-  private name: string
-  private parentId: number
+  name: string
+  parentId: number
+  characteristics: Array<Characteristic>
 }
+
