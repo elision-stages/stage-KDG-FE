@@ -43,14 +43,16 @@ export class ProductsComponent implements OnInit {
   deleteProduct(product: Product, $event: Event) {
     this.confirmationService.confirm({
       target: $event.target,
-      message: 'Are you sure that you want to delete this add-product?',
+      message: 'Are you sure that you want to delete this product?',
       icon: 'pi pi-exclamation-triangle',
       defaultFocus: 'none',
       rejectIcon: 'pi pi-chevron-left\n',
       acceptIcon: 'pi pi-trash',
       accept: () => {
-        this.products = this.products.filter(function( obj ) {
-          return obj.id !== product.id;
+        this.productService.deleteProduct(product.id).subscribe(products => {
+          this.products = this.products.filter(function( obj ) {
+            return obj.id !== product.id;
+          });
         });
       }
     });

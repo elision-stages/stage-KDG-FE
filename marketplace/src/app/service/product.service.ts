@@ -29,4 +29,9 @@ export class ProductService {
     let url = environment.api + 'product/' + id;
     return this.http.get<Product[]>(url);
   }
+
+  deleteProduct(id: number) {
+    let url = environment.api + 'product/' + id;
+    return this.http.delete<Product[]>(url);
+  }
 }

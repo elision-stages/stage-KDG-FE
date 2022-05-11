@@ -2,6 +2,7 @@
 <div class="card">
   <p-table #dt2 [value]="products" dataKey="id" responsiveLayout="stack"
            [rows]="10" [showCurrentPageReport]="true" [loading]="loading"
+           selectionMode="single" (onRowSelect)="viewProduct($event.data)"
            [paginator]="products.length > 10" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
            [globalFilterFields]="['name']">
     <ng-template pTemplate="caption">
@@ -32,11 +33,11 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-product let-columns="columns">
-      <tr>
+      <tr [pSelectableRow]="product">
         <td><span class="p-column-title">Preview</span><img [src]="product.image" [alt]="product.name" width="130" class="shadow-4" /></td>
         <td><span class="p-column-title">ID</span>{{product.id}}</td>
         <td><span class="p-column-title">Name</span>{{product.name}}</td>
-        <td><span class="p-column-title">Category</span>TODO</td>
+        <td><span class="p-column-title">Category</span>{{product.category}}</td>
         <td><span class="p-column-title">Price</span>{{product.price | currency:'EUR':'symbol'}}</td>
         <td>
           <span class="p-column-title">Actions</span>
