@@ -27,13 +27,13 @@
         <p-table [value]="[1]" responsiveLayout="scroll">
           <ng-template pTemplate="header">
             <tr>
-              <th>Property</th>
-              <th>Value</th>
+              <th scope="col">Property</th>
+              <th scope="col">Value</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body">
             <tr>
-              <td><p-skeleton height="1rem" [width]="random(60, 200) + 'px'"></p-skeleton></td>
+              <td scope="row"><p-skeleton height="1rem" [width]="random(60, 200) + 'px'"></p-skeleton></td>
               <td><p-skeleton height="1rem" [width]="random(15, 150) + 'px'"></p-skeleton></td>
             </tr>
           </ng-template>
@@ -47,11 +47,11 @@
         <p-galleria [value]="images" [numVisible]="5"
                     [circular]="true" [showItemNavigators]="true">
           <ng-template pTemplate="item" let-item>
-            <img [src]="item.previewImageSrc" style="width: 100%; display: block;" />
+            <img [alt]="item.name" [src]="item.previewImageSrc" style="width: 100%; display: block;" />
           </ng-template>
           <ng-template pTemplate="thumbnail" let-item>
             <div class="grid grid-nogutter justify-content-center">
-              <img [src]="item.thumbnailImageSrc" style="display: block; height: 5rem;" />
+              <img [alt]="item.name" [src]="item.thumbnailImageSrc" style="display: block; height: 5rem;" />
             </div>
           </ng-template>
         </p-galleria>
@@ -88,13 +88,13 @@
         <p-table [value]="product.attributes" responsiveLayout="scroll">
           <ng-template pTemplate="header">
             <tr>
-              <th>Property</th>
-              <th>Value</th>
+              <th scope="col">Property</th>
+              <th scope="col">Value</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-attribute>
             <tr>
-              <td>{{ attribute['attributeName'] }}</td>
+              <td scope="row">{{ attribute['attributeName'] }}</td>
               <td>{{ attribute['value']}}</td>
             </tr>
           </ng-template>
