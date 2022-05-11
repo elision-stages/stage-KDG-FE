@@ -6,8 +6,7 @@ import {MenuItem} from "primeng/api";
 
 @Component({
   selector: 'app-add-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss']
+  templateUrl: './product.component.html'
 })
 export class ProductComponent {
   loading: boolean = true;
@@ -40,7 +39,7 @@ export class ProductComponent {
         })
         this.generateBreadcrumb()
       },
-      error: error => {
+      error: _error => {
         this.router.navigate(['pages/notfound'])
       }
     })

@@ -33,7 +33,7 @@
           </ng-template>
           <ng-template pTemplate="body">
             <tr>
-              <td scope="row"><p-skeleton height="1rem" [width]="random(60, 200) + 'px'"></p-skeleton></td>
+              <td><p-skeleton height="1rem" [width]="random(60, 200) + 'px'"></p-skeleton></td>
               <td><p-skeleton height="1rem" [width]="random(15, 150) + 'px'"></p-skeleton></td>
             </tr>
           </ng-template>
@@ -94,7 +94,7 @@
           </ng-template>
           <ng-template pTemplate="body" let-attribute>
             <tr>
-              <td scope="row">{{ attribute['attributeName'] }}</td>
+              <td>{{ attribute['attributeName'] }}</td>
               <td>{{ attribute['value']}}</td>
             </tr>
           </ng-template>

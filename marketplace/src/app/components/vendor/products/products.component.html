@@ -36,7 +36,7 @@
       <tr [pSelectableRow]="product">
         <td><span class="p-column-title">Preview</span><img [src]="product.image" [alt]="product.name" width="130" class="shadow-4" /></td>
         <td><span class="p-column-title">ID</span>{{product.id}}</td>
-        <td scope="row"><span class="p-column-title">Name</span>{{product.name}}</td>
+        <td><span class="p-column-title">Name</span>{{product.name}}</td>
         <td><span class="p-column-title">Category</span>{{product.category}}</td>
         <td><span class="p-column-title">Price</span>{{product.price | currency:'EUR':'symbol'}}</td>
         <td>
