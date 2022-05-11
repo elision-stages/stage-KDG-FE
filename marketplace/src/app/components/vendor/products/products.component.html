@@ -1,0 +1,57 @@
+<p-confirmPopup></p-confirmPopup>
+<div class="card">
+  <p-table #dt2 [value]="products" dataKey="id" responsiveLayout="stack"
+           [rows]="10" [showCurrentPageReport]="true" [loading]="loading"
+           [paginator]="products.length > 10" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
+           [globalFilterFields]="['name']">
+    <ng-template pTemplate="caption">
+      <div class="flex">
+        <div class="flex-none">
+          <h4 class="my-2">Your products</h4>
+        </div>
+        <div class="flex-1 px-5">
+          <span class="p-input-icon-left w-full">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (input)="filter(dt2, $event)" placeholder="Search keyword" class="w-full" />
+          </span>
+        </div>
+        <div class="flex-none">
+          <button pButton label="Add product" (click)="addProduct()"></button>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th>Preview</th>
+        <th>EAN</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product let-columns="columns">
+      <tr>
+        <td><span class="p-column-title">Preview</span><img [src]="product.image" [alt]="product.name" width="130" class="shadow-4" /></td>
+        <td><span class="p-column-title">ID</span>{{product.id}}</td>
+        <td><span class="p-column-title">Name</span>{{product.name}}</td>
+        <td><span class="p-column-title">Category</span>TODO</td>
+        <td><span class="p-column-title">Price</span>{{product.price | currency:'EUR':'symbol'}}</td>
+        <td>
+          <span class="p-column-title">Actions</span>
+          <button pButton pRipple icon="pi pi-eye" class="p-button-rounded p-button-success mr-2" (click)="viewProduct(product)"></button>
+          <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-warning mr-2" (click)="editProduct(product)"></button>
+          <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteProduct(product, $event)"></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="6" style="text-align: center">
+          <p-message severity="warn" [text]="filterKeyword ? 'No products have been found for ' + filterKeyword : 'No products found'"></p-message>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

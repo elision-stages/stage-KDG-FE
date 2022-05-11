@@ -45,6 +45,9 @@ import {KnobModule} from "primeng/knob";
 import {SelectButtonModule} from "primeng/selectbutton";
 import {SliderModule} from "primeng/slider";
 import {InputNumberModule} from "primeng/inputnumber";
+import { ProductsComponent } from './components/vendor/products/products.component';
+import {TableModule} from "primeng/table";
+import {ConfirmPopupModule} from "primeng/confirmpopup";
 
 @NgModule({
   declarations: [
@@ -64,7 +67,8 @@ import {InputNumberModule} from "primeng/inputnumber";
     CustomPasswordInputComponent,
     ProductComponent,
     CustomPasswordInputComponent,
-    ChunkPipe
+    ChunkPipe,
+    ProductsComponent
   ],
   imports: [
     HttpClientModule,
@@ -99,7 +103,9 @@ import {InputNumberModule} from "primeng/inputnumber";
     SelectButtonModule,
     FormsModule,
     StoreModule.forRoot({}, {}),
-    MessagesModule
+    MessagesModule,
+    TableModule,
+    ConfirmPopupModule
   ],
   bootstrap: [AppComponent]
 })
