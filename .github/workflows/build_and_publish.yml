@@ -45,4 +45,3 @@ jobs:
         region: eu-west-1
         tags: latest,${{ github.sha }}
         dockerfile: dockerfile
-        path: ./marketplace
