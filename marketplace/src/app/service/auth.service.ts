@@ -34,6 +34,7 @@ export class AuthService {
       next: (user) => {
         localStorage.setItem('user', JSON.stringify(user));
         this.userSubject.next(user);
+        this.router.navigate(['/']);
       }
     })
     return request
