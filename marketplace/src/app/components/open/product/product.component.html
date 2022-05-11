@@ -6,8 +6,12 @@
         <p-skeleton width="100%" height="350px"></p-skeleton>
       </div>
       <div class="col-12 md:col-6">
-        <p-skeleton height="2rem" styleClass="mb-3" [width]="random(250, 350) + 'px'"></p-skeleton>
-        <p-skeleton height="1rem" styleClass="mb-2" [width]="random(250, 450) + 'px'"></p-skeleton>
+        <p-skeleton height="2rem" styleClass="mb-2" [width]="random(250, 350) + 'px'"></p-skeleton>
+        <small class="mb-2">
+          This product is sold by
+          <p-skeleton height="0.8rem" [width]="random(30, 100) + 'px'" [style]="{ display: 'inline-block' }"></p-skeleton>
+        </small>
+        <p-skeleton height="1rem" styleClass="mb-2 mt-3" [width]="random(250, 450) + 'px'"></p-skeleton>
         <p-skeleton height="1rem" styleClass="mb-3" [width]="random(100, 350) + 'px'"></p-skeleton>
         <p-skeleton height="3rem" styleClass="mb-3" width="70px"></p-skeleton>
 
@@ -53,8 +57,9 @@
         </p-galleria>
       </div>
       <div class="col-12 md:col-6">
-        <h4>{{ product.name }}</h4>
-        <p [innerHTML]="product.description"></p>
+        <h4 class="mb-0">{{ product.name }}</h4>
+        <small>This product is sold by <a [routerLink]="['/vendor/', product.vendor.id]">{{ product.vendor.businessName }}</a></small>
+        <p [innerHTML]="product.description" class="mt-3"></p>
         <div class="price mb-4">
           {{ product.price | number: '1.0-0' }}
           <sup>{{ product.price%1*100 | number: '1.0-0' }}</sup>
