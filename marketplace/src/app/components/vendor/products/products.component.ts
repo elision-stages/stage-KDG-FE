@@ -13,10 +13,8 @@ import {Router} from "@angular/router";
 })
 export class ProductsComponent implements OnInit {
 
-  products: Product[];
+  products: Product[] = [];
   filterKeyword: String = '';
-
-  statuses: any[];
 
   loading: boolean = true;
 
@@ -45,7 +43,7 @@ export class ProductsComponent implements OnInit {
   deleteProduct(product: Product, $event: Event) {
     this.confirmationService.confirm({
       target: $event.target,
-      message: 'Are you sure that you want to delete this product?',
+      message: 'Are you sure that you want to delete this add-product?',
       icon: 'pi pi-exclamation-triangle',
       defaultFocus: 'none',
       rejectIcon: 'pi pi-chevron-left\n',

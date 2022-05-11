@@ -62,3 +62,28 @@ button.inline {
     clear: both;
   }
 }
+
+.squarebtns .p-button {
+  &.p-inputnumber-button-up, &.p-inputnumber-button-down {
+    border-radius: 0 !important;
+    border-right: 1px solid rgba(255, 255, 255, .4);
+  }
+}
+
+.price {
+  font-weight: bold;
+  font-size: 160%;
+  color: #c60909;
+  sup {
+    font-size: 75%;
+    position: relative;
+    &:before {
+      content: ",";
+      display: block;
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      font-size: 160%;
+    }
+  }
+}

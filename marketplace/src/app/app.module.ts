@@ -38,7 +38,7 @@ import {CardModule} from "primeng/card";
 import { ChunkPipe } from './helpers/chunk.pipe';
 import { StoreModule } from '@ngrx/store';
 import {MessagesModule} from "primeng/messages";
-import {ProductComponent} from './components/product/product.component';
+import {AddProductComponent} from './components/vendor/add-product/add-product.component';
 import {DropdownModule} from "primeng/dropdown";
 import {MultiSelectModule} from "primeng/multiselect";
 import {KnobModule} from "primeng/knob";
@@ -48,6 +48,11 @@ import {InputNumberModule} from "primeng/inputnumber";
 import { ProductsComponent } from './components/vendor/products/products.component';
 import {TableModule} from "primeng/table";
 import {ConfirmPopupModule} from "primeng/confirmpopup";
+import {ProductComponent} from "./components/open/product/product.component";
+import {SkeletonModule} from "primeng/skeleton";
+import {GalleriaModule} from "primeng/galleria";
+import {TabViewModule} from "primeng/tabview";
+import {BreadcrumbModule} from "primeng/breadcrumb";
 
 @NgModule({
   declarations: [
@@ -65,10 +70,11 @@ import {ConfirmPopupModule} from "primeng/confirmpopup";
     VendorComponent,
     CategoriesComponent,
     CustomPasswordInputComponent,
-    ProductComponent,
+    AddProductComponent,
     CustomPasswordInputComponent,
     ChunkPipe,
-    ProductsComponent
+    ProductsComponent,
+    ProductComponent
   ],
   imports: [
     HttpClientModule,
@@ -105,7 +111,11 @@ import {ConfirmPopupModule} from "primeng/confirmpopup";
     StoreModule.forRoot({}, {}),
     MessagesModule,
     TableModule,
-    ConfirmPopupModule
+    ConfirmPopupModule,
+    SkeletonModule,
+    GalleriaModule,
+    TabViewModule,
+    BreadcrumbModule
   ],
   bootstrap: [AppComponent]
 })

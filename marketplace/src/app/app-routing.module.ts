@@ -9,8 +9,9 @@ import {RegisterComponent} from "./components/open/register/register.component";
 import {VendorComponent} from "./components/open/vendor/vendor.component";
 import {CategoriesComponent} from "./components/vendor/categories/categories.component";
 import {RouteGuardService} from "./service/route-guard.service";
-import {ProductComponent} from "./components/product/product.component";
+import {AddProductComponent} from "./components/vendor/add-product/add-product.component";
 import {ProductsComponent} from "./components/vendor/products/products.component";
+import {ProductComponent} from "./components/open/product/product.component";
 
 @NgModule({
   imports: [
@@ -23,8 +24,9 @@ import {ProductsComponent} from "./components/vendor/products/products.component
           {path: 'register', component: RegisterComponent},
           {path: 'vendor', component: VendorComponent},
           {path: 'categories', component: CategoriesComponent, canActivate: [ RouteGuardService ]},
-          {path: 'addProduct', component: ProductComponent},
+          {path: 'addProduct', component: AddProductComponent},
           {path: 'products', component: ProductsComponent, canActivate: [ RouteGuardService ]},
+          {path: 'product/:id', component: ProductComponent},
         ]
       },
       {path:'pages/notfound', component: NotfoundComponent},
