@@ -11,7 +11,7 @@
         <div class="field md:col-6 col-12">
           <label for="price">Price: </label> <br>
           <p-inputNumber id="price" class="w-full" styleClass="w-full"
-                         [showButtons]="true" [(ngModel)]="selectedProduct.price"
+                         [showButtons]="true" [(ngModel)]="selectedProduct.price" [min]="0.01"
                          prefix="€"
                          inputId="stacked" mode="decimal" [step]="0.01" incrementButtonIcon="pi pi-plus"
                          decrementButtonIcon="pi pi-minus">
@@ -45,7 +45,7 @@
                     (onChange)="attributeChanged(characteristic,$event)" placeholder="Select a value"></p-dropdown>
 
         <p-selectButton *ngIf="characteristic.type === 'BOOL'"
-                        [options]="[{label: 'Ja', value: 'true'}, {label: 'Nee', value: 'false'}]"
+                        [options]="[{label: 'Yes', value: 'true'}, {label: 'No', value: 'false'}]"
                         [ngModel]="getCharacteristicValue(characteristic.name)"
                         (onChange)="attributeChanged(characteristic,$event.value)"></p-selectButton>
 
@@ -68,19 +68,11 @@
   </div>
 </ng-container>
 
-<ng-container *ngIf="selectedProduct == undefined && isBusy">
+<ng-container *ngIf="selectedProduct == undefined">
   <div class="col-12">
     <div class="card">
-      <h5 class="center">Product loading</h5>
-      <p-progressSpinner></p-progressSpinner>
-    </div>
-  </div>
-</ng-container>
-
-<ng-container *ngIf="selectedProduct == undefined && !isBusy">
-  <div class="col-12">
-    <div class="card">
-      <h5 class="center">Something went wrong, please try again</h5>
+      <h5 class="center" *ngIf="!isBusy">Something went wrong, please try again</h5>
+      <h5 class="center" *ngIf="isBusy">Product loading</h5>
       <p-progressSpinner></p-progressSpinner>
     </div>
   </div>
