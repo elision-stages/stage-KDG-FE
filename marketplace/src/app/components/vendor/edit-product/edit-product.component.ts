@@ -6,6 +6,8 @@ import {AttributeValue} from "../../../model/AttributeValue";
 import {Category} from "../../../model/Category";
 import {Characteristic} from "../../../model/Characteristic";
 import {CategoryService} from "../../../service/category.service";
+import {ActivatedRoute} from "@angular/router";
+import {UploadService} from "../../../service/upload.service";
 
 @Component({
   selector: 'app-edit-product',
@@ -16,47 +18,43 @@ export class EditProductComponent implements OnInit {
   productNames: Array<ProductId>
   selectedProduct: Product
   categories: Array<Category>
+  isBusy: boolean
 
-  constructor(private productService: ProductService, private categoryService: CategoryService) {
+  constructor(private productService: ProductService, private categoryService: CategoryService, private route: ActivatedRoute,
+              private uploadService: UploadService) {
+    this.isBusy = true;
     this.fetchCategories()
+    this.selectProduct(this.route.snapshot.paramMap.get('productId'));
+    this.isBusy = false;
 
-    //todo: replace when calls are ready
-    this.productNames = new Array<ProductId>()
-    this.productNames.push(new ProductId("test1", 1), new ProductId("test2", 2))
-    this.selectProduct(3)
   }
 
-  ngOnInit(): void {
-    //todo: uncomment when call is ready
-    //this.getAllProducts()
+  async ngOnInit(): Promise<void> {
   }
 
-  getAllProducts() {
-    this.productService.getProductsByVendor(10).subscribe(value => this.productNames = value)
-  }
+  selectProduct(productId: any) {
+    this.productService.getProductById(productId).subscribe(value => this.selectedProduct = value)
+    // this.selectedProduct = new Product();
+    // this.selectedProduct.id = "8"
+    // this.selectedProduct.vendorId = 4
+    // this.selectedProduct.title = "test product"
+    // this.selectedProduct.price = 2.4
+    // this.selectedProduct.description = "test description"
 
-  selectProduct(productId: number) {
-    //todo: uncomment when call is ready
-    //this.selectedProduct = productService.getProductById(productId)
-    this.selectedProduct = new Product();
-    this.selectedProduct.title = "test product"
-    this.selectedProduct.price = 2.4
-    this.selectedProduct.description = "test description"
-
-    let attributeValue = new AttributeValue();
-    attributeValue.attributeValue = "first"
-    attributeValue.attributeName = "enum value"
-    this.selectedProduct.attributes.push(attributeValue)
-
-    attributeValue = new AttributeValue();
-    attributeValue.attributeValue = "3"
-    attributeValue.attributeName = "int characteristic"
-    this.selectedProduct.attributes.push(attributeValue)
-
-    attributeValue = new AttributeValue();
-    attributeValue.attributeValue = "3.5"
-    attributeValue.attributeName = "double characteristic"
-    this.selectedProduct.attributes.push(attributeValue)
+    // let attributeValue = new AttributeValue();
+    // attributeValue.value = "first"
+    // attributeValue.attributeName = "enum value"
+    // this.selectedProduct.attributes.push(attributeValue)
+    //
+    // attributeValue = new AttributeValue();
+    // attributeValue.value = "3"
+    // attributeValue.attributeName = "int characteristic"
+    // this.selectedProduct.attributes.push(attributeValue)
+    //
+    // attributeValue = new AttributeValue();
+    // attributeValue.value = "3.5"
+    // attributeValue.attributeName = "double characteristic"
+    // this.selectedProduct.attributes.push(attributeValue)
 
     const category = new Category()
     category.name = "test category"
@@ -83,7 +81,9 @@ export class EditProductComponent implements OnInit {
     characteristic.name = "boolean characteristic"
     category.characteristics.push(characteristic)
 
-    this.selectedProduct.category = category;
+    // this.categoryService.add(category).subscribe(value => console.log(value))
+
+    // this.selectedProduct.category = category;
   }
 
   attributeChanged(characteristic: Characteristic, value) {
@@ -96,7 +96,7 @@ export class EditProductComponent implements OnInit {
     if (characteristic.type === 'DECIMAL') value = Math.round(value * 100) / 100
 
     for (const pair of this.selectedProduct.attributes) {
-      if (pair.attributeName === characteristic.name) pair.attributeValue = value
+      if (pair.attributeName === characteristic.name) pair.value = value
     }
     console.log(this.selectedProduct);
   }
@@ -104,18 +104,23 @@ export class EditProductComponent implements OnInit {
   getCharacteristicValue(characteristicName: string): any {
     const attribute = this.selectedProduct.attributes.find(value => value.attributeName == characteristicName);
     if (attribute === undefined) return 0
-    return attribute.attributeValue
+    return attribute.value
   }
 
   private fetchCategories() {
-    this.categoryService.getCategories().subscribe(value => this.categories = value);
+    this.categoryService.getCategories().subscribe(value => {
+      console.log(value);
+      return this.categories = value;
+    });
   }
 
-  saveProduct() {
-    this.productService.editProduct(this.selectedProduct);
+  editProduct() {
+    console.log(this.selectedProduct);
+    this.productService.editProduct(this.selectedProduct).subscribe(value => console.log(value))
   }
 
   uploadImages(event: any) {
     console.log(event.files)
+    this.uploadService.fileUpload(event.files[0])
   }
 }

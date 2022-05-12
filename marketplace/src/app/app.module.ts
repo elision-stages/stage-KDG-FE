@@ -47,6 +47,7 @@ import {SliderModule} from "primeng/slider";
 import {InputNumberModule} from "primeng/inputnumber";
 import { EditProductComponent } from './components/vendor/edit-product/edit-product.component';
 import {FileUploadModule} from "primeng/fileupload";
+import {ProgressSpinnerModule} from "primeng/progressspinner";
 
 @NgModule({
   declarations: [
@@ -103,7 +104,8 @@ import {FileUploadModule} from "primeng/fileupload";
     FormsModule,
     StoreModule.forRoot({}, {}),
     MessagesModule,
-    FileUploadModule
+    FileUploadModule,
+    ProgressSpinnerModule
   ],
   bootstrap: [AppComponent]
 })

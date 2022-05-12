@@ -2,6 +2,7 @@ import {AttributeValue} from "./AttributeValue";
 import {Category} from "./Category";
 
 export class Product {
+  id:string
   title: string
   price: number
   description: string

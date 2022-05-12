@@ -1,49 +1,34 @@
-<p>edit-product works!</p>
-
-<div class="col-12">
-  <div class="card">
-    <label for="productSelector"></label>
-    <p-dropdown id="productSelector" [options]="productNames" optionLabel="productName" optionValue="productId"
-                placeholder="Select product" (onChange)="selectProduct($event.value)"></p-dropdown>
-  </div>
-</div>
 <ng-container *ngIf="selectedProduct">
   <div class="col-12">
     <div class="card">
       <h4>Edit product </h4>
 
-      <div class="field w-full">
-        <span class="p-float-label">
-            <input type="text" id="title" pInputText [(ngModel)]="selectedProduct.title">
-            <label for="title">Title</label>
-        </span>
+      <div class="flex flex-row flex-wrap">
+        <div class="field col-12">
+          <label for="title">Title: </label> <br>
+          <input class="w-full" type="text" id="title" pInputText [(ngModel)]="selectedProduct.title">
+        </div>
+        <div class="field md:col-6 col-12">
+          <label for="price">Price: </label> <br>
+          <p-inputNumber id="price" class="w-full" styleClass="w-full"
+                         [showButtons]="true" [(ngModel)]="selectedProduct.price"
+                         prefix="€"
+                         inputId="stacked" mode="decimal" [step]="0.01" incrementButtonIcon="pi pi-plus"
+                         decrementButtonIcon="pi pi-minus">
+          </p-inputNumber>
+        </div>
+        <div class="field md:col-6 col-12">
+          <label for="title">Category:</label> <br>
+          <p-dropdown [options]="categories" [(ngModel)]="selectedProduct.category"
+                      class="w-full" styleClass="w-full"
+                      id="category"
+                      optionLabel="name"></p-dropdown>
+        </div>
+        <div class="field col-12">
+          <label for="description">Description:</label> <br>
+          <p-editor id="description" [(ngModel)]="selectedProduct.description"></p-editor>
+        </div>
       </div>
-      <div class="field col-4 md:col-6 sm:col-12">
-        <p-inputNumber id="price" [showButtons]="true" [(ngModel)]="selectedProduct.price"
-                       prefix="€"
-                       inputId="stacked" mode="decimal" [step]="0.01" incrementButtonIcon="pi pi-plus"
-                       decrementButtonIcon="pi pi-minus">
-        </p-inputNumber>
-      </div>
-      <div class="field col-4 md:col-6 sm:col-12">
-        <p-dropdown [options]="categories" [(ngModel)]="selectedProduct.category"
-                    class="w-full"
-                    id="category"
-                    optionLabel="name"></p-dropdown>
-      </div>
-      <div class="field col-12">
-        <p-editor [(ngModel)]="selectedProduct.description"></p-editor>
-      </div>
-
-      <p-divider></p-divider>
-
-      <h5>Product images</h5>
-      <p-fileUpload
-        [customUpload]="true"
-        (uploadHandler)="uploadImages($event)"
-        [multiple]="true"
-        accept="image/*"
-      ></p-fileUpload>
 
       <p-divider></p-divider>
 
@@ -53,20 +38,19 @@
         <h5>{{characteristic.name}}</h5>
 
         <p-knob *ngIf="characteristic.type === 'INTEGER'" [ngModel]="getCharacteristicValue(characteristic.name)"
-                [ngModelOptions]="{standalone:true}"
                 [min]="0" [max]="10" (onChange)="attributeChanged(characteristic,$event)"></p-knob>
 
         <p-dropdown *ngIf="characteristic.type === 'ENUMERATION'" [options]="characteristic.enumValues"
-                    [ngModel]="getCharacteristicValue(characteristic.name)" [ngModelOptions]="{standalone:true}"
+                    [ngModel]="getCharacteristicValue(characteristic.name)"
                     (onChange)="attributeChanged(characteristic,$event)" placeholder="Select a value"></p-dropdown>
 
         <p-selectButton *ngIf="characteristic.type === 'BOOL'"
                         [options]="[{label: 'Ja', value: 'true'}, {label: 'Nee', value: 'false'}]"
-                        [ngModel]="getCharacteristicValue(characteristic.name)" [ngModelOptions]="{standalone:true}"
+                        [ngModel]="getCharacteristicValue(characteristic.name)"
                         (onChange)="attributeChanged(characteristic,$event.value)"></p-selectButton>
 
         <p-inputNumber *ngIf="characteristic.type === 'DECIMAL'" [ngModel]="getCharacteristicValue(characteristic.name)"
-                       [ngModelOptions]="{standalone:true}" [showButtons]="true"
+                       [showButtons]="true"
                        (onInput)="attributeChanged(characteristic, $event.value)"
                        inputId="stacked" mode="decimal" [step]="0.1" incrementButtonIcon="pi pi-plus"
                        decrementButtonIcon="pi pi-minus">
@@ -78,8 +62,26 @@
         pButton
         pRipple
         label="Save product"
-        (click)="saveProduct()"
+        (click)="editProduct()"
       ></button>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="selectedProduct == undefined && isBusy">
+  <div class="col-12">
+    <div class="card">
+      <h5 class="center">Product loading</h5>
+      <p-progressSpinner></p-progressSpinner>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="selectedProduct == undefined && !isBusy">
+  <div class="col-12">
+    <div class="card">
+      <h5 class="center">Something went wrong, please try again</h5>
+      <p-progressSpinner></p-progressSpinner>
     </div>
   </div>
 </ng-container>

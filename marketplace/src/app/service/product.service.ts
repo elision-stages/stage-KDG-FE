@@ -5,7 +5,6 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Response} from "../model/Response";
 import {ProductId} from "../model/ProductId";
-import {preserveWhitespacesDefault} from "@angular/compiler";
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +18,20 @@ export class ProductService {
     let url = environment.api + 'addProduct';
     return this.http.post<Response>(url, product);
   }
-  editProduct(product: Product): Observable<Response>{
-    return this.http.post<Response>(environment.api + 'editProduct', product)
+
+  editProduct(product: Product): Observable<string> {
+    console.log(product);
+    const url = environment.api + 'editProduct';
+    console.log(url);
+    return this.http.post<string>(url, product)
   }
 
   getProductsByVendor(vendorId: number): Observable<Array<ProductId>> {
     return this.http.get<Array<ProductId>>(environment.api + 'getProductsByVendor/' + vendorId)
+  }
+
+  getProductById(productId: string): Observable<Product> {
+    console.log(productId);
+    return this.http.get<Product>(environment.api + 'product/' + productId);
   }
 }

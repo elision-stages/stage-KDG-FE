@@ -24,7 +24,7 @@ import {EditProductComponent} from "./components/vendor/edit-product/edit-produc
           {path: 'vendor', component: VendorComponent},
           {path: 'categories', component: CategoriesComponent, canActivate: [ RouteGuardService ]},
           {path: 'addProduct', component: ProductComponent},
-          {path: 'editProduct', component: EditProductComponent},
+          {path: 'editProduct/:productId', component: EditProductComponent},
         ]
       },
       {path:'pages/notfound', component: NotfoundComponent},

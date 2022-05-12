@@ -22,6 +22,7 @@
     "@ngrx/store": "^13.2.0",
     "algoliasearch": "^4.13.0",
     "angular-instantsearch": "^4.1.0",
+    "aws-sdk": "^2.1132.0",
     "js-sha1": "^0.6.0",
     "primeflex": "^3.1.3",
     "primeicons": "^5.0.0",
@@ -30,6 +31,7 @@
     "quill": "^1.3.7",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
+    "util": "^0.12.4",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
@@ -37,7 +39,7 @@
     "@angular/cli": "~13.3.3",
     "@angular/compiler-cli": "~13.3.0",
     "@types/jasmine": "~3.10.0",
-    "@types/node": "^12.11.1",
+    "@types/node": "^12.20.51",
     "jasmine-core": "~4.0.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
