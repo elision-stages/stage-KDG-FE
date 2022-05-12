@@ -12,7 +12,6 @@ import {UploadService} from "../../../service/upload.service";
 @Component({
   selector: 'app-edit-product',
   templateUrl: './edit-product.component.html',
-  styleUrls: ['./edit-product.component.scss']
 })
 export class EditProductComponent implements OnInit {
   productNames: Array<ProductId>

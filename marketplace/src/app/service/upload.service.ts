@@ -6,10 +6,6 @@ import {S3} from "aws-sdk";
 })
 export class UploadService {
 
-
-  constructor() {
-  }
-
   fileUpload(file) {
     console.log("uploading")
     const fileType = file.type;
