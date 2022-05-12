@@ -25,9 +25,13 @@ export class ProductService {
     return this.http.post<Response>(url, product);
   }
 
-  getProduct(id: number) {
-    let url = environment.api + 'product/' + id;
-    return this.http.get<Product[]>(url);
+  editProduct(product: Product): Observable<string> {
+    const url = environment.api + 'editProduct';
+    return this.http.post<string>(url, product)
+  }
+
+  getProductById(productId: number): Observable<Product> {
+    return this.http.get<Product>(environment.api + 'product/' + productId);
   }
 
   deleteProduct(id: number) {

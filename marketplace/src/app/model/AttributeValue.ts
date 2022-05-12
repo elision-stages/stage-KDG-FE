@@ -1,4 +1,4 @@
 export class AttributeValue {
-    attributeName: string
-    attributeValue: string
+  attributeName: string
+  value: string
 }

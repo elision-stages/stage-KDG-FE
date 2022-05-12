@@ -53,6 +53,9 @@ import {SkeletonModule} from "primeng/skeleton";
 import {GalleriaModule} from "primeng/galleria";
 import {TabViewModule} from "primeng/tabview";
 import {BreadcrumbModule} from "primeng/breadcrumb";
+import { EditProductComponent } from './components/vendor/edit-product/edit-product.component';
+import {FileUploadModule} from "primeng/fileupload";
+import {ProgressSpinnerModule} from "primeng/progressspinner";
 
 @NgModule({
   declarations: [
@@ -73,6 +76,7 @@ import {BreadcrumbModule} from "primeng/breadcrumb";
     AddProductComponent,
     CustomPasswordInputComponent,
     ChunkPipe,
+    EditProductComponent,
     ProductsComponent,
     ProductComponent
   ],
@@ -109,6 +113,9 @@ import {BreadcrumbModule} from "primeng/breadcrumb";
     SelectButtonModule,
     FormsModule,
     StoreModule.forRoot({}, {}),
+    MessagesModule,
+    FileUploadModule,
+    ProgressSpinnerModule,
     MessagesModule,
     TableModule,
     ConfirmPopupModule,
