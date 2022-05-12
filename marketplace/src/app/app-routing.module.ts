@@ -1,17 +1,17 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import {AppMainComponent} from "./app.main.component";
-import {NotfoundComponent} from "./components/open/notfound/notfound.component";
-import {AccessComponent} from "./components/open/access/access.component";
-import {DashboardComponent} from "./components/open/dashboard/dashboard.component";
-import {LoginComponent} from "./components/open/login/login.component";
-import {RegisterComponent} from "./components/open/register/register.component";
-import {VendorComponent} from "./components/open/vendor/vendor.component";
-import {CategoriesComponent} from "./components/vendor/categories/categories.component";
+import {AppMainComponent} from "./components/main/app.main.component";
+import {NotfoundComponent} from "./views/public/notfound/notfound.component";
+import {AccessComponent} from "./views/public/access/access.component";
+import {DashboardComponent} from "./views/public/dashboard/dashboard.component";
+import {LoginComponent} from "./views/public/login/login.component";
+import {RegisterComponent} from "./views/public/register/register.component";
+import {VendorComponent} from "./views/public/vendor/vendor.component";
+import {CategoriesComponent} from "./views/admin/categories/categories.component";
 import {RouteGuardService} from "./service/route-guard.service";
-import {AddProductComponent} from "./components/vendor/add-product/add-product.component";
-import {ProductsComponent} from "./components/vendor/products/products.component";
-import {ProductComponent} from "./components/open/product/product.component";
+import {AddProductComponent} from "./views/vendor/add-product/add-product.component";
+import {ProductsComponent} from "./views/vendor/products/products.component";
+import {ProductComponent} from "./views/public/product/product.component";
 
 @NgModule({
   imports: [
