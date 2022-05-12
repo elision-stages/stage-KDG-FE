@@ -10,7 +10,7 @@ import {AuthService} from "./service/auth.service";
   styleUrls: ['./app.topbar.component.scss']
 })
 export class AppTopBarComponent {
-  items: MenuItem[];
+  items: MenuItem[] = [];
   showCategories: boolean = false;
   megaMenuItems: MegaMenuItem[];
 
@@ -127,27 +127,42 @@ export class AppTopBarComponent {
         ]
       },
     ];
-    this.setItems(123);
   }
-  setItems(x) {
-    console.log('setItems', x)
-    this.items = [
-      {
-        label: 'Dag ' + this.user?.firstName,
-        items: [
-          {
-            label: 'Settings',
-            icon: 'pi pi-cog'
-          }]
-      },
-      {
-        label: 'Navigate',
+  setItems() {
+    this.items = []
+    if(this.user?.role == 'vendor') {
+      this.items.push({
+        label: 'Hi, ' + this.user?.firstName,
         items: [{
+          label: 'Products',
+          icon: 'pi pi-shopping-bag',
+          routerLink: '/products'
+        }
+        ]})
+    }
+    if(this.user?.role == 'admin') {
+      this.items.push({
+        label: 'Admin',
+        items: [{
+          label: 'Categories',
+          icon: 'pi pi-sitemap',
+          routerLink: '/categories'
+        }
+        ]})
+    }
+    this.items.push({
+      label: 'Account',
+      items: [
+        {
+          label: 'Settings',
+          icon: 'pi pi-cog',
+          routerLink: '/settings'
+        },
+        {
           label: 'Log out',
           icon: 'pi pi-sign-out',
-          command: this.authService.logout.bind(this)
+          command: this.authService.logout.bind(this.authService)
         }
-        ]}
-    ]
+      ]})
   }
 }

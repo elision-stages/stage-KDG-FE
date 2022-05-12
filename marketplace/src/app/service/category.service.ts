@@ -16,15 +16,15 @@ export class CategoryService {
     return this.http.get<any[]>(environment.api + 'getCategories')
   }
 
-  formatCategories(cats: any): TreeNode[] {
+  formatCategories(cats: any, parent: number = null): TreeNode[] {
     let result: TreeNode[] = []
-    cats.forEach((cat) => {
+    cats.filter(cat => cat.parentId == parent).forEach((cat) => {
       result.push({
         "label": cat.name,
         "data": cat.id,
         "expandedIcon": "pi pi-folder-open",
         "collapsedIcon": "pi pi-folder",
-        "children": this.formatCategories(cat.subcategories)
+        "children": this.formatCategories(cats, cat.id)
       })
     })
     return result

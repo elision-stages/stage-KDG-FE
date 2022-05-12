@@ -13,8 +13,25 @@ export class ProductService {
   constructor(private http: HttpClient) {
   }
 
+  getMyProducts(): Observable<Product[]> {
+    let url = environment.api + 'getMyProducts';
+    return this.http.get<Product[]>(url, {
+      withCredentials: true
+    });
+  }
+
   addProduct(product: Product): Observable<Response> {
     let url = environment.api + 'addProduct';
     return this.http.post<Response>(url, product);
+  }
+
+  getProduct(id: number) {
+    let url = environment.api + 'product/' + id;
+    return this.http.get<Product[]>(url);
+  }
+
+  deleteProduct(id: number) {
+    let url = environment.api + 'product/' + id;
+    return this.http.delete<Product[]>(url);
   }
 }
