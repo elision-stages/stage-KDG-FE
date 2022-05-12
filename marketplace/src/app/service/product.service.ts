@@ -20,9 +20,7 @@ export class ProductService {
   }
 
   editProduct(product: Product): Observable<string> {
-    console.log(product);
     const url = environment.api + 'editProduct';
-    console.log(url);
     return this.http.post<string>(url, product)
   }
 
@@ -31,7 +29,6 @@ export class ProductService {
   }
 
   getProductById(productId: string): Observable<Product> {
-    console.log(productId);
     return this.http.get<Product>(environment.api + 'product/' + productId);
   }
 }
