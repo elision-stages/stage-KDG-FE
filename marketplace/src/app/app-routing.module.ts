@@ -11,9 +11,8 @@ import {CategoriesComponent} from "./views/admin/categories/categories.component
 import {RouteGuardService} from "./service/route-guard.service";
 import {AddProductComponent} from "./views/vendor/add-product/add-product.component";
 import {ProductsComponent} from "./views/vendor/products/products.component";
-import {ProductComponent} from "./views/public/product/product.component";
-import {ProductComponent} from "./components/product/product.component";
 import {EditProductComponent} from "./components/vendor/edit-product/edit-product.component";
+import {ProductComponent} from "./views/public/product/product.component";
 
 @NgModule({
   imports: [

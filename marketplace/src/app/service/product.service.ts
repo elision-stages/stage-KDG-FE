@@ -30,13 +30,8 @@ export class ProductService {
     return this.http.post<string>(url, product)
   }
 
-  getProductById(productId: string): Observable<Product> {
+  getProductById(productId: number): Observable<Product> {
     return this.http.get<Product>(environment.api + 'product/' + productId);
-  }
-
-  getProduct(id: number) {
-    let url = environment.api + 'product/' + id;
-    return this.http.get<Product[]>(url);
   }
 
   deleteProduct(id: number) {
