@@ -4,7 +4,6 @@ import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Response} from "../model/Response";
-import {ProductId} from "../model/ProductId";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +11,13 @@ import {ProductId} from "../model/ProductId";
 export class ProductService {
 
   constructor(private http: HttpClient) {
+  }
+
+  getMyProducts(): Observable<Product[]> {
+    let url = environment.api + 'getMyProducts';
+    return this.http.get<Product[]>(url, {
+      withCredentials: true
+    });
   }
 
   addProduct(product: Product): Observable<Response> {
@@ -24,11 +30,17 @@ export class ProductService {
     return this.http.post<string>(url, product)
   }
 
-  getProductsByVendor(vendorId: number): Observable<Array<ProductId>> {
-    return this.http.get<Array<ProductId>>(environment.api + 'getProductsByVendor/' + vendorId)
-  }
-
   getProductById(productId: string): Observable<Product> {
     return this.http.get<Product>(environment.api + 'product/' + productId);
+  }
+
+  getProduct(id: number) {
+    let url = environment.api + 'product/' + id;
+    return this.http.get<Product[]>(url);
+  }
+
+  deleteProduct(id: number) {
+    let url = environment.api + 'product/' + id;
+    return this.http.delete<Product[]>(url);
   }
 }

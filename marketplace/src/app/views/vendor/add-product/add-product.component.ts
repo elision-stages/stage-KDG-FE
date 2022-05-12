@@ -1,19 +1,19 @@
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {ProductService} from "../../service/product.service";
-import {Product} from "../../model/Product";
-import {CategoryService} from "../../service/category.service";
-import {Category} from "../../model/Category";
+import {ProductService} from "../../../service/product.service";
+import {Product} from "../../../model/Product";
+import {CategoryService} from "../../../service/category.service";
+import {Category} from "../../../model/Category";
 import {Component} from "@angular/core";
 import {MessageService} from "primeng/api";
-import {Characteristic} from "../../model/Characteristic";
-import {AttributeValue} from "../../model/AttributeValue";
+import {Characteristic} from "../../../model/Characteristic";
+import {AttributeValue} from "../../../model/AttributeValue";
 
 @Component({
-  selector: 'app-product',
-  templateUrl: './product.component.html',
+  selector: 'app-add-product',
+  templateUrl: './add-product.component.html',
   providers: [MessageService]
 })
-export class ProductComponent {
+export class AddProductComponent {
   addProduct = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(2)]),
     description: new FormControl('', [Validators.required]),
@@ -41,14 +41,14 @@ export class ProductComponent {
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
-            detail: 'Problem adding product'
+            detail: 'Problem adding add-product'
           });
           console.log(result.httpBody);
         }
       },
       error: (error) => {
         console.log(error);
-        this.messageService.add({severity: error, summary: 'Error', detail: 'Problem adding product'})
+        this.messageService.add({severity: error, summary: 'Error', detail: 'Problem adding add-product'})
       }
     })
   }
