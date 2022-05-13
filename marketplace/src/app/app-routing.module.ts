@@ -11,6 +11,7 @@ import {CategoriesComponent} from "./views/admin/categories/categories.component
 import {RouteGuardService} from "./service/route-guard.service";
 import {AddProductComponent} from "./views/vendor/add-product/add-product.component";
 import {ProductsComponent} from "./views/vendor/products/products.component";
+import {EditProductComponent} from "./components/vendor/edit-product/edit-product.component";
 import {ProductComponent} from "./views/public/product/product.component";
 import {CartComponent} from "./views/user/cart/cart.component";
 
@@ -25,6 +26,7 @@ import {CartComponent} from "./views/user/cart/cart.component";
           {path: 'register', component: RegisterComponent},
           {path: 'vendor', component: VendorComponent},
           {path: 'categories', component: CategoriesComponent, canActivate: [ RouteGuardService ]},
+          {path: 'editProduct/:productId', component: EditProductComponent},
           {path: 'addProduct', component: AddProductComponent},
           {path: 'products', component: ProductsComponent, canActivate: [ RouteGuardService ]},
           {path: 'product/:id', component: ProductComponent},

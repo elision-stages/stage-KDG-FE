@@ -72,7 +72,7 @@ export class AddProductComponent {
     for (let attribute of this.selectedCategory.characteristics) {
       let pair = new AttributeValue();
       pair.attributeName = attribute.name;
-      pair.attributeValue = ''
+      pair.value = ''
       this.outProduct.attributes.push(pair)
     }
   }
@@ -81,7 +81,7 @@ export class AddProductComponent {
     if (characteristic.type === 'DECIMAL') value = Math.round(value * 100) / 100
 
     for (const pair of this.outProduct.attributes) {
-      if (pair.attributeName === characteristic.name) pair.attributeValue = value
+      if (pair.attributeName === characteristic.name) pair.value = value
     }
   }
 
