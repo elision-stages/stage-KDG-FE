@@ -1,4 +1,5 @@
 import {AttributeValue} from "./AttributeValue";
+import {Category} from "./Category";
 
 export class Product {
   id: number
@@ -7,6 +8,7 @@ export class Product {
   categoryId: number
   description: string
   attributes: Array<AttributeValue>
+  category: Category
 
   constructor() {
     this.attributes = new Array<AttributeValue>()

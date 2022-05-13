@@ -56,6 +56,9 @@ import {BreadcrumbModule} from "primeng/breadcrumb";
 import { CartComponent } from './views/user/cart/cart.component';
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {CustomInterceptorInterceptor} from "./service/custom-interceptor.interceptor";
+import { EditProductComponent } from './components/vendor/edit-product/edit-product.component';
+import {FileUploadModule} from "primeng/fileupload";
+import {ProgressSpinnerModule} from "primeng/progressspinner";
 
 @NgModule({
   declarations: [
@@ -76,6 +79,7 @@ import {CustomInterceptorInterceptor} from "./service/custom-interceptor.interce
     AddProductComponent,
     CustomPasswordInputComponent,
     ChunkPipe,
+    EditProductComponent,
     ProductsComponent,
     ProductComponent,
     CartComponent
@@ -113,6 +117,9 @@ import {CustomInterceptorInterceptor} from "./service/custom-interceptor.interce
     SelectButtonModule,
     FormsModule,
     StoreModule.forRoot({}, {}),
+    MessagesModule,
+    FileUploadModule,
+    ProgressSpinnerModule,
     MessagesModule,
     TableModule,
     ConfirmPopupModule,

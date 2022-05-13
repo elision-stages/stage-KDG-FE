@@ -39,7 +39,7 @@ export class ProductComponent {
   }
 
   loadProduct(id: number) {
-    this.productService.getProduct(id).subscribe({
+    this.productService.getProductById(id).subscribe({
       next: product => {
         this.loading = false
         this.product = product
