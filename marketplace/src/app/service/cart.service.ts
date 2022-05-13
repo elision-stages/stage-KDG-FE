@@ -3,7 +3,6 @@ import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 import {Cart} from "../model/Cart";
-import {User} from "../model/User";
 
 @Injectable({
   providedIn: 'root'
