@@ -3,6 +3,7 @@ import { AppMainComponent } from '../main/app.main.component';
 import { MenuItem, MegaMenuItem } from 'primeng/api';
 import {User} from "../../model/User";
 import {AuthService} from "../../service/auth.service";
+import {CartService} from "../../service/cart.service";
 
 @Component({
   selector: 'app-topbar',
@@ -14,12 +15,13 @@ export class AppTopBarComponent {
   showCategories: boolean = false;
   megaMenuItems: MegaMenuItem[];
 
-  user: User = null;
-  j = JSON;
+  user: User = null
+  cartCount: number = 0
 
-  constructor(public appMain: AppMainComponent, private authService: AuthService) {
+  constructor(public appMain: AppMainComponent, private authService: AuthService, private cartService: CartService) {
     this.authService.user.subscribe(x => this.user = x);
     this.authService.user.subscribe(this.setItems.bind(this));
+    this.cartService.cart.subscribe(cart => this.cartCount = cart ? cart.length : 0)
   }
 
   ngOnInit() {

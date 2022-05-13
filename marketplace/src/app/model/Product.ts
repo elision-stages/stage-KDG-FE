@@ -5,8 +5,8 @@ export class Product {
   id: number
   title: string
   price: number
+  categoryId: number
   description: string
-  vendorId: number
   attributes: Array<AttributeValue>
   category: Category
 

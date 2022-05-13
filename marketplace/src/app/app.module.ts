@@ -23,7 +23,7 @@ import {PasswordModule} from "primeng/password";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { RegisterComponent } from './views/public/register/register.component';
 import {DividerModule} from "primeng/divider";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {MessageModule} from "primeng/message";
 import {DialogModule} from "primeng/dialog";
 import { ToastModule } from 'primeng/toast';
@@ -53,6 +53,9 @@ import {SkeletonModule} from "primeng/skeleton";
 import {GalleriaModule} from "primeng/galleria";
 import {TabViewModule} from "primeng/tabview";
 import {BreadcrumbModule} from "primeng/breadcrumb";
+import { CartComponent } from './views/user/cart/cart.component';
+import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {CustomInterceptorInterceptor} from "./service/custom-interceptor.interceptor";
 import { EditProductComponent } from './components/vendor/edit-product/edit-product.component';
 import {FileUploadModule} from "primeng/fileupload";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
@@ -78,7 +81,8 @@ import {ProgressSpinnerModule} from "primeng/progressspinner";
     ChunkPipe,
     EditProductComponent,
     ProductsComponent,
-    ProductComponent
+    ProductComponent,
+    CartComponent
   ],
   imports: [
     HttpClientModule,
@@ -122,8 +126,16 @@ import {ProgressSpinnerModule} from "primeng/progressspinner";
     SkeletonModule,
     GalleriaModule,
     TabViewModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    ConfirmDialogModule
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CustomInterceptorInterceptor,
+      multi: true
+    }
+  ]
 })
 export class AppModule { }

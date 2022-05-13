@@ -7,6 +7,8 @@ import {Component} from "@angular/core";
 import {MessageService} from "primeng/api";
 import {Characteristic} from "../../../model/Characteristic";
 import {AttributeValue} from "../../../model/AttributeValue";
+import {ValidationHelper} from "../../../helpers/ValidationHelper";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-product',
@@ -14,42 +16,41 @@ import {AttributeValue} from "../../../model/AttributeValue";
   providers: [MessageService]
 })
 export class AddProductComponent {
+  readableErrors = ValidationHelper.readableErrors
   addProduct = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(2)]),
     description: new FormControl('', [Validators.required]),
-    price: new FormControl('0', [Validators.required, Validators.min(0.01)])
+    price: new FormControl(0.01, [Validators.required, Validators.min(0.01)])
   })
   outProduct: Product
-  categories: Array<Category>
+  categories: Category[]
   selectedCategory: Category
+  isLoading: boolean = false
 
-  constructor(private productService: ProductService, private categoryService: CategoryService, private messageService: MessageService) {
+  constructor(private productService: ProductService, private categoryService: CategoryService, private messageService: MessageService, private router: Router) {
     this.getAllCategories();
-    this.categories = new Array<Category>();
+    this.categories = [];
     this.outProduct = new Product();
   }
 
   onAdd(): void {
+    this.addProduct.disable()
+    this.isLoading = true
     this.outProduct.price = this.addProduct.value.price;
     this.outProduct.title = this.addProduct.value.title;
     this.outProduct.description = this.addProduct.value.description;
-    this.outProduct.vendorId = 10
+    this.outProduct.categoryId = this.selectedCategory.id;
 
     this.productService.addProduct(this.outProduct).subscribe({
-      next: (result) => {
-        if (result.httpCode !== '200') {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Problem adding add-product'
-          });
-          console.log(result.httpBody);
-        }
+      next: () => {
+        this.router.navigate(['/products'])
       },
       error: (error) => {
-        console.log(error);
-        this.messageService.add({severity: error, summary: 'Error', detail: 'Problem adding add-product'})
+        this.messageService.add({severity: error, summary: 'Error', detail: 'Problem adding product'})
       }
+    }).add(() => {
+      this.addProduct.enable()
+      this.isLoading = false
     })
   }
 
@@ -60,7 +61,6 @@ export class AddProductComponent {
         return _result;
       },
       error: (error) => {
-        console.log(error);
         this.messageService.add({severity: error, summary: 'Error', detail: 'Problem getting categories from server'})
       }
     })
@@ -83,5 +83,9 @@ export class AddProductComponent {
     for (const pair of this.outProduct.attributes) {
       if (pair.attributeName === characteristic.name) pair.value = value
     }
+  }
+
+  setDescription(event: any) {
+    this.addProduct.get('description').setValue(event.htmlValue)
   }
 }

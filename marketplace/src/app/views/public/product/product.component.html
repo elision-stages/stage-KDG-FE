@@ -15,14 +15,15 @@
         <p-skeleton height="1rem" styleClass="mb-3" [width]="random(100, 350) + 'px'"></p-skeleton>
         <p-skeleton height="3rem" styleClass="mb-3" width="70px"></p-skeleton>
 
-        <div class="w-full">
+        <div class="w-full" *ngIf="loggedIn">
           <div class="p-inputgroup p-inputnumber-buttons-stacked squarebtns">
             <p-inputNumber [readonly]="true">
             </p-inputNumber>
             <span class="p-inputgroup-addon"> </span>
-            <button type="button" pButton pRipple label="Add to cart" [disabled]="true"></button>
+            <button type="button" pButton pRipple label="Add to cart" [disabled]></button>
           </div>
         </div>
+        <button [routerLink]="['/login']" pButton pRipple label="Log in to add products to your shopping cart" class="w-full" *ngIf="!loggedIn"></button>
         <h5>Product properties</h5>
         <p-table [value]="[1]" responsiveLayout="scroll">
           <ng-template pTemplate="header">
@@ -65,7 +66,7 @@
           <sup>{{ product.price%1*100 | number: '1.0-0' }}</sup>
         </div>
 
-        <div class="w-full">
+        <div class="w-full" *ngIf="loggedIn">
           <div class="p-inputgroup p-inputnumber-buttons-stacked squarebtns">
             <p-inputNumber [(ngModel)]="amount" [allowEmpty]="false" [step]="1" mode="decimal" [min]="1" [max]="100">
             </p-inputNumber>
@@ -81,9 +82,10 @@
                 <span aria-hidden="true" class="p-button-label">&nbsp;</span>
               </button>
             </span>
-            <button type="button" pButton pRipple label="Add to cart"></button>
+            <button type="button" pButton pRipple label="Add to cart" (click)="addProduct(amount)"></button>
           </div>
         </div>
+        <button [routerLink]="['/login']" pButton pRipple label="Log in to add products to your shopping cart" class="w-full" *ngIf="!loggedIn"></button>
         <h5>Product properties</h5>
         <p-table [value]="product.attributes" responsiveLayout="scroll">
           <ng-template pTemplate="header">
@@ -103,3 +105,4 @@
     </div>
   </p-card>
 </div>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

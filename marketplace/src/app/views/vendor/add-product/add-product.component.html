@@ -4,29 +4,33 @@
       <div class="card">
         <h4>Add product</h4>
 
-        <div class="field">
-        <span class="p-float-label">
-            <input type="text" id="title" pInputText class="w-full" name="first" formControlName="title">
-            <label for="title">Product title</label>
-        </span>
-        </div>
-        <div class="field">
-        <span class="p-float-label">
-            <input type="text" id="desc" class="w-full" pInputText name="desc" formControlName="description">
-            <label for="title">Product description</label>
-        </span>
-        </div>
+        <label for="title" class="block text-900 text-xl font-medium">Title</label>
+        <input id="title" type="text" placeholder="Product title" pInputText class="w-full mt-2" formControlName="title" autofocus>
+        <small class="mt-1 block p-error" *ngIf="addProduct.controls['title'].invalid && addProduct.controls['title'].touched">{{readableErrors(addProduct.controls['title'].errors).join('\n')}}</small>
 
-        <div class="field">
-          <label for="price">Prijs</label> <br>
-          <p-inputNumber id="price" [showButtons]="true"
-                         class="w-full"
-                         formControlName="price"
-                         prefix="€"
-                         inputId="stacked" mode="decimal" [step]="0.01" incrementButtonIcon="pi pi-plus"
-                         decrementButtonIcon="pi pi-minus">
-          </p-inputNumber>
-        </div>
+        <label for="description" class="block text-900 text-xl font-medium mt-3 mb-2">Product description</label>
+        <p-editor id="description" [style]="{'height':'150px'}" (onTextChange)="setDescription($event)">
+          <ng-template pTemplate="header">
+            <span class="ql-formats">
+                <button type="button" class="ql-bold" aria-label="Bold"></button>
+                <button type="button" class="ql-italic" aria-label="Italic"></button>
+                <button type="button" class="ql-underline" aria-label="Underline"></button>
+            </span>
+          </ng-template>
+        </p-editor>
+        <small class="mt-1 block p-error" *ngIf="addProduct.controls['description'].invalid && addProduct.controls['description'].value">{{readableErrors(addProduct.controls['description'].errors).join('\n')}}</small>
+
+        <label for="price" class="block text-900 text-xl font-medium mt-3">Price</label>
+        <p-inputNumber id="price" [showButtons]="true"
+                       class="w-full mt-2"
+                       formControlName="price"
+                       prefix="€"
+                       [min]="0.01"
+                       inputId="stacked" mode="decimal" [step]="0.01" incrementButtonIcon="pi pi-plus"
+                       decrementButtonIcon="pi pi-minus"
+                       styleClass="w-full">
+        </p-inputNumber>
+        <small class="mt-1 block p-error" *ngIf="addProduct.controls['price'].invalid && addProduct.controls['price'].touched">{{readableErrors(addProduct.controls['price'].errors).join('\n')}}</small>
       </div>
     </div>
     <div class="col-12 lg:col-6 ">
@@ -34,7 +38,8 @@
         <div class="field w-full">
           <label for="category" class="block text-900 text-xl font-medium mt-1 w-full">Category</label>
           <p-dropdown [options]="categories" [(ngModel)]="selectedCategory" [ngModelOptions]="{standalone:true}"
-                      class="w-full"
+                      class="w-full mt-2"
+                      styleClass="w-full"
                       id="category"
                       optionLabel="name" (onChange)="selectCategory()"></p-dropdown>
         </div>
@@ -62,18 +67,11 @@
                            inputId="stacked" mode="decimal" [step]="0.1" incrementButtonIcon="pi pi-plus"
                            decrementButtonIcon="pi pi-minus">
             </p-inputNumber>
-
           </div>
         </ng-container>
+        <button [pTooltip]="!addProduct.valid && 'Some fields aren\'t valid'" tooltipPosition="top" [disabled]="!addProduct.valid" [loading]="isLoading" pButton pRipple label="Add product" class="w-full p-3 text-xl mt-3" type="submit"></button>
       </div>
     </div>
-    <button
-      class="w-full p-3 text-xl mt-1"
-      pButton
-      pRipple
-      label="Voeg product toe"
-      type="submit"
-    ></button>
   </div>
 </form>
 
