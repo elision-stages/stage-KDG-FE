@@ -25,10 +25,10 @@
   </div>
 
   <div class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active':appMain.topMenuActive}">
-    <a href="#" class="p-link layout-topbar-button p-button-outlined" *ngIf="user">
+    <a [routerLink]="['/cart']" class="p-link layout-topbar-button p-button-outlined" *ngIf="user">
       <i class="pi pi-shopping-cart mr-3 p-text-secondary"
          pBadge
-         [value]="'5'"></i>
+         [value]="cartCount.toString()"></i>
       <span>Shopping cart</span>
     </a>
     <a class="p-link layout-topbar-button" (click)="menu.show($event)" *ngIf="user">
