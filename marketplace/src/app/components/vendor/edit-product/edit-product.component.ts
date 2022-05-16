@@ -32,7 +32,11 @@ export class EditProductComponent implements OnInit {
   }
 
   selectProduct(productId: any) {
-    this.productService.getProductById(productId).subscribe(value => this.selectedProduct = value)
+    this.productService.getProductById(productId).subscribe(value => {
+      this.selectedProduct = value;
+      console.log(this.selectedProduct);
+      console.log(this.categories);
+    })
   }
 
   attributeChanged(characteristic: Characteristic, value) {
@@ -57,17 +61,21 @@ export class EditProductComponent implements OnInit {
 
   private fetchCategories() {
     this.categoryService.getCategories().subscribe(value => {
+      console.log(value);
       return this.categories = value;
     });
   }
 
   editProduct() {
+    console.log(this.selectedProduct);
     this.productService.editProduct(this.selectedProduct).subscribe(value => console.log(value))
   }
 
   uploadImages(event: any) {
-
-
     this.uploadService.fileUpload(event.files[0])
+  }
+
+  selectCategory(event) {
+    this.selectedProduct.category = this.categories.find(value => value.id === event.value)
   }
 }

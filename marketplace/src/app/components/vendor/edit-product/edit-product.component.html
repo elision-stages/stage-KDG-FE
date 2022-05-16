@@ -2,7 +2,6 @@
   <div class="col-12">
     <div class="card">
       <h4>Edit product </h4>
-
       <div class="flex flex-row flex-wrap">
         <div class="field col-12">
           <label for="title">Title: </label> <br>
@@ -19,10 +18,10 @@
         </div>
         <div class="field md:col-6 col-12">
           <label for="title">Category:</label> <br>
-          <p-dropdown [options]="categories" [(ngModel)]="selectedProduct.category"
-                      class="w-full" styleClass="w-full"
-                      id="category"
-                      optionLabel="name"></p-dropdown>
+          <p-dropdown [options]="categories" [(ngModel)]="selectedProduct.category.id"
+                      class="w-full" styleClass="w-full" (onChange)="selectCategory($event)"
+                      id="category" placeholder="Choose a category"
+                      optionLabel="name" optionValue="id"></p-dropdown>
         </div>
         <div class="field col-12">
           <label for="description">Description:</label> <br>
@@ -33,30 +32,34 @@
       <p-divider></p-divider>
 
       <h5>Product Attributes</h5>
-      <div *ngFor="let characteristic of selectedProduct.category.characteristics"
-           class="mt-1 card ">
-        <h5>{{characteristic.name}}</h5>
+      <ng-container *ngIf="selectedProduct.category">
+        <div *ngFor="let characteristic of selectedProduct.category.characteristics"
+             class="mt-1 card ">
+          <h5>{{characteristic.name}}</h5>
 
-        <p-knob *ngIf="characteristic.type === 'INTEGER'" [ngModel]="getCharacteristicValue(characteristic.name)"
-                [min]="0" [max]="10" (onChange)="attributeChanged(characteristic,$event)"></p-knob>
+          <p-knob *ngIf="characteristic.type === 'INTEGER'" [ngModel]="getCharacteristicValue(characteristic.name)"
+                  [min]="0" [max]="10" (onChange)="attributeChanged(characteristic,$event)"></p-knob>
 
-        <p-dropdown *ngIf="characteristic.type === 'ENUMERATION'" [options]="characteristic.enumValues"
-                    [ngModel]="getCharacteristicValue(characteristic.name)"
-                    (onChange)="attributeChanged(characteristic,$event)" placeholder="Select a value"></p-dropdown>
+          <p-dropdown *ngIf="characteristic.type === 'ENUMERATION'" [options]="characteristic.enumValues"
+                      [ngModel]="getCharacteristicValue(characteristic.name)"
+                      (onChange)="attributeChanged(characteristic,$event)" placeholder="Select a value"></p-dropdown>
 
-        <p-selectButton *ngIf="characteristic.type === 'BOOL'"
-                        [options]="[{label: 'Yes', value: 'true'}, {label: 'No', value: 'false'}]"
-                        [ngModel]="getCharacteristicValue(characteristic.name)"
-                        (onChange)="attributeChanged(characteristic,$event.value)"></p-selectButton>
+          <p-selectButton *ngIf="characteristic.type === 'BOOL'"
+                          [options]="[{label: 'Yes', value: 'true'}, {label: 'No', value: 'false'}]"
+                          [ngModel]="getCharacteristicValue(characteristic.name)"
+                          (onChange)="attributeChanged(characteristic,$event.value)"></p-selectButton>
 
-        <p-inputNumber *ngIf="characteristic.type === 'DECIMAL'" [ngModel]="getCharacteristicValue(characteristic.name)"
-                       [showButtons]="true"
-                       (onInput)="attributeChanged(characteristic, $event.value)"
-                       inputId="stacked" mode="decimal" [step]="0.1" incrementButtonIcon="pi pi-plus"
-                       decrementButtonIcon="pi pi-minus">
-        </p-inputNumber>
+          <p-inputNumber *ngIf="characteristic.type === 'DECIMAL'"
+                         [ngModel]="getCharacteristicValue(characteristic.name)"
+                         [showButtons]="true"
+                         (onInput)="attributeChanged(characteristic, $event.value)"
+                         inputId="stacked" mode="decimal" [step]="0.1" incrementButtonIcon="pi pi-plus"
+                         decrementButtonIcon="pi pi-minus">
+          </p-inputNumber>
 
-      </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!selectedProduct.category"><h6>Select a category first</h6></ng-container>
       <button
         class="w-full p-3 text-xl mt-1"
         pButton

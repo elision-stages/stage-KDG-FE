@@ -40,12 +40,15 @@ export class AddProductComponent {
     this.outProduct.title = this.addProduct.value.title;
     this.outProduct.description = this.addProduct.value.description;
     this.outProduct.categoryId = this.selectedCategory.id;
+    this.outProduct.category = this.selectedCategory;
 
     this.productService.addProduct(this.outProduct).subscribe({
-      next: () => {
+      next: (value) => {
+        console.log(value);
         this.router.navigate(['/products'])
       },
       error: (error) => {
+        console.log(error);
         this.messageService.add({severity: error, summary: 'Error', detail: 'Problem adding product'})
       }
     }).add(() => {
