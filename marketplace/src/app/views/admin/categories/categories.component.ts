@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MessageService, TreeNode} from "primeng/api";
 import {CategoryService} from "../../../service/category.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ValidationHelper} from "../../../helpers/ValidationHelper";
 
 @Component({
@@ -45,6 +45,7 @@ export class CategoriesComponent implements OnInit {
     this.categoryService.add(this.addForm.value).subscribe({
       next: (_result) => {
         this.messageService.add({severity:'success', summary: 'Success', detail: 'Category added'});
+        this.addForm.reset()
         this.refresh()
       },
       error: (error) => {

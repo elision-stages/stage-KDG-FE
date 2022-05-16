@@ -21,7 +21,7 @@ export class AppTopBarComponent {
   constructor(public appMain: AppMainComponent, private authService: AuthService, private cartService: CartService) {
     this.authService.user.subscribe(x => this.user = x);
     this.authService.user.subscribe(this.setItems.bind(this));
-    this.cartService.cart.subscribe(cart => this.cartCount = cart ? cart.length : 0)
+    this.cartService.cart.subscribe(cart => this.cartCount = cart ? cart.orderLines.length : 0)
   }
 
   ngOnInit() {
@@ -153,7 +153,7 @@ export class AppTopBarComponent {
         ]})
     }
     this.items.push({
-      label: 'Account',
+      label: 'Hi, ' + this.user?.firstName,
       items: [
         {
           label: 'Settings',

@@ -7,6 +7,7 @@ export class Product {
   price: number
   categoryId: number
   description: string
+  images: string[]
   attributes: Array<AttributeValue>
   category: Category
 

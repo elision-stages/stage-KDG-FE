@@ -25,7 +25,7 @@
   </div>
 
   <div class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active':appMain.topMenuActive}">
-    <a [routerLink]="['/cart']" class="p-link layout-topbar-button p-button-outlined" *ngIf="user">
+    <a [routerLink]="['/cart']" class="p-link layout-topbar-button p-button-outlined" *ngIf="user && user.role == 'customer'">
       <i class="pi pi-shopping-cart mr-3 p-text-secondary"
          pBadge
          [value]="cartCount.toString()"></i>

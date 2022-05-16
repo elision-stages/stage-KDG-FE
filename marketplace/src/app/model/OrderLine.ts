@@ -1,4 +1,6 @@
+import {Product} from "./Product";
+
 export class OrderLine {
-  productId: number
-  amount: number
+  quantity: number
+  productDto: Product
 }

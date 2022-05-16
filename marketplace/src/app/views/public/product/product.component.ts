@@ -25,7 +25,7 @@ export class ProductComponent {
   random: Function = staticRandomInt();
   amount: number = 1;
 
-  loggedIn: boolean = false
+  user: any = null
 
   constructor(
     private route: ActivatedRoute,
@@ -35,7 +35,7 @@ export class ProductComponent {
     private confirmationService: ConfirmationService,
     private authService: AuthService) {
     this.route.params.subscribe( params => this.loadProduct(params['id']) );
-    this.loggedIn = authService.userValue !== null
+    this.user = authService.userValue
   }
 
   loadProduct(id: number) {
@@ -68,7 +68,7 @@ export class ProductComponent {
       category = category.parent
     }
     this.breadcrumb.reverse()
-    this.breadcrumb.push({label: this.product.name})
+    this.breadcrumb.push({label: this.product.title})
   }
 
   updateAmount(btn: string) {

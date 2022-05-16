@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Product} from "../../../model/Product";
+import {Cart} from "../../../model/Cart";
 import {Router} from "@angular/router";
-import {ProductService} from "../../../service/product.service";
+import {CartService} from "../../../service/cart.service";
+import {OrderLine} from "../../../model/OrderLine";
 
 @Component({
   selector: 'app-cart',
@@ -9,20 +10,16 @@ import {ProductService} from "../../../service/product.service";
 })
 export class CartComponent implements OnInit {
 
-  products: Product[] = [];
+  cart: Cart = new Cart();
 
-  loading: boolean = true;
-
-  constructor(private router: Router, private productService: ProductService) { }
+  constructor(private router: Router, private cartService: CartService) { }
 
   ngOnInit() {
-    this.productService.getMyProducts().subscribe(products => {
-      this.products = products;
-      this.loading = false;
-    });
+    this.cartService.cart.subscribe(x => this.cart = x);
   }
 
-  get totalPrice() {
-    return this.products.reduce((a, b) => +a + +b.price, 0);
+  updateCart(orderline: OrderLine, quantity: number) {
+    console.log(orderline, quantity)
+    this.cartService.updateCart(orderline.productDto.id, quantity).subscribe()
   }
 }

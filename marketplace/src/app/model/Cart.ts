@@ -1,3 +1,6 @@
+import {OrderLine} from "./OrderLine";
+
 export class Cart {
-  length: number = 0
+  orderLines: OrderLine[] = []
+  totalPrice: number = 0
 }
