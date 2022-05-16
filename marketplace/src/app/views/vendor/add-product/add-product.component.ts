@@ -40,12 +40,15 @@ export class AddProductComponent {
     this.outProduct.title = this.addProduct.value.title;
     this.outProduct.description = this.addProduct.value.description;
     this.outProduct.categoryId = this.selectedCategory.id;
+    this.outProduct.category = this.selectedCategory;
+    console.log(this.outProduct);
 
     this.productService.addProduct(this.outProduct).subscribe({
       next: () => {
         this.router.navigate(['/products'])
       },
       error: (error) => {
+        console.log(error);
         this.messageService.add({severity: error, summary: 'Error', detail: 'Problem adding product'})
       }
     }).add(() => {
@@ -78,11 +81,19 @@ export class AddProductComponent {
   }
 
   characteristicChanged(characteristic: Characteristic, value: any) {
+    console.log(value);
+    console.log(characteristic);
     if (characteristic.type === 'DECIMAL') value = Math.round(value * 100) / 100
 
+    if (!(this.outProduct.attributes.find(attr => attr.attributeName))) {
+      const attrPair = new AttributeValue();
+      attrPair.attributeName = characteristic.name
+      this.outProduct.attributes.push(attrPair);
+    }
     for (const pair of this.outProduct.attributes) {
       if (pair.attributeName === characteristic.name) pair.value = value
     }
+    console.log(this.outProduct);
   }
 
   setDescription(event: any) {

@@ -6,7 +6,7 @@ import {AttributeValue} from "../../../model/AttributeValue";
 import {Category} from "../../../model/Category";
 import {Characteristic} from "../../../model/Characteristic";
 import {CategoryService} from "../../../service/category.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {UploadService} from "../../../service/upload.service";
 
 @Component({
@@ -20,7 +20,7 @@ export class EditProductComponent implements OnInit {
   isBusy: boolean
 
   constructor(private productService: ProductService, private categoryService: CategoryService, private route: ActivatedRoute,
-              private uploadService: UploadService) {
+              private uploadService: UploadService, private router: Router) {
     this.isBusy = true;
     this.fetchCategories()
     this.selectProduct(this.route.snapshot.paramMap.get('productId'));
@@ -32,7 +32,9 @@ export class EditProductComponent implements OnInit {
   }
 
   selectProduct(productId: any) {
-    this.productService.getProductById(productId).subscribe(value => this.selectedProduct = value)
+    this.productService.getProductById(productId).subscribe(value => {
+      this.selectedProduct = value;
+    })
   }
 
   attributeChanged(characteristic: Characteristic, value) {
@@ -62,12 +64,14 @@ export class EditProductComponent implements OnInit {
   }
 
   editProduct() {
-    this.productService.editProduct(this.selectedProduct).subscribe(value => console.log(value))
+    this.productService.editProduct(this.selectedProduct).subscribe(() => this.router.navigate(['/products']))
   }
 
   uploadImages(event: any) {
-
-
     this.uploadService.fileUpload(event.files[0])
+  }
+
+  selectCategory(event) {
+    this.selectedProduct.category = this.categories.find(value => value.id === event.value)
   }
 }

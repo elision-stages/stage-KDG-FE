@@ -49,7 +49,7 @@ export class ProductsComponent implements OnInit {
       rejectIcon: 'pi pi-chevron-left\n',
       acceptIcon: 'pi pi-trash',
       accept: () => {
-        this.productService.deleteProduct(product.id).subscribe(products => {
+        this.productService.deleteProduct(product.id).subscribe(() => {
           this.products = this.products.filter(function( obj ) {
             return obj.id !== product.id;
           });
