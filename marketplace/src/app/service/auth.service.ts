@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, map, Observable, tap} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {User} from "../model/User";
@@ -27,17 +27,14 @@ export class AuthService {
   }
 
   login(mail: string, password: string): Observable<User> {
-    let request: Observable<User> = this.http.post<any>(this.authUrl + 'login', { email: mail, password: password }, {
-      withCredentials: true
-    })
-    request.subscribe({
-      next: (user) => {
+    return this.http.post<any>(this.authUrl + 'login', { email: mail, password: password }).pipe(
+      tap(user => {
         localStorage.setItem('user', JSON.stringify(user));
         this.userSubject.next(user);
         this.router.navigate(['/']);
-      }
-    })
-    return request
+        return user
+      })
+    )
   }
 
   logout() {

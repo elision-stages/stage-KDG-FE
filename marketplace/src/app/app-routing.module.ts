@@ -26,7 +26,7 @@ import {CartComponent} from "./views/user/cart/cart.component";
           {path: 'register', component: RegisterComponent},
           {path: 'vendor', component: VendorComponent},
           {path: 'categories', component: CategoriesComponent, canActivate: [ RouteGuardService ]},
-          {path: 'editProduct/:productId', component: EditProductComponent},
+          {path: 'product/:productId/edit', component: EditProductComponent},
           {path: 'addProduct', component: AddProductComponent},
           {path: 'products', component: ProductsComponent, canActivate: [ RouteGuardService ]},
           {path: 'product/:id', component: ProductComponent},

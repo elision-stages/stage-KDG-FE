@@ -39,7 +39,7 @@
                 <h2><ais-highlight attribute="name" [hit]="hit"></ais-highlight></h2>
                 <a href="#">{{ hit['categories.lvl0'] }}</a>
                 <p class="desc"><ais-highlight attribute="description" [hit]="hit"></ais-highlight></p>
-                <button pButton type="button" [label]="'&euro;' + hit.price.toFixed(2).replace('.', ',')" ></button>
+                <button pButton type="button" [label]="'&euro;' + hit.price.toFixed(2).replace('.', ',')" (click)="openProduct(hit)"></button>
               </div>
             </div>
           </div>

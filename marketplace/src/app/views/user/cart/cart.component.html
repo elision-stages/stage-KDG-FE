@@ -1,8 +1,8 @@
 <div class="card">
   <h4>Shopping cart</h4>
-  <p-table #dt2 [value]="products" dataKey="id" responsiveLayout="stack"
-           [rows]="10" [showCurrentPageReport]="true" [loading]="loading"
-           [paginator]="products.length > 10" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
+  <p-table #dt2 [value]="cart.orderLines" dataKey="id" responsiveLayout="stack"
+           [rows]="10" [showCurrentPageReport]="true"
+           [paginator]="cart.orderLines.length > 10" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
            [globalFilterFields]="['name']">
     <ng-template pTemplate="header" let-columns>
       <tr>
@@ -13,35 +13,35 @@
         <th scope="col"></th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-product let-columns="columns">
-      <tr [pSelectableRow]="product">
+    <ng-template pTemplate="body" let-orderline let-columns="columns">
+      <tr [pSelectableRow]="orderline">
         <td>
           <span class="p-column-title">Preview</span>
-          <a [routerLink]="['/product/', product.id]">
-            <img [src]="product.image" [alt]="product.name" width="130" class="shadow-4" />
+          <a [routerLink]="['/product/', orderline.productDto.id]">
+            <img [src]="orderline.productDto.images[0]" [alt]="orderline.productDto.title" width="130" class="shadow-4" />
           </a>
         </td>
         <td>
           <span class="p-column-title">Name</span>
-          <a [routerLink]="['/product/', product.id]" class="font-bold">
-            {{product.name}}
+          <a [routerLink]="['/product/', orderline.productDto.id]" class="font-bold">
+            {{orderline.productDto.title}}
           </a>
         </td>
         <td>
           <span class="p-column-title">Amount</span>
-          <p-inputNumber [(ngModel)]="product.amount" mode="decimal" [showButtons]="true" inputId="minmax-buttons" [min]="0" [max]="100"></p-inputNumber>
+          <p-inputNumber [(ngModel)]="orderline.quantity" mode="decimal" [showButtons]="true" inputId="minmax-buttons" [min]="0" [max]="100" (onInput)="updateCart(orderline, orderline.quantity)"></p-inputNumber>
         </td>
-        <td><span class="p-column-title">Price</span>{{product.price | currency:'EUR':'symbol'}}</td>
+        <td><span class="p-column-title">Price</span>{{orderline.quantity*orderline.productDto.price | currency:'EUR':'symbol'}}</td>
         <td>
           <span class="p-column-title">Actions</span>
-          <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"></button>
+          <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="updateCart(orderline, 0)"></button>
         </td>
       </tr>
     </ng-template>
     <ng-template pTemplate="summary">
       <div class="grid">
         <div class="col-12 lg:col-offset-9 lg:col-3 md:col-offset-8 md:col-4 sm:col-offset-6 md:col-6 text-center">
-          {{ products.length }} product{{ products.length == 1 ? '' : 's' }} - {{ totalPrice | currency:'EUR':'symbol' }}
+          {{ cart.orderLines.length }} product{{ cart.orderLines.length == 1 ? '' : 's' }} - {{ cart.totalPrice | currency:'EUR':'symbol' }}
         </div>
         <div class="col-12 lg:col-offset-9 lg:col-3 md:col-offset-8 md:col-4 sm:col-offset-6 md:col-6">
           <p-button icon="pi pi-check" label="Place order" styleClass="w-full"></p-button>
