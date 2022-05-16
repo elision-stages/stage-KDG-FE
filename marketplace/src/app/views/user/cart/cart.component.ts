@@ -18,7 +18,7 @@ export class CartComponent implements OnInit {
     this.cartService.cart.subscribe(x => this.cart = x);
   }
 
-  updateCart(orderline: OrderLine, quantity: number) {
+  updateCart(orderline: OrderLine, quantity: any) {
     console.log(orderline, quantity)
     this.cartService.updateCart(orderline.productDto.id, quantity).subscribe()
   }

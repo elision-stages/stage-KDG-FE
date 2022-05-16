@@ -1,6 +1,6 @@
 <div class="card">
   <h4>Shopping cart</h4>
-  <p-table #dt2 [value]="cart.orderLines" dataKey="id" responsiveLayout="stack"
+  <p-table *ngIf="cart" [value]="cart.orderLines" dataKey="id" responsiveLayout="stack"
            [rows]="10" [showCurrentPageReport]="true"
            [paginator]="cart.orderLines.length > 10" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
            [globalFilterFields]="['name']">
@@ -26,10 +26,12 @@
           <a [routerLink]="['/product/', orderline.productDto.id]" class="font-bold">
             {{orderline.productDto.title}}
           </a>
+          <br>
+          <small>This product is sold by <a [routerLink]="['/vendor/', orderline.productDto.vendorId]">{{orderline.productDto.vendorName}}</a></small>
         </td>
         <td>
           <span class="p-column-title">Amount</span>
-          <p-inputNumber [(ngModel)]="orderline.quantity" mode="decimal" [showButtons]="true" inputId="minmax-buttons" [min]="0" [max]="100" (onInput)="updateCart(orderline, orderline.quantity)"></p-inputNumber>
+          <p-inputNumber [(ngModel)]="orderline.quantity" mode="decimal" [showButtons]="true" inputId="minmax-buttons" [min]="0" [max]="100" (onInput)="updateCart(orderline, $event.value)"></p-inputNumber>
         </td>
         <td><span class="p-column-title">Price</span>{{orderline.quantity*orderline.productDto.price | currency:'EUR':'symbol'}}</td>
         <td>
