@@ -43,8 +43,7 @@ export class AddProductComponent {
     this.outProduct.category = this.selectedCategory;
 
     this.productService.addProduct(this.outProduct).subscribe({
-      next: (value) => {
-        console.log(value);
+      next: () => {
         this.router.navigate(['/products'])
       },
       error: (error) => {
