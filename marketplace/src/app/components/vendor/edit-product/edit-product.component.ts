@@ -32,7 +32,9 @@ export class EditProductComponent implements OnInit {
   }
 
   selectProduct(productId: any) {
-    this.productService.getProductById(productId).subscribe(value => this.selectedProduct = value)
+    this.productService.getProductById(productId).subscribe(value => {
+      this.selectedProduct = value;
+    })
   }
 
   attributeChanged(characteristic: Characteristic, value) {
@@ -66,8 +68,10 @@ export class EditProductComponent implements OnInit {
   }
 
   uploadImages(event: any) {
-
-
     this.uploadService.fileUpload(event.files[0])
+  }
+
+  selectCategory(event) {
+    this.selectedProduct.category = this.categories.find(value => value.id === event.value)
   }
 }
