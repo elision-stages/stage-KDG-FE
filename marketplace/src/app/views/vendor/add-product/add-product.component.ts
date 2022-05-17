@@ -1,4 +1,4 @@
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ProductService} from "../../../service/product.service";
 import {Product} from "../../../model/Product";
 import {CategoryService} from "../../../service/category.service";
@@ -20,6 +20,7 @@ export class AddProductComponent {
   addProduct = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(2)]),
     description: new FormControl('', [Validators.required]),
+    images: new FormArray([]),
     price: new FormControl(0.01, [Validators.required, Validators.min(0.01)])
   })
   outProduct: Product
@@ -38,17 +39,16 @@ export class AddProductComponent {
     this.isLoading = true
     this.outProduct.price = this.addProduct.value.price;
     this.outProduct.title = this.addProduct.value.title;
+    this.outProduct.images = this.addProduct.value.images;
     this.outProduct.description = this.addProduct.value.description;
     this.outProduct.categoryId = this.selectedCategory.id;
     this.outProduct.category = this.selectedCategory;
-    console.log(this.outProduct);
 
     this.productService.addProduct(this.outProduct).subscribe({
       next: () => {
         this.router.navigate(['/products'])
       },
       error: (error) => {
-        console.log(error);
         this.messageService.add({severity: error, summary: 'Error', detail: 'Problem adding product'})
       }
     }).add(() => {
@@ -81,8 +81,6 @@ export class AddProductComponent {
   }
 
   characteristicChanged(characteristic: Characteristic, value: any) {
-    console.log(value);
-    console.log(characteristic);
     if (characteristic.type === 'DECIMAL') value = Math.round(value * 100) / 100
 
     if (!(this.outProduct.attributes.find(attr => attr.attributeName))) {
@@ -98,5 +96,20 @@ export class AddProductComponent {
 
   setDescription(event: any) {
     this.addProduct.get('description').setValue(event.htmlValue)
+  }
+
+  get images(): FormArray {
+    return this.addProduct.get('images') as FormArray;
+  }
+
+  addImage($event: any) {
+    $event.preventDefault()
+    this.images.push(new FormControl($event.target.value, [Validators.required, ValidationHelper.httpsValidator]));
+    $event.target.value = ''
+    return false
+  }
+
+  deleteImage(i: number) {
+    this.images.removeAt(i)
   }
 }

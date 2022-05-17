@@ -8,6 +8,8 @@ import {Characteristic} from "../../../model/Characteristic";
 import {CategoryService} from "../../../service/category.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UploadService} from "../../../service/upload.service";
+import {FormControl, Validators} from "@angular/forms";
+import {ValidationHelper} from "../../../helpers/ValidationHelper";
 
 @Component({
   selector: 'app-edit-product',
@@ -67,11 +69,18 @@ export class EditProductComponent implements OnInit {
     this.productService.editProduct(this.selectedProduct).subscribe(() => this.router.navigate(['/products']))
   }
 
-  uploadImages(event: any) {
-    this.uploadService.fileUpload(event.files[0])
+  selectCategory($event) {
+    this.selectedProduct.category = this.categories.find(value => value.id === $event.value)
   }
 
-  selectCategory(event) {
-    this.selectedProduct.category = this.categories.find(value => value.id === event.value)
+  addImage($event: any) {
+    $event.preventDefault()
+    this.selectedProduct.images.push($event.target.value);
+    $event.target.value = ''
+    return false
+  }
+
+  deleteImage(select: String) {
+    this.selectedProduct.images = this.selectedProduct.images.filter(img => img != select)
   }
 }

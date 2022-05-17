@@ -30,6 +30,18 @@ export class ValidationHelper {
     return /^\d+$/.test(control.value) ? null : { phone: true }
   }
 
+  static httpsValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+    let url;
+
+    try {
+      url = new URL(control.value);
+    } catch (_) {
+      return { url: true };
+    }
+
+    return url.protocol === "https:" ? null : { https: true }
+  }
+
   static readableErrors(errors: ValidationErrors): string[] {
     let clean: string[] = []
     for (var key in errors) {
@@ -55,6 +67,12 @@ export class ValidationHelper {
             break;
           case 'phone':
             clean.push('A phone number may only contain digits.')
+            break;
+          case 'url':
+            clean.push('This isn\'t a valid URL.')
+            break;
+          case 'https':
+            clean.push('This URL must use the https protocol.')
             break;
           default:
             clean.push('Unknown error: ' + key)
