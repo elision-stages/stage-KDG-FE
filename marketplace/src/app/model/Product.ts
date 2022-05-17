@@ -10,6 +10,8 @@ export class Product {
   images: string[]
   attributes: Array<AttributeValue>
   category: Category
+  vendorId: number
+  vendorName: string
 
   constructor() {
     this.attributes = new Array<AttributeValue>()
