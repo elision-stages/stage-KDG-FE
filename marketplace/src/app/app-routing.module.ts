@@ -11,7 +11,7 @@ import {CategoriesComponent} from "./views/admin/categories/categories.component
 import {RouteGuardService} from "./service/route-guard.service";
 import {AddProductComponent} from "./views/vendor/add-product/add-product.component";
 import {ProductsComponent} from "./views/vendor/products/products.component";
-import {EditProductComponent} from "./components/vendor/edit-product/edit-product.component";
+import {EditProductComponent} from "./views/vendor/edit-product/edit-product.component";
 import {ProductComponent} from "./views/public/product/product.component";
 import {CartComponent} from "./views/user/cart/cart.component";
 

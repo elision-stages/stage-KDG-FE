@@ -20,13 +20,26 @@
         </p-editor>
         <small class="mt-1 block p-error" *ngIf="addProduct.controls['description'].invalid && addProduct.controls['description'].value">{{readableErrors(addProduct.controls['description'].errors).join('\n')}}</small>
 
+        <label for="newImage" class="block text-900 text-xl font-medium mt-3 mb-2">Product images</label>
+        <ng-container formArrayName="images" *ngFor="let image of images.controls; index as i">
+          <div class="p-inputgroup w-full mt-2">
+            <input type="text" [formControlName]="i" pInputText [value]="image" (blur)="image.value.length ? true : deleteImage(i)">
+            <button type="button" pButton pRipple icon="pi pi-times" class="p-button-danger" (click)="deleteImage(i)"></button>
+          </div>
+          <small class="mt-1 block p-error" *ngIf="image.invalid">{{readableErrors(image.errors).join('\n')}}</small>
+        </ng-container>
+        <input id="newImage" type="text" placeholder="Image URL" pInputText class="w-full mt-2" (keydown.tab)="addImage($event)" (keydown.enter)="addImage($event)" (blur)="addImage($event)">
+
+
         <label for="price" class="block text-900 text-xl font-medium mt-3">Price</label>
         <p-inputNumber id="price" [showButtons]="true"
                        class="w-full mt-2"
                        formControlName="price"
                        prefix="€"
+                       locale="de-DE"
+                       [minFractionDigits]="2"
                        [min]="0.01"
-                       inputId="stacked" mode="decimal" [step]="0.01" incrementButtonIcon="pi pi-plus"
+                       inputId="stacked" mode="decimal" [step]="1" incrementButtonIcon="pi pi-plus"
                        decrementButtonIcon="pi pi-minus"
                        styleClass="w-full">
         </p-inputNumber>

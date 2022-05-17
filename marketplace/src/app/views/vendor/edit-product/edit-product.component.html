@@ -12,7 +12,10 @@
           <p-inputNumber id="price" class="w-full" styleClass="w-full"
                          [showButtons]="true" [(ngModel)]="selectedProduct.price" [min]="0.01"
                          prefix="€"
-                         inputId="stacked" mode="decimal" [step]="0.01" incrementButtonIcon="pi pi-plus"
+                         prefix="€"
+                         locale="de-DE"
+                         [minFractionDigits]="2"
+                         inputId="stacked" mode="decimal" [step]="1" incrementButtonIcon="pi pi-plus"
                          decrementButtonIcon="pi pi-minus">
           </p-inputNumber>
         </div>
@@ -23,9 +26,27 @@
                       id="category" placeholder="Choose a category"
                       optionLabel="name" optionValue="id"></p-dropdown>
         </div>
+
+        <label for="newImage" class="block text-900 text-xl font-medium mt-3 mb-2">Product images</label>
+        <ng-container *ngFor="let image of selectedProduct.images; let i = index">
+          <div class="p-inputgroup w-full mt-2">
+            <input type="text" pInputText [(ngModel)]="selectedProduct.images[i]" (blur)="image.length ? true : deleteImage(image)">
+            <button type="button" pButton pRipple icon="pi pi-times" class="p-button-danger" (click)="deleteImage(image)"></button>
+          </div>
+        </ng-container>
+        <input id="newImage" type="text" placeholder="Image URL" pInputText class="w-full mt-2" (keydown.tab)="addImage($event)" (keydown.enter)="addImage($event)" (blur)="addImage($event)">
+
         <div class="field col-12">
           <label for="description">Description:</label> <br>
-          <p-editor id="description" [(ngModel)]="selectedProduct.description"></p-editor>
+          <p-editor id="description" [(ngModel)]="selectedProduct.description">
+            <ng-template pTemplate="header">
+              <span class="ql-formats">
+                <button type="button" class="ql-bold" aria-label="Bold"></button>
+                <button type="button" class="ql-italic" aria-label="Italic"></button>
+                <button type="button" class="ql-underline" aria-label="Underline"></button>
+              </span>
+            </ng-template>
+          </p-editor>
         </div>
       </div>
 
