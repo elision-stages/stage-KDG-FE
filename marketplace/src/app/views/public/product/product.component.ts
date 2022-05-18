@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import staticRandomInt from "../../../helpers/staticRandomInt";
-import {ProductService} from "../../../service/product.service";
+import {ProductService} from "../../../service/product/product.service";
 import {ConfirmationService, MenuItem} from "primeng/api";
-import {AuthService} from "../../../service/auth.service";
-import {CartService} from "../../../service/cart.service";
+import {AuthService} from "../../../service/user/auth.service";
+import {CartService} from "../../../service/user/cart.service";
 
 @Component({
   selector: 'app-add-product',

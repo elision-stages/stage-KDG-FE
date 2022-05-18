@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, map, Observable, tap} from "rxjs";
+import {BehaviorSubject, Observable, tap} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {environment} from "../../environments/environment";
-import {User} from "../model/User";
+import {environment} from "../../../environments/environment";
+import {User} from "../../model/User";
 import {Router} from "@angular/router";
 
 @Injectable({

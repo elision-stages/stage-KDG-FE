@@ -1,0 +1,9 @@
+<p>order-overview works!</p>
+<div class="card">
+  <app-table-component [items]="orders"
+                       [columns]="columns"
+                       [tableTitle]="'Your orders'"
+                       [loading]="loading" [filter]="filter" [filterKeyword]="filterKeyword"
+                       [viewButton]="viewOrder" [buttons]="['view']"
+  ></app-table-component>
+</div>

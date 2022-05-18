@@ -30,7 +30,7 @@ import { ToastModule } from 'primeng/toast';
 import { VendorComponent } from './views/public/vendor/vendor.component';
 import {ColorPickerModule} from "primeng/colorpicker";
 import {EditorModule} from "primeng/editor";
-import {CategoriesComponent} from "./views/admin/categories/categories.component";
+import {CategoriesComponent} from "./views/user/admin/categories/categories.component";
 import {TreeSelectModule} from "primeng/treeselect";
 import { CustomPasswordInputComponent } from './components/custom-password-input/custom-password-input.component';
 import { NgAisModule } from 'angular-instantsearch';
@@ -38,14 +38,14 @@ import {CardModule} from "primeng/card";
 import { ChunkPipe } from './helpers/chunk.pipe';
 import { StoreModule } from '@ngrx/store';
 import {MessagesModule} from "primeng/messages";
-import {AddProductComponent} from './views/vendor/add-product/add-product.component';
+import {AddProductComponent} from './views/user/vendor/add-product/add-product.component';
 import {DropdownModule} from "primeng/dropdown";
 import {MultiSelectModule} from "primeng/multiselect";
 import {KnobModule} from "primeng/knob";
 import {SelectButtonModule} from "primeng/selectbutton";
 import {SliderModule} from "primeng/slider";
 import {InputNumberModule} from "primeng/inputnumber";
-import { ProductsComponent } from './views/vendor/products/products.component';
+import { ProductsComponent } from './views/user/vendor/products/products.component';
 import {TableModule} from "primeng/table";
 import {ConfirmPopupModule} from "primeng/confirmpopup";
 import {ProductComponent} from "./views/public/product/product.component";
@@ -53,12 +53,14 @@ import {SkeletonModule} from "primeng/skeleton";
 import {GalleriaModule} from "primeng/galleria";
 import {TabViewModule} from "primeng/tabview";
 import {BreadcrumbModule} from "primeng/breadcrumb";
-import { CartComponent } from './views/user/cart/cart.component';
+import { CartComponent } from './views/user/customer/cart/cart.component';
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {CustomInterceptorInterceptor} from "./service/custom-interceptor.interceptor";
-import { EditProductComponent } from './views/vendor/edit-product/edit-product.component';
+import { EditProductComponent } from './views/user/vendor/edit-product/edit-product.component';
 import {FileUploadModule} from "primeng/fileupload";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
+import { OrderOverviewComponent } from './views/user/shared/order-overview/order-overview.component';
+import { TableComponentComponent } from './views/user/vendor/products/table-component/table-component.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +84,9 @@ import {ProgressSpinnerModule} from "primeng/progressspinner";
     EditProductComponent,
     ProductsComponent,
     ProductComponent,
-    CartComponent
+    CartComponent,
+    OrderOverviewComponent,
+    TableComponentComponent
   ],
   imports: [
     HttpClientModule,

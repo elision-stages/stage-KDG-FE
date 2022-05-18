@@ -1,13 +1,13 @@
 import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ProductService} from "../../../service/product.service";
-import {Product} from "../../../model/Product";
-import {CategoryService} from "../../../service/category.service";
-import {Category} from "../../../model/Category";
+import {ProductService} from "../../../../service/product/product.service";
+import {Product} from "../../../../model/Product";
+import {CategoryService} from "../../../../service/product/category.service";
+import {Category} from "../../../../model/Category";
 import {Component} from "@angular/core";
 import {MessageService} from "primeng/api";
-import {Characteristic} from "../../../model/Characteristic";
-import {AttributeValue} from "../../../model/AttributeValue";
-import {ValidationHelper} from "../../../helpers/ValidationHelper";
+import {Characteristic} from "../../../../model/Characteristic";
+import {AttributeValue} from "../../../../model/AttributeValue";
+import {ValidationHelper} from "../../../../helpers/ValidationHelper";
 import {Router} from "@angular/router";
 
 @Component({

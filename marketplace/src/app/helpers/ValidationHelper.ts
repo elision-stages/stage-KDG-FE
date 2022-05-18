@@ -1,4 +1,4 @@
-import {VendorService} from "../service/vendor.service";
+import {VendorService} from "../service/user/vendor.service";
 import {AbstractControl, AsyncValidatorFn, ValidationErrors, ValidatorFn} from "@angular/forms";
 import {catchError, map, Observable, of} from "rxjs";
 

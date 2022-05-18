@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { AppMainComponent } from '../main/app.main.component';
 import { MenuItem, MegaMenuItem } from 'primeng/api';
 import {User} from "../../model/User";
-import {AuthService} from "../../service/auth.service";
-import {CartService} from "../../service/cart.service";
+import {AuthService} from "../../service/user/auth.service";
+import {CartService} from "../../service/user/cart.service";
 
 @Component({
   selector: 'app-topbar',

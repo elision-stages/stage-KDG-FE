@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import getMailHint from "../../../helpers/getMailHint";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {UserService} from "../../../service/user.service";
+import {UserService} from "../../../service/user/user.service";
 import {MessageService} from "primeng/api";
 import {ValidationHelper} from "../../../helpers/ValidationHelper";
 
