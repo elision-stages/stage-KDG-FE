@@ -1,11 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Table} from "primeng/table";
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html'
 })
-export class TableComponent implements OnInit {
+export class TableComponent {
 
   @Input() items: any[];
 
@@ -30,11 +30,6 @@ export class TableComponent implements OnInit {
 
 
   constructor() {
-  }
-
-  ngOnInit(): void {
-    console.log('table', this.items);
-    console.log('table', this.cols);
   }
 
 }
