@@ -1,0 +1,53 @@
+<div>
+  <p-breadcrumb [model]="breadcrumb" [home]="home" styleClass="mb-3"></p-breadcrumb>
+  <div class="card" *ngIf="!loading" >
+    <h4>Order #{{order.id}}</h4>
+    <h5>
+      Ordered at {{order.orderDate | date: 'dd/MM/yyyy'}}
+      <ng-container *ngIf="user.role !== 'customer'">
+        by <a [href]="'mailto:' + order.customerMail" [text]="order.customerName"></a>
+      </ng-container>
+    </h5>
+    <p-table [value]="order.lines" dataKey="id" responsiveLayout="stack"
+             [rows]="10" [showCurrentPageReport]="true"
+             [paginator]="order.lines.length > 10" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
+             [globalFilterFields]="['name']">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th scope="col">Preview</th>
+          <th scope="col">Product</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Price</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-orderLine let-columns="columns">
+        <tr [pSelectableRow]="orderLine.product">
+          <td>
+            <span class="p-column-title">Preview</span>
+            <a [routerLink]="['/product/', orderLine.product.id]">
+              <img [src]="orderLine.product.image" [alt]="orderLine.product.name" width="130" class="shadow-4" />
+            </a>
+          </td>
+          <td>
+            <span class="p-column-title">Name</span>
+            <a [routerLink]="['/product/', orderLine.product.id]" class="font-bold">
+              {{orderLine.product.name}}
+            </a>
+            <br *ngIf="user.role !== 'vendor'">
+            <small *ngIf="user.role !== 'vendor'">This product is sold by <a [routerLink]="['/vendor/', orderLine.product.vendorId]">{{orderLine.product.vendorName}}</a></small>
+          </td>
+          <td>
+            <span class="p-column-title">Amount</span>
+            {{orderLine.quantity}}
+          </td>
+          <td><span class="p-column-title">Price</span>{{orderLine.quantity*orderLine.product.price | currency:'EUR':'symbol'}}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="text-right">
+          {{ order.lines.length }} product{{ order.lines.length == 1 ? '' : 's' }} - {{ order.totalPrice | currency:'EUR':'symbol' }}
+        </div>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

@@ -14,6 +14,7 @@ import {ProductsComponent} from "./views/vendor/products/products.component";
 import {EditProductComponent} from "./views/vendor/edit-product/edit-product.component";
 import {ProductComponent} from "./views/public/product/product.component";
 import {CartComponent} from "./views/user/cart/cart.component";
+import {OrderComponent} from "./views/user/order/order.component";
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import {CartComponent} from "./views/user/cart/cart.component";
           {path: 'addProduct', component: AddProductComponent},
           {path: 'products', component: ProductsComponent, canActivate: [ RouteGuardService ]},
           {path: 'product/:id', component: ProductComponent},
+          {path: 'order/:id', component: OrderComponent},
           {path: 'cart', component: CartComponent, canActivate: [ RouteGuardService ]},
         ]
       },

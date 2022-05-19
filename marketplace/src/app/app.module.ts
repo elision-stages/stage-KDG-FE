@@ -59,6 +59,7 @@ import {CustomInterceptorInterceptor} from "./service/custom-interceptor.interce
 import { EditProductComponent } from './views/vendor/edit-product/edit-product.component';
 import {FileUploadModule} from "primeng/fileupload";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
+import { OrderComponent } from './views/user/order/order.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import {ProgressSpinnerModule} from "primeng/progressspinner";
     EditProductComponent,
     ProductsComponent,
     ProductComponent,
-    CartComponent
+    CartComponent,
+    OrderComponent
   ],
   imports: [
     HttpClientModule,
