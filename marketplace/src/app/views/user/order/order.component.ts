@@ -7,8 +7,7 @@ import {User} from "../../../model/User";
 
 @Component({
   selector: 'app-order',
-  templateUrl: './order.component.html',
-  styleUrls: ['./order.component.scss']
+  templateUrl: './order.component.html'
 })
 export class OrderComponent {
   loading: boolean = true;
