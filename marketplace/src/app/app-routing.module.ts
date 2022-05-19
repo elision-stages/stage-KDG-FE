@@ -15,6 +15,7 @@ import {EditProductComponent} from "./views/user/vendor/edit-product/edit-produc
 import {ProductComponent} from "./views/public/product/product.component";
 import {CartComponent} from "./views/user/customer/cart/cart.component";
 import {OrderOverviewComponent} from "./views/user/shared/order-overview/order-overview.component";
+import {OrderComponent} from "./views/user/order/order.component";
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import {OrderOverviewComponent} from "./views/user/shared/order-overview/order-o
           {path: 'products', component: ProductsComponent, canActivate: [ RouteGuardService ]},
           {path: 'product/:id', component: ProductComponent},
           {path: 'cart', component: CartComponent, canActivate: [ RouteGuardService ]},
-          {path: 'orders', component: OrderOverviewComponent, canActivate: [ RouteGuardService ]}
+          {path: 'orders', component: OrderOverviewComponent, canActivate: [ RouteGuardService ]},
+          {path: 'order/:id', component: OrderComponent}
         ]
       },
       {path:'pages/notfound', component: NotfoundComponent},

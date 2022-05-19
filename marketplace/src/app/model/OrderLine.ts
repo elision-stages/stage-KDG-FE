@@ -1,6 +1,6 @@
-import {Product} from "./Product";
+import {SmallProduct} from "./SmallProduct";
 
 export class OrderLine {
   quantity: number
-  productDto: Product
+  product: SmallProduct
 }

@@ -41,4 +41,9 @@ export class CartService {
     let url = this.cartUrl + 'add';
     return this.handleCart(this.http.post<Cart>(url, { productId: productId, count: amount, add: false }))
   }
+
+  order() {
+    let url = this.cartUrl + 'checkout';
+    return this.http.get<number>(url)
+  }
 }
