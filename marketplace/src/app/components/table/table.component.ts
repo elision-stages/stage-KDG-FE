@@ -2,11 +2,10 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Table} from "primeng/table";
 
 @Component({
-  selector: 'app-table-component',
-  templateUrl: './table-component.component.html',
-  styleUrls: ['./table-component.component.scss']
+  selector: 'app-table',
+  templateUrl: './table.component.html'
 })
-export class TableComponentComponent implements OnInit {
+export class TableComponent implements OnInit {
 
   @Input() items: any[];
 
@@ -23,7 +22,8 @@ export class TableComponentComponent implements OnInit {
   @Input() deleteButton: (item: any, $event: Event) => void;
 
   @Input() filterKeyword: String;
-  @Input() columns: { name: string, value: string }[];
+  @Input() cols: { name: string, value: string }[];
+  @Input() idColumn: string;
   @Input() buttons: string[];
   @Input() tableTitle: string;
   @Input() filterButtonText: string;
@@ -33,7 +33,8 @@ export class TableComponentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.items);
+    console.log('table', this.items);
+    console.log('table', this.cols);
   }
 
 }

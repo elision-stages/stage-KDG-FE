@@ -1,4 +1,4 @@
-<p-table #dt2 [value]="items" dataKey="id" responsiveLayout="stack"
+<p-table #dt2 [value]="items" dataKey="id" responsiveLayout="stack" [columns]="cols"
          [rows]="10" [showCurrentPageReport]="true" [loading]="loading"
          selectionMode="single" (onRowSelect)="viewButton($event.data)"
          [paginator]="items.length > 10"
@@ -20,27 +20,30 @@
       </div>
     </div>
   </ng-template>
-  <ng-template pTemplate="header">
+  <ng-template pTemplate="header" let-columns>
     <tr>
       <th scope="col" *ngFor="let column of columns">{{ column.name}}</th>
       <th scope="col"></th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body">
+  <ng-template pTemplate="body" let-item let-columns="columns">
 
-    <tr [pSelectableRow]="item" *ngFor="let item of items; let i = index" [attr.data-index]="i">
+    <tr [pSelectableRow]="item" >
 
       <td *ngFor="let column of columns">
-
         <ng-container *ngIf="column.value == 'image'">
-        <span  class="p-column-title">{{item[column.name]}}</span>
-        <img *ngIf="column.value == 'image'" [src]="item.image" [alt]="item.name" width="130" class="shadow-4"/>
+          <span class="p-column-title">{{item[column.name]}}</span>
+          <img *ngIf="column.value == 'image'" [src]="item.image" [alt]="item.name" width="130" class="shadow-4"/>
         </ng-container>
+
         <ng-container *ngIf="column.value == 'string'">
-        <span class="p-column-title">{{item[column.name]}}</span>{{item[column.name]}}</ng-container>
+          <span class="p-column-title">{{column.name}}</span>{{item[column.name]}}</ng-container>
 
         <ng-container *ngIf="column.value == 'currency'">
-        <span class="p-column-title">Price</span>{{item[column.name] | currency:'EUR':'symbol'}}</ng-container>
+          <span class="p-column-title">{{column.name}}</span>{{item[column.name] | currency:'EUR':'symbol'}}</ng-container>
+
+        <ng-container *ngIf="column.value == 'date'">
+          <span class="p-column-title">{{column.name}}</span>{{item[column.name] | date:'dd-MM-yyyy'}}</ng-container>
       </td>
 
       <td>

@@ -60,7 +60,7 @@ import { EditProductComponent } from './views/user/vendor/edit-product/edit-prod
 import {FileUploadModule} from "primeng/fileupload";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
 import { OrderOverviewComponent } from './views/user/shared/order-overview/order-overview.component';
-import { TableComponentComponent } from './views/user/vendor/products/table-component/table-component.component';
+import { TableComponent } from './components/table/table.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +86,7 @@ import { TableComponentComponent } from './views/user/vendor/products/table-comp
     ProductComponent,
     CartComponent,
     OrderOverviewComponent,
-    TableComponentComponent
+    TableComponent
   ],
   imports: [
     HttpClientModule,
