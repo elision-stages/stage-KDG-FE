@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {PasswordService} from "../../service/password.service";
+import {PasswordService} from "../../service/user/password.service";
 import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({

@@ -1,15 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {ProductId} from "../../../model/ProductId";
-import {ProductService} from "../../../service/product.service";
-import {Product} from "../../../model/Product";
-import {AttributeValue} from "../../../model/AttributeValue";
-import {Category} from "../../../model/Category";
-import {Characteristic} from "../../../model/Characteristic";
-import {CategoryService} from "../../../service/category.service";
+import {ProductId} from "../../../../model/ProductId";
+import {ProductService} from "../../../../service/product/product.service";
+import {Product} from "../../../../model/Product";
+import {AttributeValue} from "../../../../model/AttributeValue";
+import {Category} from "../../../../model/Category";
+import {Characteristic} from "../../../../model/Characteristic";
+import {CategoryService} from "../../../../service/product/category.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {UploadService} from "../../../service/upload.service";
-import {FormControl, Validators} from "@angular/forms";
-import {ValidationHelper} from "../../../helpers/ValidationHelper";
+import {UploadService} from "../../../../service/product/upload.service";
 
 @Component({
   selector: 'app-edit-product',

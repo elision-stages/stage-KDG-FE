@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators } from "@angular/forms";
 import {Router} from "@angular/router";
 import getMailHint from "../../../helpers/getMailHint";
 import { MessageService } from 'primeng/api';
-import {AuthService} from "../../../service/auth.service";
+import {AuthService} from "../../../service/user/auth.service";
 import {finalize} from "rxjs";
 
 @Component({

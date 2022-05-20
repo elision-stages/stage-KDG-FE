@@ -7,13 +7,14 @@ import {DashboardComponent} from "./views/public/dashboard/dashboard.component";
 import {LoginComponent} from "./views/public/login/login.component";
 import {RegisterComponent} from "./views/public/register/register.component";
 import {VendorComponent} from "./views/public/vendor/vendor.component";
-import {CategoriesComponent} from "./views/admin/categories/categories.component";
+import {CategoriesComponent} from "./views/user/admin/categories/categories.component";
 import {RouteGuardService} from "./service/route-guard.service";
-import {AddProductComponent} from "./views/vendor/add-product/add-product.component";
-import {ProductsComponent} from "./views/vendor/products/products.component";
-import {EditProductComponent} from "./views/vendor/edit-product/edit-product.component";
+import {AddProductComponent} from "./views/user/vendor/add-product/add-product.component";
+import {ProductsComponent} from "./views/user/vendor/products/products.component";
+import {EditProductComponent} from "./views/user/vendor/edit-product/edit-product.component";
 import {ProductComponent} from "./views/public/product/product.component";
-import {CartComponent} from "./views/user/cart/cart.component";
+import {CartComponent} from "./views/user/customer/cart/cart.component";
+import {OrderOverviewComponent} from "./views/user/shared/order-overview/order-overview.component";
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import {CartComponent} from "./views/user/cart/cart.component";
           {path: 'products', component: ProductsComponent, canActivate: [ RouteGuardService ]},
           {path: 'product/:id', component: ProductComponent},
           {path: 'cart', component: CartComponent, canActivate: [ RouteGuardService ]},
+          {path: 'orders', component: OrderOverviewComponent, canActivate: [ RouteGuardService ]}
         ]
       },
       {path:'pages/notfound', component: NotfoundComponent},

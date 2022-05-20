@@ -1,0 +1,71 @@
+<p-table #dt2 [value]="items" dataKey="id" responsiveLayout="stack" [columns]="cols"
+         [rows]="10" [showCurrentPageReport]="true" [loading]="loading"
+         selectionMode="single" (onRowSelect)="viewButton($event.data)"
+         [paginator]="items.length > 10"
+         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} items"
+         [globalFilterFields]="['name']">
+  <ng-template pTemplate="caption">
+    <div class="flex">
+      <div class="flex-none">
+        <h4 class="my-2">{{tableTitle}}</h4>
+      </div>
+      <div class="flex-1 px-5">
+          <span class="p-input-icon-left w-full">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (input)="filter(dt2, $event)" placeholder="Search keyword" class="w-full"/>
+          </span>
+      </div>
+      <div class="flex-none">
+        <button *ngIf="filterButtonText" pButton [label]="filterButtonText" (click)="filterButton()"></button>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th scope="col" *ngFor="let column of columns">{{ column.name}}</th>
+      <th scope="col" *ngIf="buttons.length != 0"></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-item let-columns="columns">
+
+    <tr [pSelectableRow]="item" >
+
+      <td *ngFor="let column of columns">
+        <ng-container *ngIf="column.value == 'image'">
+          <span class="p-column-title">{{item[column.name]}}</span>
+          <img *ngIf="column.value == 'image'" [src]="item.image" [alt]="item.name" width="130" class="shadow-4"/>
+        </ng-container>
+
+        <ng-container *ngIf="column.value == 'currency'">
+          <span class="p-column-title">{{column.name}}</span>{{item[column.name] | currency:'EUR':'symbol'}}</ng-container>
+
+        <ng-container *ngIf="column.value == 'date'">
+          <span class="p-column-title">{{column.name}}</span>{{item[column.name] | date:'dd-MM-yyyy'}}</ng-container>
+
+        <ng-container *ngIf="column.value == 'string' || !(['date','currency','image'].includes(column.value))">
+          <span class="p-column-title">{{column.name}}</span>{{item[column.name]}}</ng-container>
+      </td>
+
+      <td *ngIf="buttons.length != 0">
+        <span class="p-column-title">Actions</span>
+        <button *ngIf="buttons.includes('view')" pButton pRipple icon="pi pi-eye"
+                class="p-button-rounded p-button-success mr-2"
+                (click)="viewButton(item)"></button>
+        <button *ngIf="buttons.includes('edit')" pButton pRipple icon="pi pi-pencil"
+                class="p-button-rounded p-button-warning mr-2"
+                (click)="editButton(item)"></button>
+        <button *ngIf="buttons.includes('delete')" pButton pRipple icon="pi pi-trash"
+                class="p-button-rounded p-button-danger"
+                (click)="deleteButton(item, $event)"></button>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="6" style="text-align: center">
+        <p-message severity="warn"
+                   [text]="filterKeyword ? 'No items have been found for ' + filterKeyword : 'No items found'"></p-message>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

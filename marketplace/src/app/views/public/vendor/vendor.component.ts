@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import getMailHint from 'src/app/helpers/getMailHint';
-import {PasswordService} from "../../../service/password.service";
 import {Router} from "@angular/router";
 import {MessageService} from "primeng/api";
-import {VendorService} from "../../../service/vendor.service";
+import {VendorService} from "../../../service/user/vendor.service";
 import {ValidationHelper} from "../../../helpers/ValidationHelper";
 
 @Component({

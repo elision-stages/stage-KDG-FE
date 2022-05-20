@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {MessageService, TreeNode} from "primeng/api";
-import {CategoryService} from "../../../service/category.service";
-import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ValidationHelper} from "../../../helpers/ValidationHelper";
+import {CategoryService} from "../../../../service/product/category.service";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {ValidationHelper} from "../../../../helpers/ValidationHelper";
 
 @Component({
   selector: 'app-categories',
@@ -48,7 +48,7 @@ export class CategoriesComponent implements OnInit {
         this.addForm.reset()
         this.refresh()
       },
-      error: (error) => {
+      error: (_error) => {
         this.messageService.add({severity:'error', summary: 'Error', detail: 'Unknown error'});
       }
     }).add(() => {

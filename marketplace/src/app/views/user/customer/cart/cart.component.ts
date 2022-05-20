@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Cart} from "../../../model/Cart";
+import {Cart} from "../../../../model/Cart";
 import {Router} from "@angular/router";
-import {CartService} from "../../../service/cart.service";
-import {OrderLine} from "../../../model/OrderLine";
+import {CartService} from "../../../../service/user/cart.service";
+import {OrderLine} from "../../../../model/OrderLine";
 
 @Component({
   selector: 'app-cart',

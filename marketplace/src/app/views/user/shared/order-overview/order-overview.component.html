@@ -1,0 +1,9 @@
+<p>order-overview works!</p>
+<div class="card">
+  <app-table [items]="orders"
+             [cols]="columns"
+             [tableTitle]="'Your orders'"
+             [loading]="loading" [filter]="filter" [filterKeyword]="filterKeyword"
+             [viewButton]="viewOrder" [buttons]="['view']"
+  ></app-table>
+</div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ProductService} from "../../../service/product.service";
-import {Product} from "../../../model/Product";
+import {ProductService} from "../../../../service/product/product.service";
+import {Product} from "../../../../model/Product";
 import {Table} from "primeng/table";
 import {ConfirmationService} from 'primeng/api';
 import {Router} from "@angular/router";
