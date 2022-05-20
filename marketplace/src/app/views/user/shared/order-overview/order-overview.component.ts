@@ -34,17 +34,17 @@ export class OrderOverviewComponent implements OnInit {
   }
 
   viewOrder(order: SmallOrder) {
-    this.router.navigate(['/product', order.orderNumber])
+    this.router.navigate(['/order', order.orderNumber])
   }
 
   private selectColumns() {
     this.columns.push(
-      {name: 'orderDate', value: 'date'},
-      {name: 'orderNumber', value: 'string'})
-    if (this.authService.userValue.role !== 'customer') this.columns.push({name: 'customerName', value: 'string'})
+      {name: 'orderDate', value: 'date', text: 'Date'},
+      {name: 'orderNumber', value: 'string', text: 'Order number'})
+    if (this.authService.userValue.role !== 'customer') this.columns.push({name: 'customerName', value: 'string', text: 'Customer'})
 
     this.columns.push(
-      {name: 'numberProducts', value: 'string'},
-      {name: 'totalPrice', value: 'currency'})
+      {name: 'numberProducts', value: 'string', text: '# of products'},
+      {name: 'totalPrice', value: 'currency', text: 'Price'})
   }
 }

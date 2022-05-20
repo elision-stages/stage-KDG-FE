@@ -3,7 +3,7 @@
          selectionMode="single" (onRowSelect)="viewButton($event.data)"
          [paginator]="items.length > 10"
          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} items"
-         [globalFilterFields]="['name']">
+         [globalFilterFields]="globalFilterFields">
   <ng-template pTemplate="caption">
     <div class="flex">
       <div class="flex-none">
@@ -22,7 +22,7 @@
   </ng-template>
   <ng-template pTemplate="header" let-columns>
     <tr>
-      <th scope="col" *ngFor="let column of columns">{{ column.name}}</th>
+      <th scope="col" *ngFor="let column of columns">{{ column.text ?? column.name }}</th>
       <th scope="col" *ngIf="buttons.length != 0"></th>
     </tr>
   </ng-template>
@@ -32,18 +32,18 @@
 
       <td *ngFor="let column of columns">
         <ng-container *ngIf="column.value == 'image'">
-          <span class="p-column-title">{{item[column.name]}}</span>
+          <span class="p-column-title">{{ column.text ?? column.name }}</span>
           <img *ngIf="column.value == 'image'" [src]="item.image" [alt]="item.name" width="130" class="shadow-4"/>
         </ng-container>
 
         <ng-container *ngIf="column.value == 'currency'">
-          <span class="p-column-title">{{column.name}}</span>{{item[column.name] | currency:'EUR':'symbol'}}</ng-container>
+          <span class="p-column-title">{{ column.text ?? column.name }}</span>{{item[column.name] | currency:'EUR':'symbol'}}</ng-container>
 
         <ng-container *ngIf="column.value == 'date'">
-          <span class="p-column-title">{{column.name}}</span>{{item[column.name] | date:'dd-MM-yyyy'}}</ng-container>
+          <span class="p-column-title">{{ column.text ?? column.name }}</span>{{item[column.name] | date:'dd-MM-yyyy'}}</ng-container>
 
         <ng-container *ngIf="column.value == 'string' || !(['date','currency','image'].includes(column.value))">
-          <span class="p-column-title">{{column.name}}</span>{{item[column.name]}}</ng-container>
+          <span class="p-column-title">{{ column.text ?? column.name }}</span>{{item[column.name]}}</ng-container>
       </td>
 
       <td *ngIf="buttons.length != 0">

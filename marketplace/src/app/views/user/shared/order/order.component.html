@@ -1,6 +1,6 @@
 <div>
   <p-breadcrumb [model]="breadcrumb" [home]="home" styleClass="mb-3"></p-breadcrumb>
-  <div class="card" *ngIf="!loading" >
+  <div class="card" *ngIf="!loading">
     <h4>Order #{{order.id}}</h4>
     <h5>
       Ordered at {{order.orderDate | date: 'dd/MM/yyyy'}}
@@ -10,8 +10,7 @@
     </h5>
     <p-table [value]="order.lines" dataKey="id" responsiveLayout="stack"
              [rows]="10" [showCurrentPageReport]="true"
-             [paginator]="order.lines.length > 10" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
-             [globalFilterFields]="['name']">
+             [paginator]="order.lines.length > 10" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products">
       <ng-template pTemplate="header" let-columns>
         <tr>
           <th scope="col">Preview</th>

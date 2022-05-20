@@ -20,8 +20,7 @@ export class CartService {
   }
 
   update() {
-    let url = this.cartUrl + 'get';
-    this.handleCart(this.http.get<Cart>(url)).subscribe()
+    this.handleCart(this.http.get<Cart>(this.cartUrl)).subscribe()
   }
 
   handleCart(request: Observable<Cart>) {

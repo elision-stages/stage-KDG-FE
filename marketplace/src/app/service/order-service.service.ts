@@ -14,6 +14,6 @@ export class OrderServiceService {
   }
 
   getUserOrders(): Observable<SmallOrder[]>{
-    return this.http.get<SmallOrder[]>(this.orderUrl + 'myOrders')
+    return this.http.get<SmallOrder[]>(this.orderUrl + 'order')
   }
 }

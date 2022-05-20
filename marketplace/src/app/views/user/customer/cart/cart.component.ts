@@ -25,7 +25,8 @@ export class CartComponent implements OnInit {
   placeOrder() {
     this.cartService.order().subscribe({
       next: orderId => {
-        console.log(orderId)
+        this.cartService.update()
+        this.router.navigate(['order', orderId])
       }
     })
   }

@@ -132,60 +132,30 @@ export class AppTopBarComponent {
   }
 
   setItems() {
-    const products = {
-      label: 'Products',
-      icon: 'pi pi-shopping-bag',
-      routerLink: '/products'
-    };
-    const orders = {
-      label: 'Orders',
-      icon: 'pi pi-money-bill',
-      routerLink: '/orders'
-    };
-    const settings = {
-      label: 'Settings',
-      icon: 'pi pi-cog',
-      routerLink: '/settings'
-    };
-    const logOut = {
-      label: 'Log out',
-      icon: 'pi pi-sign-out',
-      command: this.authService.logout.bind(this.authService)
-    };
-
-    this.items = []
+    this.items = [{
+      label: 'Hi, ' + this.user?.firstName,
+      items: [{
+        label: 'Orders',
+        icon: 'pi pi-money-bill',
+        routerLink: '/orders'
+      }, {
+        label: 'Log out',
+        icon: 'pi pi-sign-out',
+        command: this.authService.logout.bind(this.authService)
+      }]
+    }]
     if (this.user?.role == 'vendor') {
-
-      this.items.push({
-        label: 'Hi, ' + this.user?.firstName,
-        items: [
-          products,
-          orders,
-          settings,
-          logOut
-        ]
+      this.items[0].items.unshift({
+        label: 'Products',
+        icon: 'pi pi-shopping-bag',
+        routerLink: '/products'
       })
     }
     if (this.user?.role == 'admin') {
-      this.items.push({
-        label: 'Admin',
-        items: [{
-          label: 'Categories',
-          icon: 'pi pi-sitemap',
-          routerLink: '/categories'
-        }
-        ]
-      })
-    }
-
-    if (this.user?.role == 'customer') {
-      this.items.push({
-        label: 'Hi, ' + this.user?.firstName,
-        items: [
-          orders,
-          settings,
-          logOut
-        ]
+      this.items[0].items.unshift({
+        label: 'Categories',
+        icon: 'pi pi-sitemap',
+        routerLink: '/categories'
       })
     }
   }
