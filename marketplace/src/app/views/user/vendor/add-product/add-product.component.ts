@@ -91,7 +91,6 @@ export class AddProductComponent {
     for (const pair of this.outProduct.attributes) {
       if (pair.attributeName === characteristic.name) pair.value = value
     }
-    console.log(this.outProduct);
   }
 
   setDescription(event: any) {
@@ -103,9 +102,11 @@ export class AddProductComponent {
   }
 
   addImage($event: any) {
-    $event.preventDefault()
-    this.images.push(new FormControl($event.target.value, [Validators.required, ValidationHelper.httpsValidator]));
-    $event.target.value = ''
+    if($event.target.value) {
+      $event.preventDefault()
+      this.images.push(new FormControl($event.target.value, [Validators.required, ValidationHelper.httpsValidator]));
+      $event.target.value = ''
+    }
     return false
   }
 

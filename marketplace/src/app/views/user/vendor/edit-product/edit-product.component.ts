@@ -72,9 +72,11 @@ export class EditProductComponent implements OnInit {
   }
 
   addImage($event: any) {
-    $event.preventDefault()
-    this.selectedProduct.images.push($event.target.value);
-    $event.target.value = ''
+    if($event.target.value) {
+      $event.preventDefault()
+      this.selectedProduct.images.push($event.target.value);
+      $event.target.value = ''
+    }
     return false
   }
 
