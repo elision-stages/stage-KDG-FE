@@ -1,3 +1,4 @@
+<p-breadcrumb [model]="[{ routerLink: '/products', label: 'Your products' }, { label: 'Add product' }]" [home]="{icon: 'pi pi-home', routerLink: '/'}" styleClass="mb-3"></p-breadcrumb>
 <form [formGroup]="addProduct" (ngSubmit)="onAdd()">
   <div class="grid">
     <div class="col-12 lg:col-6">
