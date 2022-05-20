@@ -21,15 +21,11 @@ export class TableComponent {
 
   @Input() deleteButton: (item: any, $event: Event) => void;
 
-  @Input() filterKeyword: String;
+  @Input() filterKeyword: string;
   @Input() cols: { name: string, value: string }[];
-  @Input() idColumn: string;
   @Input() buttons: string[];
   @Input() tableTitle: string;
   @Input() filterButtonText: string;
 
-
-  constructor() {
-  }
 
 }

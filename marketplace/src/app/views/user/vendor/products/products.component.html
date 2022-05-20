@@ -2,7 +2,7 @@
 <div class="card">
   <app-table [items]="products"
              [cols]="[{name:'Image',value: 'image'},{name:'id',value: 'string'},{name: 'name',value: 'string'},{name:'category',value: 'string'},{name:'price',value: 'currency'}]"
-             [idColumn]="'id'" [tableTitle]="'Your products'"
+             [tableTitle]="'Your products'"
              [loading]="loading" [filter]="filter" [filterKeyword]="filterKeyword"
              [filterButtonText]="'Add product'"
              [filterButton]="addProduct" [editButton]="editProduct" [deleteButton]="deleteProduct"
