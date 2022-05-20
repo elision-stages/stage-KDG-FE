@@ -20,8 +20,7 @@ export class CartService {
   }
 
   update() {
-    let url = this.cartUrl + 'get';
-    this.handleCart(this.http.get<Cart>(url)).subscribe()
+    this.handleCart(this.http.get<Cart>(this.cartUrl)).subscribe()
   }
 
   handleCart(request: Observable<Cart>) {
@@ -40,5 +39,10 @@ export class CartService {
   updateCart(productId: number, amount = 1): Observable<Cart> {
     let url = this.cartUrl + 'add';
     return this.handleCart(this.http.post<Cart>(url, { productId: productId, count: amount, add: false }))
+  }
+
+  order() {
+    let url = this.cartUrl + 'checkout';
+    return this.http.post<number>(url, {})
   }
 }

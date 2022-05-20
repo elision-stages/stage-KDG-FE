@@ -17,23 +17,23 @@
       <tr [pSelectableRow]="orderline">
         <td>
           <span class="p-column-title">Preview</span>
-          <a [routerLink]="['/product/', orderline.productDto.id]">
-            <img [src]="orderline.productDto.images[0]" [alt]="orderline.productDto.title" width="130" class="shadow-4" />
+          <a [routerLink]="['/product/', orderline.product.id]">
+            <img [src]="orderline.product.image" [alt]="orderline.product.title" width="130" class="shadow-4" />
           </a>
         </td>
         <td>
           <span class="p-column-title">Name</span>
-          <a [routerLink]="['/product/', orderline.productDto.id]" class="font-bold">
-            {{orderline.productDto.title}}
+          <a [routerLink]="['/product/', orderline.product.id]" class="font-bold">
+            {{orderline.product.name}}
           </a>
           <br>
-          <small>This product is sold by <a [routerLink]="['/vendor/', orderline.productDto.vendorId]">{{orderline.productDto.vendorName}}</a></small>
+          <small>This product is sold by <a [routerLink]="['/vendor/', orderline.product.vendorId]">{{orderline.product.vendorName}}</a></small>
         </td>
         <td>
           <span class="p-column-title">Amount</span>
           <p-inputNumber [(ngModel)]="orderline.quantity" mode="decimal" [showButtons]="true" inputId="minmax-buttons" [min]="0" [max]="100" (onInput)="updateCart(orderline, $event.value)"></p-inputNumber>
         </td>
-        <td><span class="p-column-title">Price</span>{{orderline.quantity*orderline.productDto.price | currency:'EUR':'symbol'}}</td>
+        <td><span class="p-column-title">Price</span>{{orderline.quantity*orderline.product.price | currency:'EUR':'symbol'}}</td>
         <td>
           <span class="p-column-title">Actions</span>
           <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="updateCart(orderline, 0)"></button>
@@ -42,11 +42,11 @@
     </ng-template>
     <ng-template pTemplate="summary">
       <div class="grid">
-        <div class="col-12 lg:col-offset-9 lg:col-3 md:col-offset-8 md:col-4 sm:col-offset-6 md:col-6 text-center">
+        <div class="col-12 lg:col-offset-9 lg:col-3 md:col-offset-8 md:col-4 sm:col-offset-6 sm:col-6 text-center">
           {{ cart.orderLines.length }} product{{ cart.orderLines.length == 1 ? '' : 's' }} - {{ cart.totalPrice | currency:'EUR':'symbol' }}
         </div>
-        <div class="col-12 lg:col-offset-9 lg:col-3 md:col-offset-8 md:col-4 sm:col-offset-6 md:col-6">
-          <p-button icon="pi pi-check" label="Place order" styleClass="w-full"></p-button>
+        <div class="col-12 lg:col-offset-9 lg:col-3 md:col-offset-8 md:col-4 sm:col-offset-6 sm:col-6">
+          <p-button icon="pi pi-check" label="Place order" styleClass="w-full" (click)="placeOrder()"></p-button>
         </div>
       </div>
     </ng-template>

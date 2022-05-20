@@ -15,11 +15,19 @@ export class CartComponent implements OnInit {
   constructor(private router: Router, private cartService: CartService) { }
 
   ngOnInit() {
-    this.cartService.cart.subscribe(x => this.cart = x);
+    this.cartService.cart.subscribe(x => { this.cart = x; console.log(x) });
   }
 
   updateCart(orderline: OrderLine, quantity: any) {
-    console.log(orderline, quantity)
-    this.cartService.updateCart(orderline.productDto.id, quantity).subscribe()
+    this.cartService.updateCart(orderline.product.id, quantity).subscribe()
+  }
+
+  placeOrder() {
+    this.cartService.order().subscribe({
+      next: orderId => {
+        this.cartService.update()
+        this.router.navigate(['order', orderId])
+      }
+    })
   }
 }

@@ -1,11 +1,15 @@
 <p-confirmPopup></p-confirmPopup>
 <div class="card">
   <app-table [items]="products"
-             [cols]="[{name:'Image',value: 'image'},{name:'id',value: 'string'},{name: 'name',value: 'string'},{name:'category',value: 'string'},{name:'price',value: 'currency'}]"
+             [cols]="[{name:'image', value: 'image', text: 'Preview'},
+             {name:'id',value: 'string', text: '#'},
+             {name: 'name',value: 'string', text: 'Name'},
+             {name:'category',value: 'string', text: 'Category'},
+             {name:'price',value: 'currency', text: 'Price'}]"
              [tableTitle]="'Your products'"
-             [loading]="loading" [filter]="filter" [filterKeyword]="filterKeyword"
+             [loading]="loading" [filter]="filter" [filterKeyword]="filterKeyword" [globalFilterFields]="['name', 'category']"
              [filterButtonText]="'Add product'"
-             [filterButton]="addProduct" [editButton]="editProduct" [deleteButton]="deleteProduct"
-             [viewButton]="viewProduct" [buttons]="['view', 'edit', 'delete']"
+             [filterButton]="addProduct.bind(this)" [editButton]="editProduct.bind(this)" [deleteButton]="deleteProduct.bind(this)"
+             [viewButton]="viewProduct.bind(this)" [buttons]="['view', 'edit', 'delete']"
   ></app-table>
 </div>

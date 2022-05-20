@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { AppMainComponent } from '../main/app.main.component';
-import { MenuItem, MegaMenuItem } from 'primeng/api';
+import {Component} from '@angular/core';
+import {AppMainComponent} from '../main/app.main.component';
+import {MenuItem, MegaMenuItem} from 'primeng/api';
 import {User} from "../../model/User";
 import {AuthService} from "../../service/user/auth.service";
 import {CartService} from "../../service/user/cart.service";
@@ -130,41 +130,33 @@ export class AppTopBarComponent {
       },
     ];
   }
+
   setItems() {
-    this.items = []
-    if(this.user?.role == 'vendor') {
-      this.items.push({
-        label: 'Hi, ' + this.user?.firstName,
-        items: [{
-          label: 'Products',
-          icon: 'pi pi-shopping-bag',
-          routerLink: '/products'
-        }
-        ]})
-    }
-    if(this.user?.role == 'admin') {
-      this.items.push({
-        label: 'Admin',
-        items: [{
-          label: 'Categories',
-          icon: 'pi pi-sitemap',
-          routerLink: '/categories'
-        }
-        ]})
-    }
-    this.items.push({
+    this.items = [{
       label: 'Hi, ' + this.user?.firstName,
-      items: [
-        {
-          label: 'Settings',
-          icon: 'pi pi-cog',
-          routerLink: '/settings'
-        },
-        {
-          label: 'Log out',
-          icon: 'pi pi-sign-out',
-          command: this.authService.logout.bind(this.authService)
-        }
-      ]})
+      items: [{
+        label: 'Orders',
+        icon: 'pi pi-money-bill',
+        routerLink: '/orders'
+      }, {
+        label: 'Log out',
+        icon: 'pi pi-sign-out',
+        command: this.authService.logout.bind(this.authService)
+      }]
+    }]
+    if (this.user?.role == 'vendor') {
+      this.items[0].items.unshift({
+        label: 'Products',
+        icon: 'pi pi-shopping-bag',
+        routerLink: '/products'
+      })
+    }
+    if (this.user?.role == 'admin') {
+      this.items[0].items.unshift({
+        label: 'Categories',
+        icon: 'pi pi-sitemap',
+        routerLink: '/categories'
+      })
+    }
   }
 }
