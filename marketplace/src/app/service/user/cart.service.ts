@@ -44,6 +44,6 @@ export class CartService {
 
   order() {
     let url = this.cartUrl + 'checkout';
-    return this.http.get<number>(url)
+    return this.http.post<number>(url, {})
   }
 }

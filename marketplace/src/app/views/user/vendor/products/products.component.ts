@@ -14,7 +14,7 @@ import {Router} from "@angular/router";
 export class ProductsComponent implements OnInit {
 
   products: Product[] = [];
-  filterKeyword: String = '';
+  filterKeyword: string = '';
 
   loading: boolean = true;
 

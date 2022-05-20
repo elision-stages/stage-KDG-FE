@@ -61,7 +61,7 @@ import {FileUploadModule} from "primeng/fileupload";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
 import { OrderOverviewComponent } from './views/user/shared/order-overview/order-overview.component';
 import { TableComponent } from './components/table/table.component';
-import { OrderComponent } from './views/user/order/order.component';
+import { OrderComponent } from './views/user/shared/order/order.component';
 
 @NgModule({
   declarations: [

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {AuthService} from "../../../service/auth.service";
 import {MenuItem} from "primeng/api";
-import {OrderService} from "../../../service/order.service";
-import {User} from "../../../model/User";
+import {AuthService} from "../../../../service/user/auth.service";
+import {OrderService} from "../../../../service/order.service";
+import {User} from "../../../../model/User";
 
 @Component({
   selector: 'app-order',

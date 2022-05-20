@@ -1,16 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {Order} from "../../../../model/Order";
 import {Table} from "primeng/table";
 import {Router} from "@angular/router";
 import {OrderServiceService} from "../../../../service/order-service.service";
 import {AuthService} from "../../../../service/user/auth.service";
+import {SmallOrder} from "../../../../model/SmallOrder";
 
 @Component({
   selector: 'app-order-overview',
   templateUrl: './order-overview.component.html'
 })
 export class OrderOverviewComponent implements OnInit {
-  orders: Order[] = [];
+  orders: SmallOrder[] = [];
   columns = []
 
   loading: boolean;
@@ -22,7 +22,7 @@ export class OrderOverviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
-    this.orderService.getVendorOrders().subscribe(orders => {
+    this.orderService.getUserOrders().subscribe(orders => {
       this.orders = orders;
       this.loading = false;
     })
@@ -33,7 +33,7 @@ export class OrderOverviewComponent implements OnInit {
     table.filterGlobal(this.filterKeyword, 'contains')
   }
 
-  viewOrder(order: Order) {
+  viewOrder(order: SmallOrder) {
     this.router.navigate(['/product', order.orderNumber])
   }
 

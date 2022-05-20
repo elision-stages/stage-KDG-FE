@@ -15,7 +15,7 @@ import {EditProductComponent} from "./views/user/vendor/edit-product/edit-produc
 import {ProductComponent} from "./views/public/product/product.component";
 import {CartComponent} from "./views/user/customer/cart/cart.component";
 import {OrderOverviewComponent} from "./views/user/shared/order-overview/order-overview.component";
-import {OrderComponent} from "./views/user/order/order.component";
+import {OrderComponent} from "./views/user/shared/order/order.component";
 
 @NgModule({
   imports: [

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { AppMainComponent } from '../main/app.main.component';
-import { MenuItem, MegaMenuItem } from 'primeng/api';
+import {Component} from '@angular/core';
+import {AppMainComponent} from '../main/app.main.component';
+import {MenuItem, MegaMenuItem} from 'primeng/api';
 import {User} from "../../model/User";
 import {AuthService} from "../../service/user/auth.service";
 import {CartService} from "../../service/user/cart.service";
@@ -130,19 +130,43 @@ export class AppTopBarComponent {
       },
     ];
   }
+
   setItems() {
+    const products = {
+      label: 'Products',
+      icon: 'pi pi-shopping-bag',
+      routerLink: '/products'
+    };
+    const orders = {
+      label: 'Orders',
+      icon: 'pi pi-money-bill',
+      routerLink: '/orders'
+    };
+    const settings = {
+      label: 'Settings',
+      icon: 'pi pi-cog',
+      routerLink: '/settings'
+    };
+    const logOut = {
+      label: 'Log out',
+      icon: 'pi pi-sign-out',
+      command: this.authService.logout.bind(this.authService)
+    };
+
     this.items = []
-    if(this.user?.role == 'vendor') {
+    if (this.user?.role == 'vendor') {
+
       this.items.push({
         label: 'Hi, ' + this.user?.firstName,
-        items: [{
-          label: 'Products',
-          icon: 'pi pi-shopping-bag',
-          routerLink: '/products'
-        }
-        ]})
+        items: [
+          products,
+          orders,
+          settings,
+          logOut
+        ]
+      })
     }
-    if(this.user?.role == 'admin') {
+    if (this.user?.role == 'admin') {
       this.items.push({
         label: 'Admin',
         items: [{
@@ -150,21 +174,19 @@ export class AppTopBarComponent {
           icon: 'pi pi-sitemap',
           routerLink: '/categories'
         }
-        ]})
+        ]
+      })
     }
-    this.items.push({
-      label: 'Hi, ' + this.user?.firstName,
-      items: [
-        {
-          label: 'Settings',
-          icon: 'pi pi-cog',
-          routerLink: '/settings'
-        },
-        {
-          label: 'Log out',
-          icon: 'pi pi-sign-out',
-          command: this.authService.logout.bind(this.authService)
-        }
-      ]})
+
+    if (this.user?.role == 'customer') {
+      this.items.push({
+        label: 'Hi, ' + this.user?.firstName,
+        items: [
+          orders,
+          settings,
+          logOut
+        ]
+      })
+    }
   }
 }
