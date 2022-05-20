@@ -3,10 +3,12 @@ import {Cart} from "../../../../model/Cart";
 import {Router} from "@angular/router";
 import {CartService} from "../../../../service/user/cart.service";
 import {OrderLine} from "../../../../model/OrderLine";
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-cart',
-  templateUrl: './cart.component.html'
+  templateUrl: './cart.component.html',
+  providers: [MessageService]
 })
 export class CartComponent implements OnInit {
 

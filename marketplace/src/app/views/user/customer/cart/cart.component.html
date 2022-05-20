@@ -1,6 +1,7 @@
+<p-breadcrumb [model]="[{ icon: 'pi pi-shopping-cart', label: 'Shopping cart' }]" [home]="{icon: 'pi pi-home', routerLink: '/'}" styleClass="mb-3"></p-breadcrumb>
 <div class="card">
   <h4>Shopping cart</h4>
-  <p-table *ngIf="cart" [value]="cart.orderLines" dataKey="id" responsiveLayout="stack"
+  <p-table *ngIf="cart && cart.orderLines.length" [value]="cart.orderLines" dataKey="id" responsiveLayout="stack"
            [rows]="10" [showCurrentPageReport]="true"
            [paginator]="cart.orderLines.length > 10" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
            [globalFilterFields]="['name']">
@@ -50,12 +51,6 @@
         </div>
       </div>
     </ng-template>
-    <ng-template pTemplate="emptymessage">
-      <tr>
-        <td colspan="6" style="text-align: center">
-          <p-message severity="info" text="You have no products added to your shopping cart yet. Shop them now!"></p-message>
-        </td>
-      </tr>
-    </ng-template>
   </p-table>
+  <p-messages *ngIf="!cart || !cart.orderLines.length" [value]="[{severity: 'info', closable: false, summary: 'You have no products added to your shopping cart yet. Shop them now!'}]" [enableService]="false"></p-messages>
 </div>
