@@ -23,7 +23,7 @@
   <ng-template pTemplate="header" let-columns>
     <tr>
       <th scope="col" *ngFor="let column of columns">{{ column.name}}</th>
-      <th scope="col"></th>
+      <th scope="col" *ngIf="buttons.length != 0"></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-item let-columns="columns">
@@ -46,7 +46,7 @@
           <span class="p-column-title">{{column.name}}</span>{{item[column.name]}}</ng-container>
       </td>
 
-      <td>
+      <td *ngIf="buttons.length != 0">
         <span class="p-column-title">Actions</span>
         <button *ngIf="buttons.includes('view')" pButton pRipple icon="pi pi-eye"
                 class="p-button-rounded p-button-success mr-2"
