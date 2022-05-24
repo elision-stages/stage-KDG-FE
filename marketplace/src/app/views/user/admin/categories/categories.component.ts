@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MessageService, TreeNode} from "primeng/api";
 import {CategoryService} from "../../../../service/product/category.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ValidationHelper} from "../../../../helpers/ValidationHelper";
 
 @Component({
@@ -12,7 +12,8 @@ import {ValidationHelper} from "../../../../helpers/ValidationHelper";
 export class CategoriesComponent implements OnInit {
   addForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(2)]),
-    parentId: new FormControl('0', [Validators.required])
+    parentId: new FormControl('0', [Validators.required]),
+    characteristics: new FormArray([])
   });
   readableErrors = ValidationHelper.readableErrors;
   isLoading: boolean = false
