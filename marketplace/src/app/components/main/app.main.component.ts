@@ -5,10 +5,11 @@ import { ConfigService } from '../../service/app.config.service';
 import { AppConfig } from '../../api/appconfig';
 import { Subscription } from 'rxjs';
 import algoliasearch from 'algoliasearch/lite';
+import {environment} from "../../../environments/environment";
 
 const searchClient = algoliasearch(
-  'EL070LM1BO',
-  'a3a4d79bb7692be48ae627e98245c082'
+  environment.algoliaAppId,
+  environment.algoliaApiKey
 );
 
 @Component({
@@ -62,7 +63,7 @@ export class AppMainComponent implements AfterViewInit, OnDestroy, OnInit {
   subscription: Subscription;
 
   algoliaConfig = {
-    indexName: 'l1_kdg_stage_marketplace',
+    indexName: environment.algoliaIndexName,
     searchClient
   };
 

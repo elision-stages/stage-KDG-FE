@@ -19,8 +19,8 @@ export class VendorComponent {
   success: boolean = false
 
   vendorForm = new FormGroup({
-    vat: new FormControl('', [Validators.required, Validators.minLength(10)], [ValidationHelper.VATValidator(this.vendorService)]),
-    business: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    vatNumber: new FormControl('', [Validators.required, Validators.minLength(10)], [ValidationHelper.VATValidator(this.vendorService)]),
+    businessName: new FormControl('', [Validators.required, Validators.minLength(2)]),
     phoneNumber: new FormControl('', [Validators.required, Validators.minLength(9), ValidationHelper.phoneValidator]),
     logo: new FormControl('', [Validators.required]),
     logoImage: new FormControl('', [Validators.required]),
@@ -38,11 +38,11 @@ export class VendorComponent {
   }
 
   checkVat() {
-    const vat = this.vendorForm.get('vat').value
-    if(vat.length < 10 && !this.vendorForm.get('business').value.length) return;
+    const vat = this.vendorForm.get('vatNumber').value
+    if(vat.length < 10 && !this.vendorForm.get('businessName').value.length) return;
     this.vendorService.checkVat(vat).subscribe({
       next: (result) => {
-        this.vendorForm.get('business').setValue(result.name)
+        this.vendorForm.get('businessName').setValue(result.name)
       }
     })
   }
@@ -74,11 +74,12 @@ export class VendorComponent {
       next: (_result) => {
         this.success = true
       },
-      error: (error) => {
-        if(error.status === 409) {
+      error: (result) => {
+        console.log(result,1)
+        if(result.status === 409) {
           this.messageService.add({severity:'error', summary: 'Error', detail: 'A vendor with this e-mail address exists already'});
         }else{
-          this.messageService.add({severity:'error', summary: 'Error', detail: 'Unknown error'});
+          this.messageService.add({severity:'error', summary: 'Error', detail: Object.values(result.error)[0].toString()});
         }
       }
     }).add(() => {
