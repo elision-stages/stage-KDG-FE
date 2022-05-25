@@ -62,6 +62,7 @@ import {ProgressSpinnerModule} from "primeng/progressspinner";
 import { OrderOverviewComponent } from './views/user/shared/order-overview/order-overview.component';
 import { TableComponent } from './components/table/table.component';
 import { OrderComponent } from './views/user/shared/order/order.component';
+import { CreateCategoryComponent } from './views/user/admin/create-category/create-category.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { OrderComponent } from './views/user/shared/order/order.component';
     CartComponent,
     OrderOverviewComponent,
     TableComponent,
-    OrderComponent
+    OrderComponent,
+    CreateCategoryComponent
   ],
   imports: [
     HttpClientModule,
