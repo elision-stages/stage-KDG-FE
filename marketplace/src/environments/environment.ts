@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
-  api: 'http://localhost:8080/'
+  api: 'http://localhost:8080/',
+  algoliaAppId: 'EL070LM1BO',
+  algoliaApiKey: 'a3a4d79bb7692be48ae627e98245c082',
+  algoliaIndexName: 'l1_kdg_stage_marketplace'
 };
 
 /*

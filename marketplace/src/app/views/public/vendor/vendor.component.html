@@ -15,16 +15,16 @@
             <label id="logoPreview" for="logo" class="mt-1 image-upload-label p-inputtext pb-0"></label>
             <input id="logo" type="file" placeholder="Logo" pInputText class="w-full mt-2" formControlName="logo"
                    accept="image/png,image/jpeg,image/gif" (change)="updatePreview($event)">
-            <small class="p-error" *ngIf="vendorForm.controls['logo'].invalid && vendorForm.controls['business'].touched">{{readableErrors(vendorForm.controls['logo'].errors).join('\n')}}</small>
+            <small class="p-error" *ngIf="vendorForm.controls['logo'].invalid && vendorForm.controls['businessName'].touched">{{readableErrors(vendorForm.controls['logo'].errors).join('\n')}}</small>
           </div>
           <div class="col-9">
-            <label for="vat" class="block text-900 text-xl font-medium">Business VAT</label>
-            <input id="vat" type="text" placeholder="Business VAT" pInputText class="w-full mt-2" formControlName="vat" autofocus (keyup)="checkVat()">
-            <small class="mt-1 block p-error" *ngIf="vendorForm.controls['vat'].invalid && vendorForm.controls['vat'].touched">{{readableErrors(vendorForm.controls['vat'].errors).join('\n')}}</small>
+            <label for="vatNumber" class="block text-900 text-xl font-medium">Business VAT</label>
+            <input id="vatNumber" type="text" placeholder="Business VAT" pInputText class="w-full mt-2" formControlName="vatNumber" autofocus (keyup)="checkVat()">
+            <small class="mt-1 block p-error" *ngIf="vendorForm.controls['vatNumber'].invalid && vendorForm.controls['vatNumber'].touched">{{readableErrors(vendorForm.controls['vatNumber'].errors).join('\n')}}</small>
 
-            <label for="business" class="mt-3 block text-900 text-xl font-medium">Business name</label>
-            <input id="business" type="text" placeholder="Business name" pInputText class="w-full mt-2" formControlName="business" autofocus>
-            <small class="mt-1 block p-error" *ngIf="vendorForm.controls['business'].invalid && vendorForm.controls['business'].touched">{{readableErrors(vendorForm.controls['business'].errors).join('\n')}}</small>
+            <label for="businessName" class="mt-3 block text-900 text-xl font-medium">Business name</label>
+            <input id="businessName" type="text" placeholder="Business name" pInputText class="w-full mt-2" formControlName="businessName" autofocus>
+            <small class="mt-1 block p-error" *ngIf="vendorForm.controls['businessName'].invalid && vendorForm.controls['businessName'].touched">{{readableErrors(vendorForm.controls['businessName'].errors).join('\n')}}</small>
           </div>
         </div>
         <label for="phoneNumber" class="mt-3 block text-900 text-xl font-medium">Phone number</label>

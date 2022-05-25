@@ -33,7 +33,7 @@
       <td *ngFor="let column of columns">
         <ng-container *ngIf="column.value == 'image'">
           <span class="p-column-title">{{ column.text ?? column.name }}</span>
-          <img *ngIf="column.value == 'image'" [src]="item.image" [alt]="item.name" width="130" class="shadow-4"/>
+          <img *ngIf="column.value == 'image'" [src]="item.image" [alt]="item.name" width="130" class="shadow-4" (error)="imageFail($event)" />
         </ng-container>
 
         <ng-container *ngIf="column.value == 'currency'">
