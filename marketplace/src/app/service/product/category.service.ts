@@ -13,7 +13,7 @@ export class CategoryService {
   constructor(private http: HttpClient) { }
 
   getCategories(): Observable<any[]> {
-    return this.http.get<any[]>(environment.api + 'getCategories')
+    return this.http.get<any[]>(environment.api + 'category/')
   }
 
   formatCategories(cats: any, parent: number = null): TreeNode[] {
@@ -31,6 +31,6 @@ export class CategoryService {
   }
 
   add(category: Category): Observable<Category> {
-    return this.http.post<Category>(environment.api + 'createCategory', category)
+    return this.http.post<Category>(environment.api + 'category/create', category)
   }
 }
