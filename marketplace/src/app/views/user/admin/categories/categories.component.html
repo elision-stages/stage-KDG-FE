@@ -9,5 +9,5 @@
       <button pButton label="Add category" [routerLink]="['/categories', 'add']"></button>
     </div>
   </div>
-  <p-tree [value]="categoryView"></p-tree>
+  <p-tree [value]="categoryView" selectionMode="single" (onNodeSelect)="open($event)"></p-tree>
 </div>

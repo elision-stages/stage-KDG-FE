@@ -1,0 +1,92 @@
+<p-breadcrumb [model]="[{ label: 'Categories', routerLink: '/categories' }, { label: 'Edit category' }]" [home]="{icon: 'pi pi-home', routerLink: '/'}" styleClass="mb-3"></p-breadcrumb>
+<form [formGroup]="editForm" (ngSubmit)="onEdit()">
+  <div class="grid">
+    <div class="col-12 md:col-6">
+      <div class="card">
+        <h4>Edit category</h4>
+        <label for="name" class="block text-900 text-xl font-medium">Category name</label>
+        <input id="name"
+               type="text"
+               placeholder="Category name"
+               pInputText
+               class="w-full mt-2"
+               formControlName="name"
+               autofocus>
+        <small class="mt-1 block p-error"
+               *ngIf="editForm.controls['name'].invalid && editForm.controls['name'].touched">{{readableErrors(editForm.controls['name'].errors).join('\n')}}</small>
+        <label for="parent" class="block text-900 text-xl font-medium mt-2">Parent category</label>
+        <p-treeSelect id="parent"
+                      [options]="categoryList"
+                      (onNodeSelect)="setParentId($event)"
+                      placeholder="Root map"
+                      class="w-full mt-2 block"></p-treeSelect>
+      </div>
+    </div>
+    <div class="col-12 md:col-6">
+      <div class="card">
+        <h5>
+          Dynamic attributes
+        </h5>
+        <ng-container formArrayName="characteristics">
+          <ng-container *ngFor="let char of characteristics.controls; let i = index">
+            <ng-container [formGroupName]="i">
+              <div class="p-inputgroup w-full mt-3">
+                <input type="text" pInputText formControlName="name" style="width: 25%" (blur)="characteristics.controls[i]['controls']['name'].value.length ? true : deleteCharacteristic(i)">
+                <select formControlName="type" class="p-inputtext p-element inlineselect">
+                  <option *ngFor="let attr of attributeTypes" [ngValue]="attr.value">
+                    {{ attr.label }}
+                  </option>
+                </select>
+                <select formControlName="required" class="p-inputtext p-element inlineselect">
+                  <option *ngFor="let req of requiredTypes" [ngValue]="req.value">
+                    {{ req.label }}
+                  </option>
+                </select>
+                <button type="button" pButton pRipple icon="pi pi-times" class="p-button-danger" (click)="deleteCharacteristic(i)"></button>
+              </div>
+              <small class="mt-1 block p-error"
+                     *ngIf="characteristics.controls[i].status == 'INVALID'">{{readableErrors(characteristics.controls[i]['controls']['name'].errors).join('\n')}}</small>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+        <p-messages *ngIf="!characteristics.controls.length" [value]="[{severity: 'info', closable: false, summary: 'You can add dynamic attributes to this category with the button below'}]" [enableService]="false" class="mt-3"></p-messages>
+        <button type="button" pButton class="w-full mt-3" label="Add attribute" (click)="openNewAttribute()"></button>
+      </div>
+    </div>
+  </div>
+  <button [pTooltip]="!editForm.valid && 'Some fields aren\'t valid'"
+          tooltipPosition="top"
+          [disabled]="!editForm.valid"
+          [loading]="isLoading"
+          pButton
+          pRipple
+          label="Update category"
+          class="w-full p-3 text-xl mt-3"
+          type="submit"></button>
+</form>
+<form [formGroup]="characteristic" (ngSubmit)="addAttribute()">
+  <p-dialog [(visible)]="attributeDialog" [style]="{width: '500px'}" header="Add dynamic attribute" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+      <label for="attrName" class="block text-900 text-xl font-medium">Attribute name</label>
+      <input id="attrName"
+             type="text"
+             placeholder="Attribute name"
+             pInputText
+             class="w-full mt-2"
+             formControlName="name"
+             autofocus>
+      <small class="mt-1 block p-error"
+             *ngIf="characteristic.controls['name'].invalid && characteristic.controls['name'].touched">{{readableErrors(characteristic.controls['name'].errors).join('\n')}}</small>
+      <label for="attrType" class="block text-900 text-xl font-medium mt-3 mb-2">Attribute type</label>
+      <p-selectButton id="attrType" [options]="attributeTypes" formControlName="type" optionLabel="label" optionValue="value"></p-selectButton>
+      <label for="attrRequired" class="block text-900 text-xl font-medium mt-3 mb-2">Attribute required?</label>
+      <p-selectButton id="attrRequired" [options]="requiredTypes" formControlName="required" optionLabel="label" optionValue="value"></p-selectButton>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+      <button pButton pRipple type="button" label="Cancel" icon="pi pi-times" class="p-button-text p-button-danger" (click)="hideNewAttribute()"></button>
+      <button pButton pRipple label="Add attribute" icon="pi pi-check" [disabled]="!characteristic.valid"></button>
+    </ng-template>
+  </p-dialog>
+</form>
+<p-toast position="bottom-center"></p-toast>
