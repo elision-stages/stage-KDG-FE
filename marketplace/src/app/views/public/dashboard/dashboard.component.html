@@ -4,22 +4,25 @@
       <div class="col-3" *ngIf="!!results && results.query">
         <div class="p-card p-card-shadow">
           <div class="p-card-body">
-            <p-selectButton [options]="productTemplateOptions" [(ngModel)]="productTemplate" optionLabel="icon" class="mb-1">
+            <p-selectButton [options]="productTemplateOptions" [(ngModel)]="productTemplate" optionLabel="icon"
+                            class="mb-1">
               <ng-template let-item>
                 <i [ngClass]="['pi', 'pi-' + item]"></i>&nbsp;{{ item == 'list' ? 'List' : 'Grid' }}
               </ng-template>
             </p-selectButton>
 
             <h2>Price</h2>
-            <ais-range-input attribute="price"></ais-range-input>
+            <ais-range-input attribute="price" currency="€" [precision]="0" submitLabel="Zoek">
+            </ais-range-input>
             <h2>Category</h2>
             <ais-hierarchical-menu
               [attributes]="[
-    'categories.lvl0',
-    'categories.lvl1',
-    'categories.lvl2'
-  ]"
+                          'categories.lvl0',
+                          'categories.lvl1',
+                          'categories.lvl2'
+                        ]"
             ></ais-hierarchical-menu>
+
           </div>
         </div>
       </div>
@@ -27,19 +30,26 @@
         <div [class]="['grid', productTemplate]">
           <div class="col-12" *ngIf="hits.length === 0">
             <div class="p-card p-card-shadow py-3" style="text-align: center">
-              <p-message severity="warn" [text]="'No results have been found for ' + (results ? results.query : '')"></p-message>
+              <p-message severity="warn"
+                         [text]="'No results have been found for ' + (results ? results.query : '')"></p-message>
             </div>
           </div>
-          <div [class]="productTemplate == 'list' ? 'col-12' : ['col-12', 'lg:col-3', 'md:col-4', 'sm:col-6']" *ngFor="let hit of hits">
+          <div [class]="productTemplate == 'list' ? 'col-12' : ['col-12', 'lg:col-3', 'md:col-4', 'sm:col-6']"
+               *ngFor="let hit of hits">
             <div class="p-card-shadow p-card">
               <div class="p-card-header">
                 <img alt="Card" [src]="hit.image" class="smallaspect" (error)="imageFail($event)">
               </div>
               <div class="p-card-body">
-                <h2><ais-highlight attribute="name" [hit]="hit"></ais-highlight></h2>
+                <h2>
+                  <ais-highlight attribute="name" [hit]="hit"></ais-highlight>
+                </h2>
                 <a href="#">{{ hit['categories.lvl0'] }}</a>
-                <p class="desc"><ais-highlight attribute="description" [hit]="hit"></ais-highlight></p>
-                <button pButton type="button" [label]="'&euro;' + hit.price.toFixed(2).replace('.', ',')" (click)="openProduct(hit)"></button>
+                <p class="desc">
+                  <ais-highlight attribute="description" [hit]="hit"></ais-highlight>
+                </p>
+                <button pButton type="button" [label]="'&euro;' + hit.price.toFixed(2).replace('.', ',')"
+                        (click)="openProduct(hit)"></button>
               </div>
             </div>
           </div>
