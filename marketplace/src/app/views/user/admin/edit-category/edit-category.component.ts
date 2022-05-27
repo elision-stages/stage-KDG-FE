@@ -39,7 +39,6 @@ export class EditCategoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.route.params)
     this.characteristic = this.createCharacteristic()
     this.categoryService.getCategories().subscribe(cats => {
       this.categoryList = [{
