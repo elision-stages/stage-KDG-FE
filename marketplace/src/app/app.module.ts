@@ -63,6 +63,7 @@ import { OrderOverviewComponent } from './views/user/shared/order-overview/order
 import { TableComponent } from './components/table/table.component';
 import { OrderComponent } from './views/user/shared/order/order.component';
 import { CreateCategoryComponent } from './views/user/admin/create-category/create-category.component';
+import { EditCategoryComponent } from './views/user/admin/edit-category/edit-category.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +91,8 @@ import { CreateCategoryComponent } from './views/user/admin/create-category/crea
     OrderOverviewComponent,
     TableComponent,
     OrderComponent,
-    CreateCategoryComponent
+    CreateCategoryComponent,
+    EditCategoryComponent
   ],
   imports: [
     HttpClientModule,

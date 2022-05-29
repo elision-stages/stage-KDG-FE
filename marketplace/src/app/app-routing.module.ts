@@ -17,6 +17,7 @@ import {CartComponent} from "./views/user/customer/cart/cart.component";
 import {OrderOverviewComponent} from "./views/user/shared/order-overview/order-overview.component";
 import {OrderComponent} from "./views/user/shared/order/order.component";
 import {CreateCategoryComponent} from "./views/user/admin/create-category/create-category.component";
+import { EditCategoryComponent } from './views/user/admin/edit-category/edit-category.component';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import {CreateCategoryComponent} from "./views/user/admin/create-category/create
           {path: 'login', component: LoginComponent},
           {path: 'register', component: RegisterComponent},
           {path: 'vendor', component: VendorComponent},
+          {path: 'category/:id', component: EditCategoryComponent},
           {path: 'categories/add', component: CreateCategoryComponent, canActivate: [ RouteGuardService ]},
           {path: 'categories', component: CategoriesComponent, canActivate: [ RouteGuardService ]},
           {path: 'product/:productId/edit', component: EditProductComponent},

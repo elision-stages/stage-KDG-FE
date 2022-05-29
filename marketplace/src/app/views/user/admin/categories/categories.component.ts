@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MessageService, TreeNode} from "primeng/api";
 import {CategoryService} from "../../../../service/product/category.service";
-import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ValidationHelper} from "../../../../helpers/ValidationHelper";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-categories',
@@ -12,7 +11,7 @@ import {ValidationHelper} from "../../../../helpers/ValidationHelper";
 export class CategoriesComponent implements OnInit {
   categoryView: TreeNode[] = [];
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(private categoryService: CategoryService, private router: Router) { }
 
   ngOnInit(): void {
     this.refresh()
@@ -22,5 +21,9 @@ export class CategoriesComponent implements OnInit {
     this.categoryService.getCategories().subscribe(cats => {
       this.categoryView = this.categoryService.formatCategories(cats)
     });
+  }
+
+  open($event) {
+    this.router.navigate(['category', $event.node.data])
   }
 }
