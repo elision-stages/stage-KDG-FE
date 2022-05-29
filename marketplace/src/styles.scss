@@ -1,3 +1,4 @@
+@use "assets/theme/lara-light-indigo/theme.css";
 @import "../node_modules/primeng/resources/primeng.min.css";
 @import "../node_modules/primeflex/primeflex.scss";
 @import "../node_modules/primeicons/primeicons.css";
@@ -86,4 +87,25 @@ button.inline {
       font-size: 160%;
     }
   }
+}
+
+.ais-RangeInput-label {
+  position: relative;
+
+  > .ais-RangeInput-currency {
+    position: absolute;
+    left: 10px;
+    top: 7px;
+  }
+
+  .ais-RangeInput-input {
+    @extend .p-inputtext;
+    width: 100%;
+    box-shadow: none;
+    padding-left: 20px;
+  }
+}
+
+.ais-HierarchicalMenu-count {
+  @extend .p-badge;
 }
