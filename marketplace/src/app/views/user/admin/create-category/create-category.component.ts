@@ -54,8 +54,8 @@ export class CreateCategoryComponent implements OnInit {
         this.addForm.reset()
         this.characteristics.controls = []
       },
-      error: (_error) => {
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'Unknown error'});
+      error: (result) => {
+        this.messageService.add({severity:'error', summary: 'Error', detail: Object.values(result.error)[0].toString()});
       }
     }).add(() => {
       this.addForm.enable()

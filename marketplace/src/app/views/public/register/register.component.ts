@@ -42,12 +42,8 @@ export class RegisterComponent implements OnInit {
       next: (_result) => {
         this.success = true
       },
-      error: (error) => {
-        if(error.status === 409) {
-          this.messageService.add({severity:'error', summary: 'Error', detail: 'A user with this e-mail address exists already'});
-        }else{
-          this.messageService.add({severity:'error', summary: 'Error', detail: 'Unknown error'});
-        }
+      error: (result) => {
+        this.messageService.add({severity:'error', summary: 'Error', detail: Object.values(result.error)[0].toString()});
       }
     }).add(() => {
       this.registerForm.enable()

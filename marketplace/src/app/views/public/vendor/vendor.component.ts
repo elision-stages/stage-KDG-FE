@@ -75,12 +75,7 @@ export class VendorComponent {
         this.success = true
       },
       error: (result) => {
-        console.log(result,1)
-        if(result.status === 409) {
-          this.messageService.add({severity:'error', summary: 'Error', detail: 'A vendor with this e-mail address exists already'});
-        }else{
-          this.messageService.add({severity:'error', summary: 'Error', detail: Object.values(result.error)[0].toString()});
-        }
+        this.messageService.add({severity:'error', summary: 'Error', detail: Object.values(result.error)[0].toString()});
       }
     }).add(() => {
       this.vendorForm.enable()

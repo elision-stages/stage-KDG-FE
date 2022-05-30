@@ -81,8 +81,8 @@ export class EditCategoryComponent implements OnInit {
         this.messageService.add({severity:'success', summary: 'Success', detail: 'Category updated succesfully'});
         this.router.navigate(['categories'])
       },
-      error: (_error) => {
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'Unknown error'});
+      error: (result) => {
+        this.messageService.add({severity:'error', summary: 'Error', detail: Object.values(result.error)[0].toString()});
       }
     }).add(() => {
       this.editForm.enable()
