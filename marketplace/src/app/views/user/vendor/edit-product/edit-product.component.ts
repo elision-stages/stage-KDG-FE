@@ -14,6 +14,7 @@ import {UploadService} from "../../../../service/product/upload.service";
   templateUrl: './edit-product.component.html',
 })
 export class EditProductComponent implements OnInit {
+  stringInput: string;
   productNames: Array<ProductId>
   selectedProduct: Product
   categories: Array<Category>
@@ -72,7 +73,7 @@ export class EditProductComponent implements OnInit {
   }
 
   addImage($event: any) {
-    if($event.target.value) {
+    if ($event.target.value) {
       $event.preventDefault()
       this.selectedProduct.images.push($event.target.value);
       $event.target.value = ''
@@ -82,5 +83,14 @@ export class EditProductComponent implements OnInit {
 
   deleteImage(select: String) {
     this.selectedProduct.images = this.selectedProduct.images.filter(img => img != select)
+  }
+
+  stringAttributeChanged(characteristic) {
+    console.log(this.stringInput[characteristic.name]);
+    this.attributeChanged(characteristic, this.stringInput[characteristic.name]);
+  }
+
+  log($event: any) {
+    console.log($event);
   }
 }

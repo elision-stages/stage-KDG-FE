@@ -78,6 +78,10 @@
                          decrementButtonIcon="pi pi-minus">
           </p-inputNumber>
 
+          <input *ngIf="characteristic.type === 'STRING'" id="float-input" type="text"
+                 pInputText (keyup)="attributeChanged(characteristic, $event.target['value'])"
+                 [ngModel]="getCharacteristicValue(characteristic.name)">
+
         </div>
       </ng-container>
       <ng-container *ngIf="!selectedProduct.category"><h6>Select a category first</h6></ng-container>

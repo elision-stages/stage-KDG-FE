@@ -21,7 +21,8 @@ export class AddProductComponent {
     title: new FormControl('', [Validators.required, Validators.minLength(2)]),
     description: new FormControl('', [Validators.required]),
     images: new FormArray([]),
-    price: new FormControl(0.01, [Validators.required, Validators.min(0.01)])
+    price: new FormControl(0.01, [Validators.required, Validators.min(0.01)]),
+    stringInput: new FormControl('', [Validators.minLength(1)])
   })
   outProduct: Product
   categories: Category[]
@@ -81,6 +82,7 @@ export class AddProductComponent {
   }
 
   characteristicChanged(characteristic: Characteristic, value: any) {
+    console.log(value, characteristic, this.addProduct.value.stringInput);
     if (characteristic.type === 'DECIMAL') value = Math.round(value * 100) / 100
 
     if (!(this.outProduct.attributes.find(attr => attr.attributeName))) {
@@ -91,6 +93,9 @@ export class AddProductComponent {
     for (const pair of this.outProduct.attributes) {
       if (pair.attributeName === characteristic.name) pair.value = value
     }
+  }
+  stringCharacteristicChanged(characteristic: Characteristic) {
+    this.characteristicChanged(characteristic, this.addProduct.value.stringInput)
   }
 
   setDescription(event: any) {

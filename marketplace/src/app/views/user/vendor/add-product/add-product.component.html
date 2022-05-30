@@ -1,4 +1,5 @@
-<p-breadcrumb [model]="[{ routerLink: '/products', label: 'Your products' }, { label: 'Add product' }]" [home]="{icon: 'pi pi-home', routerLink: '/'}" styleClass="mb-3"></p-breadcrumb>
+<p-breadcrumb [model]="[{ routerLink: '/products', label: 'Your products' }, { label: 'Add product' }]"
+              [home]="{icon: 'pi pi-home', routerLink: '/'}" styleClass="mb-3"></p-breadcrumb>
 <form [formGroup]="addProduct" (ngSubmit)="onAdd()">
   <div class="grid">
     <div class="col-12 lg:col-6">
@@ -6,8 +7,10 @@
         <h4>Add product</h4>
 
         <label for="title" class="block text-900 text-xl font-medium">Title</label>
-        <input id="title" type="text" placeholder="Product title" pInputText class="w-full mt-2" formControlName="title" autofocus>
-        <small class="mt-1 block p-error" *ngIf="addProduct.controls['title'].invalid && addProduct.controls['title'].touched">{{readableErrors(addProduct.controls['title'].errors).join('\n')}}</small>
+        <input id="title" type="text" placeholder="Product title" pInputText class="w-full mt-2" formControlName="title"
+               autofocus>
+        <small class="mt-1 block p-error"
+               *ngIf="addProduct.controls['title'].invalid && addProduct.controls['title'].touched">{{readableErrors(addProduct.controls['title'].errors).join('\n')}}</small>
 
         <label for="description" class="block text-900 text-xl font-medium mt-3 mb-2">Product description</label>
         <p-editor id="description" [style]="{'height':'150px'}" (onTextChange)="setDescription($event)">
@@ -19,17 +22,21 @@
             </span>
           </ng-template>
         </p-editor>
-        <small class="mt-1 block p-error" *ngIf="addProduct.controls['description'].invalid && addProduct.controls['description'].value">{{readableErrors(addProduct.controls['description'].errors).join('\n')}}</small>
+        <small class="mt-1 block p-error"
+               *ngIf="addProduct.controls['description'].invalid && addProduct.controls['description'].value">{{readableErrors(addProduct.controls['description'].errors).join('\n')}}</small>
 
         <label for="newImage" class="block text-900 text-xl font-medium mt-3 mb-2">Product images</label>
         <ng-container formArrayName="images" *ngFor="let image of images.controls; index as i">
           <div class="p-inputgroup w-full mt-2">
-            <input type="text" [formControlName]="i" pInputText [value]="image" (blur)="image.value.length ? true : deleteImage(i)">
-            <button type="button" pButton pRipple icon="pi pi-times" class="p-button-danger" (click)="deleteImage(i)"></button>
+            <input type="text" [formControlName]="i" pInputText [value]="image"
+                   (blur)="image.value.length ? true : deleteImage(i)">
+            <button type="button" pButton pRipple icon="pi pi-times" class="p-button-danger"
+                    (click)="deleteImage(i)"></button>
           </div>
           <small class="mt-1 block p-error" *ngIf="image.invalid">{{readableErrors(image.errors).join('\n')}}</small>
         </ng-container>
-        <input id="newImage" type="text" placeholder="Image URL" pInputText class="w-full mt-2" (keydown.tab)="addImage($event)" (keydown.enter)="addImage($event)" (blur)="addImage($event)">
+        <input id="newImage" type="text" placeholder="Image URL" pInputText class="w-full mt-2"
+               (keydown.tab)="addImage($event)" (keydown.enter)="addImage($event)" (blur)="addImage($event)">
 
 
         <label for="price" class="block text-900 text-xl font-medium mt-3">Price</label>
@@ -44,7 +51,8 @@
                        decrementButtonIcon="pi pi-minus"
                        styleClass="w-full">
         </p-inputNumber>
-        <small class="mt-1 block p-error" *ngIf="addProduct.controls['price'].invalid && addProduct.controls['price'].touched">{{readableErrors(addProduct.controls['price'].errors).join('\n')}}</small>
+        <small class="mt-1 block p-error"
+               *ngIf="addProduct.controls['price'].invalid && addProduct.controls['price'].touched">{{readableErrors(addProduct.controls['price'].errors).join('\n')}}</small>
       </div>
     </div>
     <div class="col-12 lg:col-6 ">
@@ -81,9 +89,15 @@
                            inputId="stacked" mode="decimal" [step]="0.1" incrementButtonIcon="pi pi-plus"
                            decrementButtonIcon="pi pi-minus">
             </p-inputNumber>
+
+            <input *ngIf="characteristic.type === 'STRING'" id="float-input" type="text"
+                   pInputText (input)="stringCharacteristicChanged(characteristic)"
+                   formControlName="stringInput">
           </div>
         </ng-container>
-        <button [pTooltip]="!addProduct.valid && 'Some fields aren\'t valid'" tooltipPosition="top" [disabled]="!addProduct.valid" [loading]="isLoading" pButton pRipple label="Add product" class="w-full p-3 text-xl mt-3" type="submit"></button>
+        <button [pTooltip]="!addProduct.valid && 'Some fields aren\'t valid'" tooltipPosition="top"
+                [disabled]="!addProduct.valid" [loading]="isLoading" pButton pRipple label="Add product"
+                class="w-full p-3 text-xl mt-3" type="submit"></button>
       </div>
     </div>
   </div>
