@@ -21,7 +21,7 @@ export class CreateCategoryComponent implements OnInit {
 
   attributeDialog: boolean = false
   characteristic: FormGroup
-  attributeTypes = [{label: 'Whole number', value: 'INTEGER'}, {label: 'Decimal number', value: 'DECIMAL'}, {label: 'Yes / No', value: 'BOOL'}]
+  attributeTypes = [{label: 'Whole number', value: 'INTEGER'}, {label: 'Decimal number', value: 'DECIMAL'}, {label: 'Yes / No', value: 'BOOL'}, {label: 'Text', value: 'STRING'}]
   requiredTypes = [{label: 'Not required', value: false}, {label: 'Required', value: true}]
 
   categoryList: TreeNode[] = [];
@@ -29,7 +29,7 @@ export class CreateCategoryComponent implements OnInit {
   constructor(private categoryService: CategoryService, private messageService: MessageService) { }
 
   ngOnInit(): void {
-    this.characteristic = this.createCharacteristic()
+    this.characteristic = CreateCategoryComponent.createCharacteristic()
     this.categoryService.getCategories().subscribe(cats => {
       this.categoryList = [{
         "label": "Root map",
@@ -82,11 +82,11 @@ export class CreateCategoryComponent implements OnInit {
   addAttribute() {
     if(this.characteristic.controls['name'].invalid) return
     this.characteristics.push(this.characteristic);
-    this.characteristic = this.createCharacteristic();
+    this.characteristic = CreateCategoryComponent.createCharacteristic();
     this.attributeDialog = false
   }
 
-  private createCharacteristic(name = '', type = 'INTEGER', required = false) {
+  private static createCharacteristic(name = '', type = 'INTEGER', required = false) {
     return new FormGroup({
       name: new FormControl(name, [Validators.required, Validators.minLength(2), Validators.maxLength(250)]),
       type: new FormControl(type, [Validators.required]),
