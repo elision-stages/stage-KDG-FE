@@ -18,8 +18,8 @@ import {Router} from "@angular/router";
 export class AddProductComponent {
   readableErrors = ValidationHelper.readableErrors
   addProduct = new FormGroup({
-    title: new FormControl('', [Validators.required, Validators.minLength(2)]),
-    description: new FormControl('', [Validators.required]),
+    title: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(250)]),
+    description: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50000)]),
     images: new FormArray([]),
     price: new FormControl(0.01, [Validators.required, Validators.min(0.01)])
   })

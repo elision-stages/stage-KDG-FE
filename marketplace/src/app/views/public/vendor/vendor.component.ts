@@ -20,7 +20,7 @@ export class VendorComponent {
 
   vendorForm = new FormGroup({
     vatNumber: new FormControl('', [Validators.required, Validators.minLength(10)], [ValidationHelper.VATValidator(this.vendorService)]),
-    businessName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    businessName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(250)]),
     phoneNumber: new FormControl('', [Validators.required, Validators.minLength(9), ValidationHelper.phoneValidator]),
     logo: new FormControl('', [Validators.required]),
     logoImage: new FormControl('', [Validators.required]),
