@@ -85,11 +85,6 @@ export class EditProductComponent implements OnInit {
     this.selectedProduct.images = this.selectedProduct.images.filter(img => img != select)
   }
 
-  stringAttributeChanged(characteristic) {
-    console.log(this.stringInput[characteristic.name]);
-    this.attributeChanged(characteristic, this.stringInput[characteristic.name]);
-  }
-
   log($event: any) {
     console.log($event);
   }

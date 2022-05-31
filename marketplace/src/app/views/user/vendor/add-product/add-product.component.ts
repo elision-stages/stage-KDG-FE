@@ -21,8 +21,7 @@ export class AddProductComponent {
     title: new FormControl('', [Validators.required, Validators.minLength(2)]),
     description: new FormControl('', [Validators.required]),
     images: new FormArray([]),
-    price: new FormControl(0.01, [Validators.required, Validators.min(0.01)]),
-    stringInput: new FormControl('', [Validators.minLength(1)])
+    price: new FormControl(0.01, [Validators.required, Validators.min(0.01)])
   })
   outProduct: Product
   categories: Category[]
@@ -93,9 +92,6 @@ export class AddProductComponent {
     for (const pair of this.outProduct.attributes) {
       if (pair.attributeName === characteristic.name) pair.value = value
     }
-  }
-  stringCharacteristicChanged(characteristic: Characteristic) {
-    this.characteristicChanged(characteristic, this.addProduct.value.stringInput)
   }
 
   setDescription(event: any) {

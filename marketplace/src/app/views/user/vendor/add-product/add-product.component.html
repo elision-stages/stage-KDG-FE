@@ -91,8 +91,8 @@
             </p-inputNumber>
 
             <input *ngIf="characteristic.type === 'STRING'" id="float-input" type="text"
-                   pInputText (input)="stringCharacteristicChanged(characteristic)"
-                   formControlName="stringInput">
+                   pInputText (keyup)="characteristicChanged(characteristic, $event.target['value'])">
+
           </div>
         </ng-container>
         <button [pTooltip]="!addProduct.valid && 'Some fields aren\'t valid'" tooltipPosition="top"
