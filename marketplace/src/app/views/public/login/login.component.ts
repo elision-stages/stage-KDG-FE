@@ -37,11 +37,11 @@ export class LoginComponent {
       next: (_result) => {
         this.messageService.add({severity:'success', summary: 'Login successfull', detail: 'Hooray'});
       },
-      error: (error) => {
-        if(error.status === 401) {
+      error: (result) => {
+        if(result.status === 401) {
           this.messageService.add({severity:'error', summary: 'Error', detail: 'Unknown credentials'});
         }else{
-          this.messageService.add({severity:'error', summary: 'Error', detail: 'Unknown error: '});
+          this.messageService.add({severity:'error', summary: 'Error', detail: Object.values(result.error)[0].toString()});
         }
       }
     })
