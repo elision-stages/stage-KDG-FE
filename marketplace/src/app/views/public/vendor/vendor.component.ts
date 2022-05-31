@@ -25,9 +25,9 @@ export class VendorComponent {
     logo: new FormControl('', [Validators.required]),
     logoImage: new FormControl('', [Validators.required]),
     theme: new FormControl('', [Validators.required]),
-    description: new FormControl('', [Validators.required, Validators.minLength(50)]),
-    firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
-    lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    introduction: new FormControl('', [Validators.required, Validators.minLength(20), Validators.maxLength(5000)]),
+    firstName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(250)]),
+    lastName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(250)]),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(8), ValidationHelper.passwordValidator]),
     passwordRepeat: new FormControl('')
@@ -63,8 +63,8 @@ export class VendorComponent {
     this.vendorForm.get('theme').setValue(event.value)
   }
 
-  setDescription(event: any) {
-    this.vendorForm.get('description').setValue(event.htmlValue)
+  setIntroduction(event: any) {
+    this.vendorForm.get('introduction').setValue(event.htmlValue)
   }
 
   onVendorRegister(): void {
