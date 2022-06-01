@@ -18,13 +18,24 @@
   overflow: hidden;
 }
 
+.grid.th-large {
+  align-items: stretch;
+  .p-card {
+    height: 100%;
+  }
+}
+
 .grid.list {
   .smallaspect {
     height: 15rem;
     width: auto;
   }
 
-  .p-card-header, .p-card-body {
+  .p-card {
+    display: flex;
+  }
+
+  /*.p-card-header, .p-card-body {
     float: left;
   }
 
@@ -32,5 +43,5 @@
     content: '';
     clear: both;
     display: block;
-  }
+  }*/
 }
