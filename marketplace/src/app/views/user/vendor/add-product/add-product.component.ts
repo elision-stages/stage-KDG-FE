@@ -81,7 +81,6 @@ export class AddProductComponent {
   }
 
   characteristicChanged(characteristic: Characteristic, value: any) {
-    console.log(value, characteristic, this.addProduct.value.stringInput);
     if (characteristic.type === 'DECIMAL') value = Math.round(value * 100) / 100
 
     if (!(this.outProduct.attributes.find(attr => attr.attributeName))) {

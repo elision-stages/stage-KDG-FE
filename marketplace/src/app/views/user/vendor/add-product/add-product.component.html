@@ -81,7 +81,7 @@
             <p-selectButton *ngIf="characteristic.type === 'BOOL'"
                             [options]="[{label: 'Ja', value: 'true'}, {label: 'Nee', value: 'false'}]"
                             [ngModel]="characteristic.value" [ngModelOptions]="{standalone:true}"
-                            (onChange)="characteristicChanged(characteristic,$event)"></p-selectButton>
+                            (onChange)="characteristicChanged(characteristic,$event.value)"></p-selectButton>
 
             <p-inputNumber *ngIf="characteristic.type === 'DECIMAL'" [ngModel]="characteristic.value"
                            [ngModelOptions]="{standalone:true}" [showButtons]="true"
