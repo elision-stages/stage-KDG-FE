@@ -63,6 +63,8 @@ import { OrderOverviewComponent } from './views/user/shared/order-overview/order
 import { TableComponent } from './components/table/table.component';
 import { OrderComponent } from './views/user/shared/order/order.component';
 import { CreateCategoryComponent } from './views/user/admin/create-category/create-category.component';
+import { AutocompleteComponent } from './components/autocomplete/autocomplete.component';
+import {AutoCompleteModule} from "primeng/autocomplete";
 import { EditCategoryComponent } from './views/user/admin/edit-category/edit-category.component';
 
 @NgModule({
@@ -92,7 +94,8 @@ import { EditCategoryComponent } from './views/user/admin/edit-category/edit-cat
     TableComponent,
     OrderComponent,
     CreateCategoryComponent,
-    EditCategoryComponent
+    EditCategoryComponent,
+    AutocompleteComponent
   ],
   imports: [
     HttpClientModule,
@@ -137,7 +140,8 @@ import { EditCategoryComponent } from './views/user/admin/edit-category/edit-cat
     GalleriaModule,
     TabViewModule,
     BreadcrumbModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    AutoCompleteModule
   ],
   bootstrap: [AppComponent],
   providers: [
