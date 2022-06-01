@@ -84,8 +84,4 @@ export class EditProductComponent implements OnInit {
   deleteImage(select: String) {
     this.selectedProduct.images = this.selectedProduct.images.filter(img => img != select)
   }
-
-  log($event: any) {
-    console.log($event);
-  }
 }
