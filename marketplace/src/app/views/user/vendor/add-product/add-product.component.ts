@@ -92,6 +92,8 @@ export class AddProductComponent {
     for (const pair of this.outProduct.attributes) {
       if (pair.attributeName === characteristic.name) pair.value = value
     }
+
+    console.log(this.outProduct);
   }
 
   setDescription(event: any) {
