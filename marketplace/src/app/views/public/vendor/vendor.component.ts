@@ -20,14 +20,14 @@ export class VendorComponent {
 
   vendorForm = new FormGroup({
     vatNumber: new FormControl('', [Validators.required, Validators.minLength(10)], [ValidationHelper.VATValidator(this.vendorService)]),
-    businessName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    businessName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(250)]),
     phoneNumber: new FormControl('', [Validators.required, Validators.minLength(9), ValidationHelper.phoneValidator]),
     logo: new FormControl('', [Validators.required]),
     logoImage: new FormControl('', [Validators.required]),
     theme: new FormControl('', [Validators.required]),
-    description: new FormControl('', [Validators.required, Validators.minLength(50)]),
-    firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
-    lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    introduction: new FormControl('', [Validators.required, Validators.minLength(20), Validators.maxLength(5000)]),
+    firstName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(250)]),
+    lastName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(250)]),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(8), ValidationHelper.passwordValidator]),
     passwordRepeat: new FormControl('')
@@ -63,8 +63,8 @@ export class VendorComponent {
     this.vendorForm.get('theme').setValue(event.value)
   }
 
-  setDescription(event: any) {
-    this.vendorForm.get('description').setValue(event.htmlValue)
+  setIntroduction(event: any) {
+    this.vendorForm.get('introduction').setValue(event.htmlValue)
   }
 
   onVendorRegister(): void {
@@ -75,12 +75,7 @@ export class VendorComponent {
         this.success = true
       },
       error: (result) => {
-        console.log(result,1)
-        if(result.status === 409) {
-          this.messageService.add({severity:'error', summary: 'Error', detail: 'A vendor with this e-mail address exists already'});
-        }else{
-          this.messageService.add({severity:'error', summary: 'Error', detail: Object.values(result.error)[0].toString()});
-        }
+        this.messageService.add({severity:'error', summary: 'Error', detail: Object.values(result.error)[0].toString()});
       }
     }).add(() => {
       this.vendorForm.enable()

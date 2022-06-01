@@ -15,7 +15,7 @@
         <small [hidden]="!getMailHint(registerForm.get('email').value)">
           Do you mean <button type="button" class="inline" (click)="registerForm.get('email').setValue(getMailHint(registerForm.get('email').value))">{{getMailHint(registerForm.get('email').value)}}</button>?
         </small>
-        <small class="mt-1 block p-error" *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched">{{readableErrors(registerForm.controls['email'].errors).join('\n')}}</small>
+        <small class="mt-1 block p-error" *ngIf="registerForm.controls['email'].invalid">{{readableErrors(registerForm.controls['email'].errors).join('\n')}}</small>
       </div>
     </div>
     <div class="col-12 lg:col-6">
