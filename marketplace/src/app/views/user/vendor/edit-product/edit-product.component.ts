@@ -14,7 +14,6 @@ import {UploadService} from "../../../../service/product/upload.service";
   templateUrl: './edit-product.component.html',
 })
 export class EditProductComponent implements OnInit {
-  stringInput: string;
   productNames: Array<ProductId>
   selectedProduct: Product
   categories: Array<Category>
@@ -55,7 +54,7 @@ export class EditProductComponent implements OnInit {
   getCharacteristicValue(characteristicName: string): any {
     const attribute = this.selectedProduct.attributes.find(value => value.attributeName == characteristicName);
     if (attribute === undefined) return 0
-    return attribute.value
+    return attribute.value.toString()
   }
 
   private fetchCategories() {
