@@ -6,7 +6,7 @@ import {AccessComponent} from "./views/public/access/access.component";
 import {DashboardComponent} from "./views/public/dashboard/dashboard.component";
 import {LoginComponent} from "./views/public/login/login.component";
 import {RegisterComponent} from "./views/public/register/register.component";
-import {VendorComponent} from "./views/public/vendor/vendor.component";
+import {RegisterVendorComponent} from "./views/public/register-vendor/register-vendor.component";
 import {CategoriesComponent} from "./views/user/admin/categories/categories.component";
 import {RouteGuardService} from "./service/route-guard.service";
 import {AddProductComponent} from "./views/user/vendor/add-product/add-product.component";
@@ -18,6 +18,7 @@ import {OrderOverviewComponent} from "./views/user/shared/order-overview/order-o
 import {OrderComponent} from "./views/user/shared/order/order.component";
 import {CreateCategoryComponent} from "./views/user/admin/create-category/create-category.component";
 import { EditCategoryComponent } from './views/user/admin/edit-category/edit-category.component';
+import {VendorComponent} from "./views/public/vendor/vendor.component";
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { EditCategoryComponent } from './views/user/admin/edit-category/edit-cat
           {path: '', component: DashboardComponent},
           {path: 'login', component: LoginComponent},
           {path: 'register', component: RegisterComponent},
-          {path: 'vendor', component: VendorComponent},
+          {path: 'vendor', component: RegisterVendorComponent},
+          {path: 'vendor/:id', component: VendorComponent},
           {path: 'category/:id', component: EditCategoryComponent},
           {path: 'categories/add', component: CreateCategoryComponent, canActivate: [ RouteGuardService ]},
           {path: 'categories', component: CategoriesComponent, canActivate: [ RouteGuardService ]},

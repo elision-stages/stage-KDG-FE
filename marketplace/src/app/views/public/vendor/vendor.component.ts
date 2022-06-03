@@ -1,85 +1,46 @@
 import { Component } from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import getMailHint from 'src/app/helpers/getMailHint';
-import {Router} from "@angular/router";
-import {MessageService} from "primeng/api";
+import {MenuItem} from "primeng/api";
+import {ActivatedRoute, Router} from "@angular/router";
 import {VendorService} from "../../../service/user/vendor.service";
-import {ValidationHelper} from "../../../helpers/ValidationHelper";
+import staticRandomInt from "../../../helpers/staticRandomInt";
 
 @Component({
   selector: 'app-vendor',
   templateUrl: './vendor.component.html',
-  styleUrls: ['./vendor.component.scss'],
-  providers: [MessageService]
+  styleUrls: ['./vendor.component.scss']
 })
 export class VendorComponent {
-  getMailHint: Function = getMailHint;
-  readableErrors = ValidationHelper.readableErrors;
-  isLoading: boolean = false
-  success: boolean = false
+  loading: boolean = true;
 
-  vendorForm = new FormGroup({
-    vatNumber: new FormControl('', [Validators.required, Validators.minLength(10)], [ValidationHelper.VATValidator(this.vendorService)]),
-    businessName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(250)]),
-    phoneNumber: new FormControl('', [Validators.required, Validators.minLength(9), ValidationHelper.phoneValidator]),
-    logo: new FormControl('', [Validators.required]),
-    logoImage: new FormControl('', [Validators.required]),
-    theme: new FormControl('', [Validators.required]),
-    introduction: new FormControl('', [Validators.required, Validators.minLength(20), Validators.maxLength(5000)]),
-    firstName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(250)]),
-    lastName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(250)]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(8), ValidationHelper.passwordValidator]),
-    passwordRepeat: new FormControl('')
-  }, { validators: ValidationHelper.passwordRepeatValidator });
+  breadcrumb: MenuItem[]
+  home: MenuItem = {icon: 'pi pi-home', routerLink: '/'}
 
-  constructor(public router: Router, private vendorService: VendorService, private messageService: MessageService) {
+  vendor: any = null
+  id: number
 
+  random: Function = staticRandomInt();
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private vendorService: VendorService)
+  {
+    this.route.params.subscribe( params => this.loadVendor(params['id']) );
   }
 
-  checkVat() {
-    const vat = this.vendorForm.get('vatNumber').value
-    if(vat.length < 10 && !this.vendorForm.get('businessName').value.length) return;
-    this.vendorService.checkVat(vat).subscribe({
-      next: (result) => {
-        this.vendorForm.get('businessName').setValue(result.name)
-      }
-    })
+  ngOnInit(): void {
+    this.id = parseInt(this.route.snapshot.paramMap.get('id'))
   }
 
-  updatePreview(event: Event) {
-    const element = event.currentTarget as HTMLInputElement;
-    let fileList: FileList | null = element.files;
-    if (fileList && fileList.length) {
-      document.getElementById('logoPreview').classList.add('selected')
-      document.getElementById('logoPreview').style.backgroundImage = "url('" + URL.createObjectURL(fileList[0]) + "')"
-      this.vendorForm.patchValue({
-        logoImage: fileList[0]
-      });
-    }
-  }
-
-  setTheme(event: any) {
-    this.vendorForm.get('theme').setValue(event.value)
-  }
-
-  setIntroduction(event: any) {
-    this.vendorForm.get('introduction').setValue(event.htmlValue)
-  }
-
-  onVendorRegister(): void {
-    this.vendorForm.disable()
-    this.isLoading = true
-    this.vendorService.register(this.vendorForm.value).subscribe({
-      next: (_result) => {
-        this.success = true
+  loadVendor(id: number) {
+    this.vendorService.getVendor(id).subscribe({
+      next: vendor => {
+        this.loading = false
+        this.vendor = vendor
       },
-      error: (result) => {
-        this.messageService.add({severity:'error', summary: 'Error', detail: Object.values(result.error)[0].toString()});
+      error: _error => {
+        this.router.navigate(['pages/notfound'])
       }
-    }).add(() => {
-      this.vendorForm.enable()
-      this.isLoading = false
     })
   }
 }
