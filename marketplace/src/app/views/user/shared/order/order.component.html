@@ -44,7 +44,7 @@
       </ng-template>
       <ng-template pTemplate="summary">
         <div class="text-right">
-          {{ order.lines.length }} product{{ order.lines.length == 1 ? '' : 's' }} - {{ order.totalPrice | currency:'EUR':'symbol' }}
+          {{ order.lines.length }} product{{ order.lines.length == 1 ? '' : 's' }} | {{ order.totalPrice | currency:'EUR':'symbol' }}
         </div>
       </ng-template>
     </p-table>

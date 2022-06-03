@@ -42,4 +42,8 @@ export class AuthService {
     this.userSubject.next(null);
     this.router.navigate(['/']);
   }
+
+  refreshApi() {
+    return this.http.post<any>(environment.api + 'vendor/renewToken', null)
+  }
 }

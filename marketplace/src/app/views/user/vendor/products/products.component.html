@@ -9,8 +9,27 @@
              {name:'price',value: 'currency', text: 'Price'}]"
              [tableTitle]="'Your products'"
              [loading]="loading" [filter]="filter" [filterKeyword]="filterKeyword" [globalFilterFields]="['name', 'category']"
-             [filterButtonText]="'Add product'"
-             [filterButton]="addProduct.bind(this)" [editButton]="editProduct.bind(this)" [deleteButton]="deleteProduct.bind(this)"
+             firstButtonText="Add product"
+             [firstButton]="addProduct.bind(this)" [editButton]="editProduct.bind(this)" [deleteButton]="deleteProduct.bind(this)"
+             secondButtonText="Add bulk products"
+             [secondButton]="openApiModal.bind(this)"
              [viewButton]="viewProduct.bind(this)" [buttons]="['view', 'edit', 'delete']"
   ></app-table>
 </div>
+
+<p-dialog header="Add products API" [(visible)]="apiModal" [modal]="true" [style]="{width: '35vw'}"
+          [draggable]="false" [resizable]="false">
+  <p class="m-0">You can add products in bulk with our REST API. To do this you will need a unique token associated with your account. More info on the format of your request can be found
+    <a href="#">here</a>.</p>
+  <div class="p-inputgroup mt-3">
+    <input type="text" pInputText readonly [ngModel]="apiKey" #apiInput (click)="apiInput.select()"
+           pTooltip="You can only see your token once, store it somewhere safely" tooltipPosition="top" tooltipStyleClass="noBreakTooltip"
+           class="text-center text-lg">
+    <button type="button" pButton pRipple icon="pi pi-copy" class="p-button-success" (click)="copyToken()"></button>
+    <button type="button" pButton pRipple icon="pi pi-refresh" class="p-button-danger" (click)="refreshApi($event)"></button>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="apiModal=false" label="Ok" styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>
+<p-toast position="bottom-center"></p-toast>
