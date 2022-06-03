@@ -6,8 +6,7 @@ import staticRandomInt from "../../../helpers/staticRandomInt";
 
 @Component({
   selector: 'app-vendor',
-  templateUrl: './vendor.component.html',
-  styleUrls: ['./vendor.component.scss']
+  templateUrl: './vendor.component.html'
 })
 export class VendorComponent {
   loading: boolean = true;
