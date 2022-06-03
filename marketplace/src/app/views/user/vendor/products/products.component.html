@@ -22,10 +22,10 @@
   <p class="m-0">You can add products in bulk with our REST API. To do this you will need a unique token associated with your account. More info on the format of your request can be found
     <a href="#">here</a>.</p>
   <div class="p-inputgroup mt-3">
-    <input type="text" pInputText readonly [ngModel]="apiKey" #apiInput (click)="apiInput.select()"
+    <input type="text" pInputText readonly [ngModel]="apiKey" #apiInput (click)="apiInput.select()" [disabled]="apiKey.includes('•')"
            pTooltip="You can only see your token once, store it somewhere safely" tooltipPosition="top" tooltipStyleClass="noBreakTooltip"
            class="text-center text-lg">
-    <button type="button" pButton pRipple icon="pi pi-copy" class="p-button-success" (click)="copyToken()"></button>
+    <button type="button" pButton pRipple icon="pi pi-copy" class="p-button-success" (click)="copyToken()" [disabled]="apiKey.includes('•')"></button>
     <button type="button" pButton pRipple icon="pi pi-refresh" class="p-button-danger" (click)="refreshApi($event)"></button>
   </div>
   <ng-template pTemplate="footer">
