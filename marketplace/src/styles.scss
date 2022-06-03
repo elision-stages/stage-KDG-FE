@@ -110,3 +110,7 @@ button.inline {
 .ais-HierarchicalMenu-count {
   @extend .p-badge;
 }
+
+.noBreakTooltip {
+  max-width: 100%;
+}

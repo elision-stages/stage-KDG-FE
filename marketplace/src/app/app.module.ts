@@ -66,6 +66,7 @@ import { CreateCategoryComponent } from './views/user/admin/create-category/crea
 import { AutocompleteComponent } from './components/autocomplete/autocomplete.component';
 import {AutoCompleteModule} from "primeng/autocomplete";
 import { EditCategoryComponent } from './views/user/admin/edit-category/edit-category.component';
+import {ConfirmationService, MessageService} from "primeng/api";
 
 @NgModule({
   declarations: [
@@ -149,7 +150,9 @@ import { EditCategoryComponent } from './views/user/admin/edit-category/edit-cat
       provide: HTTP_INTERCEPTORS,
       useClass: CustomInterceptorInterceptor,
       multi: true
-    }
+    },
+    MessageService,
+    ConfirmationService
   ]
 })
 export class AppModule { }

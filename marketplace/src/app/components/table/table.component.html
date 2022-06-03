@@ -16,7 +16,10 @@
           </span>
       </div>
       <div class="flex-none">
-        <button *ngIf="filterButtonText" pButton [label]="filterButtonText" (click)="filterButton()"></button>
+        <button *ngIf="firstButtonText" pButton [label]="firstButtonText" (click)="firstButton()"></button>
+      </div>
+      <div class="flex-none">
+        <button *ngIf="secondButtonText" pButton [label]="secondButtonText" (click)="secondButton()" class="p-button-warning ml-2"></button>
       </div>
     </div>
   </ng-template>
