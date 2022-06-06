@@ -27,7 +27,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {MessageModule} from "primeng/message";
 import {DialogModule} from "primeng/dialog";
 import { ToastModule } from 'primeng/toast';
-import { VendorComponent } from './views/public/vendor/vendor.component';
+import { RegisterVendorComponent } from './views/public/register-vendor/register-vendor.component';
 import {ColorPickerModule} from "primeng/colorpicker";
 import {EditorModule} from "primeng/editor";
 import {CategoriesComponent} from "./views/user/admin/categories/categories.component";
@@ -67,6 +67,7 @@ import { AutocompleteComponent } from './components/autocomplete/autocomplete.co
 import {AutoCompleteModule} from "primeng/autocomplete";
 import { EditCategoryComponent } from './views/user/admin/edit-category/edit-category.component';
 import {ConfirmationService, MessageService} from "primeng/api";
+import { VendorComponent } from './views/public/vendor/vendor.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,7 @@ import {ConfirmationService, MessageService} from "primeng/api";
     DashboardComponent,
     LoginComponent,
     RegisterComponent,
-    VendorComponent,
+    RegisterVendorComponent,
     CategoriesComponent,
     CustomPasswordInputComponent,
     AddProductComponent,
@@ -96,7 +97,8 @@ import {ConfirmationService, MessageService} from "primeng/api";
     OrderComponent,
     CreateCategoryComponent,
     EditCategoryComponent,
-    AutocompleteComponent
+    AutocompleteComponent,
+    VendorComponent
   ],
   imports: [
     HttpClientModule,

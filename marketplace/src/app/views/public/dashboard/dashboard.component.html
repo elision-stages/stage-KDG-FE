@@ -1,7 +1,7 @@
 <ais-hits>
   <ng-template let-hits="hits" let-results="results">
     <div class="grid">
-      <div class="col-3" *ngIf="!!results && results.query">
+      <div class="col-12 lg:col-3 md:col-4 sm:col-6">
         <div class="p-card p-card-shadow">
           <div class="p-card-body">
             <p-selectButton [options]="productTemplateOptions" [(ngModel)]="productTemplate" optionLabel="icon"
@@ -25,12 +25,12 @@
           </div>
         </div>
       </div>
-      <div [class]="results && results.query ? 'col-9' : 'col-12'">
+      <div class="col-12 lg:col-9 md:col-8 sm:col-6">
         <div [class]="['grid', productTemplate]">
           <div class="col-12" *ngIf="hits.length === 0 && (!results || !results['userData'])">
             <div class="p-card p-card-shadow py-3" style="text-align: center">
               <p-message severity="warn"
-                         [text]="'No results have been found for ' + (results ? results.query : '')"></p-message>
+                         [text]="'No products have been found'"></p-message>
             </div>
           </div>
           <div [class]="productTemplate == 'list' ? 'col-12' : ['col-12', 'lg:col-3', 'md:col-4', 'sm:col-6']"

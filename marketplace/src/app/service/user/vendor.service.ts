@@ -20,4 +20,8 @@ export class VendorService {
   register(user: User): Observable<User> {
     return this.http.post<User>(environment.api + 'register/vendor', user)
   }
+
+  getVendor(id: number): Observable<any> {
+    return this.http.get<any>(this.vendorUrl + id);
+  }
 }

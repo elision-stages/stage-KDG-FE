@@ -1,0 +1,92 @@
+<form [formGroup]="vendorForm" (ngSubmit)="onVendorRegister()">
+  <div class="grid">
+    <div class="col-12 lg:flex-order-2 lg:col-2">
+      <div class="card">
+        <h4>Become a vendor</h4>
+        <p>Is selling through a platform also your next step to accelerate the growth of your business? Find out what Marketplace can do for you, how it works and how to get started!</p>
+      </div>
+    </div>
+    <div class="col-12 md:col-6 md:flex-order-0 lg:col-5">
+      <div class="card">
+        <h4>Business details</h4>
+        <div class="grid">
+          <div class="col-3">
+            <label for="logoImage" class="block text-900 text-xl font-medium">Logo</label>
+            <label id="logoPreview" for="logoImage" class="mt-1 image-upload-label p-inputtext pb-0"></label>
+            <input id="logoImage" type="file" placeholder="Logo" pInputText class="w-full mt-2" formControlName="logoImage"
+                   accept="image/png,image/jpeg,image/gif" (change)="updatePreview($event)">
+            <small class="p-error" *ngIf="vendorForm.controls['logoImage'].invalid && vendorForm.controls['businessName'].touched">{{readableErrors(vendorForm.controls['logoImage'].errors).join('\n')}}</small>
+          </div>
+          <div class="col-9">
+            <label for="vatNumber" class="block text-900 text-xl font-medium">Business VAT</label>
+            <input id="vatNumber" type="text" placeholder="Business VAT" pInputText class="w-full mt-2" formControlName="vatNumber" autofocus (keyup)="checkVat()">
+            <small class="mt-1 block p-error" *ngIf="vendorForm.controls['vatNumber'].invalid && vendorForm.controls['vatNumber'].touched">{{readableErrors(vendorForm.controls['vatNumber'].errors).join('\n')}}</small>
+
+            <label for="businessName" class="mt-3 block text-900 text-xl font-medium">Business name</label>
+            <input id="businessName" type="text" placeholder="Business name" pInputText class="w-full mt-2" formControlName="businessName" autofocus>
+            <small class="mt-1 block p-error" *ngIf="vendorForm.controls['businessName'].invalid && vendorForm.controls['businessName'].touched">{{readableErrors(vendorForm.controls['businessName'].errors).join('\n')}}</small>
+          </div>
+        </div>
+        <label for="phoneNumber" class="mt-3 block text-900 text-xl font-medium">Phone number</label>
+        <input id="phoneNumber" type="tel" placeholder="Phone number" pInputText class="w-full mt-2" formControlName="phoneNumber" autofocus>
+        <small class="mt-1 block p-error" *ngIf="vendorForm.controls['phoneNumber'].invalid && vendorForm.controls['phoneNumber'].touched">{{readableErrors(vendorForm.controls['phoneNumber'].errors).join('\n')}}</small>
+
+        <label for="color" class="block text-900 text-xl font-medium mt-3">Theme color</label>
+        <p-colorPicker id="color" class="mt-2 block w-full" (onChange)="setTheme($event)"></p-colorPicker>
+        <small class="mt-1 block p-error" *ngIf="vendorForm.controls['theme'].invalid && vendorForm.controls['firstName'].dirty">{{readableErrors(vendorForm.controls['theme'].errors).join('\n')}}</small>
+
+        <label for="introduction" class="block text-900 text-xl font-medium mt-3 mb-2">Business introduction</label>
+        <p-editor id="introduction" [style]="{'height':'150px'}" (onTextChange)="setIntroduction($event)">
+          <ng-template pTemplate="header">
+            <span class="ql-formats">
+                <button type="button" class="ql-bold" aria-label="Bold"></button>
+                <button type="button" class="ql-italic" aria-label="Italic"></button>
+                <button type="button" class="ql-underline" aria-label="Underline"></button>
+            </span>
+          </ng-template>
+        </p-editor>
+        <small class="mt-1 block p-error" *ngIf="vendorForm.controls['introduction'].invalid && vendorForm.controls['firstName'].dirty">{{readableErrors(vendorForm.controls['introduction'].errors).join('\n')}}</small>
+      </div>
+    </div>
+    <div class="col-12 md:col-6 md:flex-order-1 lg:col-5">
+      <div class="card">
+        <h4>Personal details</h4>
+        <label for="firstName" class="block text-900 text-xl font-medium">First name</label>
+        <input id="firstName" type="text" placeholder="First name" pInputText class="w-full mt-2" formControlName="firstName" autofocus>
+        <small class="mt-1 block p-error" *ngIf="vendorForm.controls['firstName'].invalid && vendorForm.controls['firstName'].touched">{{readableErrors(vendorForm.controls['firstName'].errors).join('\n')}}</small>
+        <label for="lastname" class="block text-900 text-xl font-medium mt-3">Family name</label>
+        <input id="lastName" type="text" placeholder="Family name" pInputText class="w-full mt-2" formControlName="lastName">
+        <small class="mt-1 block p-error" *ngIf="vendorForm.controls['lastName'].invalid && vendorForm.controls['lastName'].touched">{{readableErrors(vendorForm.controls['lastName'].errors).join('\n')}}</small>
+        <label for="email2" class="block text-900 text-xl font-medium mt-3">Email</label>
+        <input id="email2" type="email" placeholder="Email address" pInputText class="w-full mt-2" formControlName="email"
+               (keydown.Tab)="getMailHint(vendorForm.get('email').value) ? vendorForm.get('email').setValue(getMailHint(vendorForm.get('email').value)) : true">
+        <small [hidden]="!getMailHint(vendorForm.get('email').value)">
+          Do you mean <a (click)="vendorForm.get('email').setValue(getMailHint(vendorForm.get('email').value))">{{getMailHint(vendorForm.get('email').value)}}</a>?
+        </small>
+        <small class="mt-1 block p-error" *ngIf="vendorForm.controls['email'].invalid && vendorForm.controls['email'].touched">{{readableErrors(vendorForm.controls['email'].errors).join('\n')}}</small>
+      </div>
+      <div class="card">
+        <h4>Account credentials</h4>
+        <label for="password1" class="block text-900 font-medium text-xl">Password</label>
+        <app-custom-password-input [formGroupParent]="vendorForm" [formGroupControlName]="'password'"></app-custom-password-input>
+        <small class="mt-1 block p-error" *ngIf="vendorForm.controls['password'].invalid && vendorForm.controls['password'].dirty">{{readableErrors(vendorForm.controls['password'].errors).join('\n')}}</small>
+
+        <label for="password2" class="block text-900 font-medium text-xl mt-3">Password confirmation</label>
+        <p-password id="password2" formControlName="passwordRepeat" placeholder="Password confirmation" [toggleMask]="true"
+                    styleClass="mt-2 w-full p-inputwrapper p-input-icon-right" inputStyleClass="w-full"
+                    [feedback]="false"></p-password>
+        <small class="mt-1 block p-error" *ngIf="vendorForm.errors && vendorForm.errors.hasOwnProperty('passwordRepeat') && vendorForm.controls['passwordRepeat'].dirty">{{readableErrors(vendorForm.errors).join('\n')}}</small>
+
+        <button [pTooltip]="!vendorForm.valid && 'Some fields aren\'t valid'" tooltipPosition="top" [disabled]="!vendorForm.valid" [loading]="isLoading" pButton pRipple label="Create your account" class="w-full p-3 text-xl mt-3" type="submit"></button>
+      </div>
+    </div>
+  </div>
+</form>
+<p-dialog header="Registration successfull" [(visible)]="success" [modal]="true" [style]="{width: '50vw'}"
+          [draggable]="false" [resizable]="false" [closable]="false">
+  <p class="m-0">You have received a confirmation e-mail. You can log in when your e-mail address is confirmed.</p>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="this.router.navigate(['/login'])" label="Ok" styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>
+<p-toast position="bottom-center"></p-toast>
