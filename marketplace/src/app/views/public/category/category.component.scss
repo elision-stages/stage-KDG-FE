@@ -1,0 +1,11 @@
+.children {
+  justify-content: space-between;
+
+  > div {
+    flex-grow: 1;
+
+    > .card {
+      cursor: pointer;
+    }
+  }
+}

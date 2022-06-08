@@ -24,6 +24,6 @@ export class CategoriesComponent implements OnInit {
   }
 
   open($event) {
-    this.router.navigate(['category', $event.node.data])
+    this.router.navigate(['category', $event.node.data, 'edit'])
   }
 }

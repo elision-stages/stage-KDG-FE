@@ -12,7 +12,7 @@
             </p-selectButton>
 
             <h2>Price</h2>
-            <ais-range-input attribute="price" currency="€" [precision]="0" submitLabel="Zoek">
+            <ais-range-input attribute="price" currency="€" [precision]="0" submitLabel="→">
             </ais-range-input>
             <h2>Category</h2>
             <ais-hierarchical-menu
@@ -54,7 +54,7 @@
               </div>
               <div class="p-card-body">
                 <h4><ais-highlight attribute="name" [hit]="hit"></ais-highlight></h4>
-                <a href="#">{{ hit['categories.lvl0'] }}</a>
+                <a [routerLink]="['/category/', hit['categoryId']]">{{ hit['categories.lvl2'] || hit['categories.lvl1' || hit['categories.lvl0']] }}</a>
                 <p class="desc">
                   <ais-highlight attribute="description" [hit]="hit"></ais-highlight>
                 </p>
