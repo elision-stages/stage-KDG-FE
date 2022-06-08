@@ -1,0 +1,13 @@
+<p-breadcrumb [model]="loading ? [] : breadcrumb" [home]="home" styleClass="mb-3"></p-breadcrumb>
+<div class="grid children">
+  <div class="col-6 md:col-3 lg:col-2" *ngFor="let cat of children">
+    <div class="card" [routerLink]="['/category/', cat['id']]">
+      <h6 [textContent]="cat.name" class="mb-0 text-center"></h6>
+    </div>
+  </div>
+</div>
+<ais-configure
+  [searchParameters]="{
+       filters: 'categoryIds:' + id
+   }"></ais-configure>
+<results></results>

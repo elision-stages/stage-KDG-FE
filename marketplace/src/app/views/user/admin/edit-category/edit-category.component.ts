@@ -64,7 +64,7 @@ export class EditCategoryComponent implements OnInit {
 
       },
       error: _error => {
-        this.router.navigate(['pages/notfound'])
+        this.router.navigate([`pages/notfound`], { replaceUrl: true });
       }
     })
   }

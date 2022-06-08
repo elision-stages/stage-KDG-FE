@@ -19,6 +19,7 @@ import {OrderComponent} from "./views/user/shared/order/order.component";
 import {CreateCategoryComponent} from "./views/user/admin/create-category/create-category.component";
 import { EditCategoryComponent } from './views/user/admin/edit-category/edit-category.component';
 import {VendorComponent} from "./views/public/vendor/vendor.component";
+import {CategoryComponent} from "./views/public/category/category.component";
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import {VendorComponent} from "./views/public/vendor/vendor.component";
           {path: 'register', component: RegisterComponent},
           {path: 'vendor', component: RegisterVendorComponent},
           {path: 'vendor/:id', component: VendorComponent},
-          {path: 'category/:id', component: EditCategoryComponent},
+          {path: 'category/:id/edit', component: EditCategoryComponent},
+          {path: 'category/:id', component: CategoryComponent},
           {path: 'categories/add', component: CreateCategoryComponent, canActivate: [ RouteGuardService ]},
           {path: 'categories', component: CategoriesComponent, canActivate: [ RouteGuardService ]},
           {path: 'product/:productId/edit', component: EditProductComponent},

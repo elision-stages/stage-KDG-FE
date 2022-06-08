@@ -11,7 +11,6 @@ import staticRandomInt from "../../../helpers/staticRandomInt";
 export class VendorComponent {
   loading: boolean = true;
 
-  breadcrumb: MenuItem[]
   home: MenuItem = {icon: 'pi pi-home', routerLink: '/'}
 
   vendor: any = null
@@ -38,7 +37,7 @@ export class VendorComponent {
         this.vendor = vendor
       },
       error: _error => {
-        this.router.navigate(['pages/notfound'])
+        this.router.navigate([`pages/notfound`], { replaceUrl: true });
       }
     })
   }

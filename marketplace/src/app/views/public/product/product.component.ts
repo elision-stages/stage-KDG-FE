@@ -52,7 +52,7 @@ export class ProductComponent {
         this.generateBreadcrumb()
       },
       error: _error => {
-        this.router.navigate(['pages/notfound'])
+        this.router.navigate([`pages/notfound`], { replaceUrl: true });
       }
     })
   }

@@ -36,7 +36,7 @@ export class OrderComponent {
         this.order = order
       },
       error: _error => {
-        this.router.navigate(['pages/notfound'])
+        this.router.navigate([`pages/notfound`], { replaceUrl: true });
       }
     })
   }
