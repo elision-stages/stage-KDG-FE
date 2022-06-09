@@ -3,6 +3,7 @@ import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ValidationHelper} from "../../../../helpers/ValidationHelper";
 import {MessageService, TreeNode} from "primeng/api";
 import {CategoryService} from "../../../../service/product/category.service";
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-create-category',
@@ -19,17 +20,16 @@ export class CreateCategoryComponent implements OnInit {
   readableErrors = ValidationHelper.readableErrors;
   isLoading: boolean = false
 
-  attributeDialog: boolean = false
-  characteristic: FormGroup
   attributeTypes = [{label: 'Whole number', value: 'INTEGER'}, {label: 'Decimal number', value: 'DECIMAL'}, {label: 'Yes / No', value: 'BOOL'}, {label: 'Text', value: 'STRING'}]
   requiredTypes = [{label: 'Not required', value: false}, {label: 'Required', value: true}]
 
   categoryList: TreeNode[] = [];
 
+  characteristicSubject: Subject<void> = new Subject<void>();
+
   constructor(private categoryService: CategoryService, private messageService: MessageService) { }
 
   ngOnInit(): void {
-    this.characteristic = CreateCategoryComponent.createCharacteristic()
     this.categoryService.getCategories().subscribe(cats => {
       this.categoryList = [{
         "label": "Root map",
@@ -72,25 +72,11 @@ export class CreateCategoryComponent implements OnInit {
   }
 
   openNewAttribute() {
-    this.attributeDialog = true
+    this.characteristicSubject.next()
   }
 
-  hideNewAttribute() {
-    this.attributeDialog = false
-  }
-
-  addAttribute() {
-    if(this.characteristic.controls['name'].invalid) return
-    this.characteristics.push(this.characteristic);
-    this.characteristic = CreateCategoryComponent.createCharacteristic();
-    this.attributeDialog = false
-  }
-
-  private static createCharacteristic(name = '', type = 'INTEGER', required = false) {
-    return new FormGroup({
-      name: new FormControl(name, [Validators.required, Validators.minLength(2), Validators.maxLength(250)]),
-      type: new FormControl(type, [Validators.required]),
-      required: new FormControl(required, [Validators.required])
-    })
+  addAttribute(characteristic: FormGroup) {
+    console.log('In category component', characteristic)
+    this.characteristics.push(characteristic)
   }
 }

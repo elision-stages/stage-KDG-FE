@@ -68,6 +68,7 @@ import { EditCategoryComponent } from './views/user/admin/edit-category/edit-cat
 import {ConfirmationService, MessageService} from "primeng/api";
 import { VendorComponent } from './views/public/vendor/vendor.component';
 import { CategoryComponent } from './views/public/category/category.component';
+import { AttributeFormComponent } from './components/attribute-form/attribute-form.component';
 
 @NgModule({
   declarations: [
@@ -98,7 +99,8 @@ import { CategoryComponent } from './views/public/category/category.component';
     EditCategoryComponent,
     AutocompleteComponent,
     VendorComponent,
-    CategoryComponent
+    CategoryComponent,
+    AttributeFormComponent
   ],
   imports: [
     HttpClientModule,
