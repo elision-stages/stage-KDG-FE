@@ -1,0 +1,25 @@
+<form [formGroup]="characteristic" (ngSubmit)="submit()">
+  <p-dialog [(visible)]="dialog" [style]="{width: '500px'}" header="Add dynamic attribute" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+      <label for="attrName" class="block text-900 text-xl font-medium">Attribute name</label>
+      <input id="attrName"
+             type="text"
+             placeholder="Attribute name"
+             pInputText
+             class="w-full mt-2"
+             formControlName="name"
+             autofocus>
+      <small class="mt-1 block p-error"
+             *ngIf="characteristic.controls['name'].invalid && characteristic.controls['name'].touched">{{readableErrors(characteristic.controls['name'].errors).join('\n')}}</small>
+      <label for="attrType" class="block text-900 text-xl font-medium mt-3 mb-2">Attribute type</label>
+      <p-selectButton id="attrType" [options]="attributeTypes" formControlName="type" optionLabel="label" optionValue="value"></p-selectButton>
+      <label for="attrRequired" class="block text-900 text-xl font-medium mt-3 mb-2">Attribute required?</label>
+      <p-selectButton id="attrRequired" [options]="requiredTypes" formControlName="required" optionLabel="label" optionValue="value"></p-selectButton>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+      <button pButton pRipple type="button" label="Cancel" icon="pi pi-times" class="p-button-text p-button-danger" (click)="hideDialog()"></button>
+      <button pButton pRipple label="Add attribute" icon="pi pi-check" [disabled]="!characteristic.valid"></button>
+    </ng-template>
+  </p-dialog>
+</form>
