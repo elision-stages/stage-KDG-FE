@@ -18,7 +18,7 @@
 <div class="card" *ngIf="vendor">
   <div class="grid">
     <div class="col-3">
-      <img [src]="vendor.logo" [alt]="vendor.businessName" class="w-full">
+      <img [src]="vendor.logo" [alt]="vendor.businessName" class="w-full" (error)="imageFail($event)">
     </div>
     <div class="col-9">
       <h4 [style]="{ color: vendor.theme }">{{vendor.businessName}}</h4>
