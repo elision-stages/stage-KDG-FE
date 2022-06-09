@@ -35,7 +35,6 @@ import {TreeSelectModule} from "primeng/treeselect";
 import { CustomPasswordInputComponent } from './components/custom-password-input/custom-password-input.component';
 import { NgAisModule } from 'angular-instantsearch';
 import {CardModule} from "primeng/card";
-import { ChunkPipe } from './helpers/chunk.pipe';
 import { StoreModule } from '@ngrx/store';
 import {MessagesModule} from "primeng/messages";
 import {AddProductComponent} from './views/user/vendor/add-product/add-product.component';
@@ -88,7 +87,6 @@ import { CategoryComponent } from './views/public/category/category.component';
     CustomPasswordInputComponent,
     AddProductComponent,
     CustomPasswordInputComponent,
-    ChunkPipe,
     EditProductComponent,
     ProductsComponent,
     ProductComponent,
