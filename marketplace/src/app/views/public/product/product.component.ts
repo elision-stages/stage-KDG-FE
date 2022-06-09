@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {AfterViewChecked, AfterViewInit, Component, ElementRef} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import staticRandomInt from "../../../helpers/staticRandomInt";
 import {ProductService} from "../../../service/product/product.service";
@@ -9,13 +9,13 @@ import {CartService} from "../../../service/user/cart.service";
 @Component({
   selector: 'app-add-product',
   templateUrl: './product.component.html',
-  providers: [ConfirmationService]
+  providers: [ConfirmationService],
+  styleUrls: ['./product.component.scss']
 })
-export class ProductComponent {
+export class ProductComponent implements AfterViewInit {
   loading: boolean = true;
 
   product: any;
-  images: any;
 
   attributes: any;
 
@@ -26,8 +26,10 @@ export class ProductComponent {
   amount: number = 1;
 
   user: any = null
+  math = Math
 
   constructor(
+    private elementRef: ElementRef,
     private route: ActivatedRoute,
     private router: Router,
     private productService: ProductService,
@@ -38,18 +40,36 @@ export class ProductComponent {
     this.user = authService.userValue
   }
 
+  ngAfterViewInit() {
+    if(document.getElementById('magicthumb') == null) {
+      var s = document.createElement("script")
+      s.id = 'magicthumb'
+      s.type = "text/javascript"
+      s.src = "../assets/magicthumb/magicthumb.js"
+      s.onload = this.updateGallery;
+      this.elementRef.nativeElement.appendChild(s)
+    }
+  }
+
+  updateGallery() {
+    if(window['MagicThumb']) {
+      if(!window['MagicThumb'].refresh('productList')) {
+        console.error('Refreshing failed, trying again...')
+        setTimeout(this.updateGallery, 50)
+      }
+    }else{
+      console.error('No magicthumb found, trying again...')
+      setTimeout(this.updateGallery, 50)
+    }
+  }
+
   loadProduct(id: number) {
     this.productService.getProductById(id).subscribe({
       next: product => {
         this.loading = false
         this.product = product
-        this.images = product['images'].map(img => {
-          return {
-            "previewImageSrc": img,
-            "thumbnailImageSrc": img
-          }
-        })
         this.generateBreadcrumb()
+        setTimeout(this.updateGallery, 50)
       },
       error: _error => {
         this.router.navigate([`pages/notfound`], { replaceUrl: true });

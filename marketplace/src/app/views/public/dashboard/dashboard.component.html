@@ -1,7 +1,7 @@
 <ais-hits>
   <ng-template let-hits="hits" let-results="results">
     <div class="grid">
-      <div class="col-12 lg:col-3 md:col-4 sm:col-6">
+      <div class="col-12 lg:col-3 md:col-4">
         <div class="p-card p-card-shadow">
           <div class="p-card-body">
             <p-selectButton [options]="productTemplateOptions" [(ngModel)]="productTemplate" optionLabel="icon"
@@ -25,7 +25,7 @@
           </div>
         </div>
       </div>
-      <div class="col-12 lg:col-9 md:col-8 sm:col-6">
+      <div class="col-12 lg:col-9 md:col-8">
         <div [class]="['grid', productTemplate]">
           <div class="col-12" *ngIf="hits.length === 0 && (!results || !results['userData'])">
             <div class="p-card p-card-shadow py-3" style="text-align: center">
@@ -33,7 +33,7 @@
                          [text]="'No products have been found'"></p-message>
             </div>
           </div>
-          <div [class]="productTemplate == 'list' ? 'col-12' : ['col-12', 'lg:col-3', 'md:col-4', 'sm:col-6']"
+          <div [class]="productTemplate == 'list' ? 'col-12' : ['col-12', 'xl:col-3', 'lg:col-4', 'md:col-6', 'sm:col-6']"
                *ngFor="let data of (results && results['userData'] ? results['userData'][0]['custom'] : [])">
             <div class="p-card-shadow p-card">
               <div class="p-card-header">
@@ -46,14 +46,14 @@
               </div>
             </div>
           </div>
-          <div [class]="productTemplate == 'list' ? 'col-12' : ['col-12', 'lg:col-3', 'md:col-4', 'sm:col-6']"
+          <div [class]="productTemplate == 'list' ? 'col-12' : ['col-12', 'xl:col-3', 'lg:col-4', 'md:col-6', 'sm:col-6']"
                *ngFor="let hit of hits">
             <div class="p-card-shadow p-card">
-              <div class="p-card-header">
+              <div class="p-card-header" (click)="openProduct(hit)">
                 <img alt="Card" [src]="hit.image" class="smallaspect" (error)="imageFail($event)">
               </div>
               <div class="p-card-body">
-                <h4><ais-highlight attribute="name" [hit]="hit"></ais-highlight></h4>
+                <h4 (click)="openProduct(hit)"><ais-highlight attribute="name" [hit]="hit"></ais-highlight></h4>
                 <a [routerLink]="['/category/', hit['categoryId']]">{{ hit['categories.lvl2'] || hit['categories.lvl1' || hit['categories.lvl0']] }}</a>
                 <p class="desc">
                   <ais-highlight attribute="description" [hit]="hit"></ais-highlight>

@@ -1,0 +1,30 @@
+.selectors {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 5rem;
+  a {
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    background: white;
+    img {
+      max-height: 100%;
+      max-width: 100%;
+      margin: auto;
+    }
+    &:hover {
+      filter: brightness(75%);
+      img {
+        filter: brightness(100%);
+      }
+    }
+    &.mgt-active {
+      filter: brightness(60%);
+      img {
+        filter: brightness(100%);
+      }
+    }
+  }
+}
