@@ -57,7 +57,7 @@
             [attr.data-image]="img"
             *ngFor="let img of product.images"
           >
-            <img [src]="img"/>
+            <img [src]="img" [alt]="product.title"/>
           </a>
         </div>
       </div>
