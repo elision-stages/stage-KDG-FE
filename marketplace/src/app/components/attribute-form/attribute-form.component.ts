@@ -5,8 +5,7 @@ import {Observable, Subscription} from "rxjs";
 
 @Component({
   selector: 'attribute-form',
-  templateUrl: './attribute-form.component.html',
-  styleUrls: ['./attribute-form.component.scss']
+  templateUrl: './attribute-form.component.html'
 })
 export class AttributeFormComponent implements OnInit {
   dialog: boolean = false

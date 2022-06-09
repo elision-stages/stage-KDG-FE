@@ -76,7 +76,6 @@ export class CreateCategoryComponent implements OnInit {
   }
 
   addAttribute(characteristic: FormGroup) {
-    console.log('In category component', characteristic)
     this.characteristics.push(characteristic)
   }
 }
