@@ -172,6 +172,7 @@ export class AppMainComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   isDesktop() {
+    return true; // Always give desktop menu
     return window.innerWidth > 992;
   }
 
