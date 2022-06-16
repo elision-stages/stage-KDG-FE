@@ -8,7 +8,7 @@
     <i class="pi pi-bars"></i>
   </a>
 
-  <a class="p-link layout-topbar-menu-button layout-topbar-button" href="#" (click)="appMain.onMenuClick();appMain.toggleTopMenu($event)">
+  <a class="p-link layout-topbar-menu-button layout-topbar-button" href="#" (click)="appMain.onMenuClick();appMain.toggleTopMenu($event)" *ngIf="false">
     <i class="pi pi-ellipsis-v"></i>
   </a>
 
@@ -24,7 +24,7 @@
     <app-autocomplete></app-autocomplete>
   </div>
 
-  <div class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active':appMain.topMenuActive}">
+  <div class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active':true}">
     <a [routerLink]="['/cart']" class="p-link layout-topbar-button p-button-outlined" *ngIf="user && user.role == 'customer'">
       <i class="pi pi-shopping-cart mr-3 p-text-secondary"
          pBadge
