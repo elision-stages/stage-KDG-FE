@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Product} from "../../model/Product";
+import {Product, ProductDto} from "../../model/Product";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
@@ -22,12 +22,16 @@ export class ProductService {
 
   addProduct(product: Product): Observable<Response> {
     let url = environment.api + 'addProduct';
-    return this.http.post<Response>(url, product);
+    let body = this.toProductDto(product);
+    console.log(body);
+    return this.http.post<Response>(url, body);
   }
 
   editProduct(product: Product): Observable<string> {
     const url = environment.api + 'editProduct';
-    return this.http.post<string>(url, product)
+    let body = this.toProductDto(product);
+    console.log(body);
+    return this.http.post<string>(url,body)
   }
 
   getProductById(productId: number): Observable<Product> {
@@ -37,5 +41,12 @@ export class ProductService {
   deleteProduct(id: number) {
     let url = environment.api + 'product/' + id;
     return this.http.delete<Product[]>(url);
+  }
+
+  toProductDto(product: Product): ProductDto{
+    console.log(product)
+    return new ProductDto(
+      product.id, product.title, product.price, product.category.id, product.description, product.images, product.attributes, product.vendorId
+    );
   }
 }

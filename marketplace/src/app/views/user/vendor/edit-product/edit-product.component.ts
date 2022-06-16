@@ -69,6 +69,7 @@ export class EditProductComponent implements OnInit {
 
   selectCategory($event) {
     this.selectedProduct.category = this.categories.find(value => value.id === $event.value)
+    this.selectedProduct.attributes = [];
   }
 
   addImage($event: any) {
